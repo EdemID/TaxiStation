@@ -1,6 +1,7 @@
 package elp.max.e.taxistation.service.dispatcherService;
 
 import elp.max.e.taxistation.dto.*;
+import elp.max.e.taxistation.model.DispatcherEntity;
 import elp.max.e.taxistation.repository.DispatcherRepository;
 import elp.max.e.taxistation.service.ServiceInterface;
 import elp.max.e.taxistation.service.carService.CarConverter;
@@ -48,6 +49,15 @@ public class DispatcherServiceImpl implements ServiceInterface<DispatcherDto> {
     @Transactional
     public DispatcherDto findById(Long id) {
         return DispatcherConverter.fromDispatcherEntityToDispatcherDto(dispatcherRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Диспетчер " + id + " не найден")));
+    }
+
+    @Transactional
+    public DispatcherDto findByName(String name) {
+        DispatcherEntity dispatcherEntity = dispatcherRepository.findByName(name);
+        if (dispatcherEntity == null) {
+            throw new EntityNotFoundException("Диспетчер " + name + " не найден");
+        }
+        return DispatcherConverter.fromDispatcherEntityToDispatcherDto(dispatcherEntity);
     }
 
     @Override
@@ -115,7 +125,9 @@ public class DispatcherServiceImpl implements ServiceInterface<DispatcherDto> {
 
         //заняты клиентом
         driverDto.setBusy(true);
+        System.out.println("Driver " + driverDto.getName() + " занят");
         carDto.setBusy(true);
+        System.out.println("Car " + carDto.getNumberCar() + " занят");
 
         driverDto.setCar(carDto.getNumberCar());
         System.out.println(driverDto.getName());

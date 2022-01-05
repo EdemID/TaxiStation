@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface DispatcherRepository extends JpaRepository<DispatcherEntity, Long> {
+    DispatcherEntity findByName(String name);
 }

@@ -36,6 +36,15 @@ public class DriverServiceImpl implements ServiceInterface<DriverDto> {
         return DriverConverter.fromDriverEntityToDriverDto(driverEntity);
     }
 
+    @Transactional
+    public DriverDto findByName(String name) {
+        DriverEntity driverEntity = driverRepository.findByName(name);
+        if (driverEntity == null) {
+            throw new EntityNotFoundException("Водитель " + name + " не найден");
+        }
+        return DriverConverter.fromDriverEntityToDriverDto(driverEntity);
+    }
+
     @Override
     public DriverDto save(DriverDto dto) throws ValidationException {
         return null;

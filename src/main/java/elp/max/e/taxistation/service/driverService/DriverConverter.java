@@ -12,6 +12,7 @@ public class DriverConverter {
         driverDto.setDayoff(driverEntity.getDayoff());
         driverDto.setCar(driverEntity.getCar());
         driverDto.setWorkStatus(driverEntity.isWorkStatus());
+        driverDto.setBusy(driverEntity.isBusy());
         return driverDto;
     }
 
@@ -22,6 +23,7 @@ public class DriverConverter {
         driverEntity.setDayoff(driverDto.getDayoff());
         driverEntity.setCar(driverDto.getCar());
         driverEntity.setWorkStatus(driverDto.isWorkStatus());
+        driverEntity.setBusy(driverDto.isBusy());
         return driverEntity;
     }
 }

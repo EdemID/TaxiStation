@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface DriverRepository extends JpaRepository<DriverEntity, Long> {
+    DriverEntity findByName(String name);
 }
