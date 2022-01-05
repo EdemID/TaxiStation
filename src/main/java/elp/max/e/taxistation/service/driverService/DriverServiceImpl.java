@@ -87,8 +87,6 @@ public class DriverServiceImpl implements ServiceInterface<DriverDto> {
                 driverDto.setCar(car);
                 driverRepository.save(DriverConverter.fromDriverDtoToDriverEntity(driverDto));
                 workerDriverDto = driverDto;
-
-                break;
             }
         }
         return workerDriverDto;

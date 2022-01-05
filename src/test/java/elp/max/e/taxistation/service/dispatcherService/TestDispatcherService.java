@@ -6,7 +6,6 @@ import elp.max.e.taxistation.service.carService.CarServiceImpl;
 import elp.max.e.taxistation.service.driverService.DriverServiceImpl;
 import elp.max.e.taxistation.service.mechanicService.MechanicServiceImpl;
 import elp.max.e.taxistation.service.orderNumberService.OrderNumberServiceImpl;
-import elp.max.e.taxistation.utils.DateUtil;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -14,9 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
 
-import java.time.LocalDate;
 import java.util.Date;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -52,38 +49,10 @@ public class TestDispatcherService {
     @Test
     @DisplayName("Проверить рабочего диспетчера")
     void getWorkerDispatcher() {
-        DispatcherDto actual = dispatcherService.getWorkerDispatcher();
-        DispatcherDto expected = dispatcherService.findById(actual.getId());
-        assertTrue(isMakeEqual(expected, actual));
-    }
-
-    @Order(2)
-    @Test
-    @DisplayName("Проверить рабочий статус всех диспетчеров")
-    void checkStatusWorkDispatchers() {
         DispatcherDto workerDispatcher = dispatcherService.getWorkerDispatcher();
-        List<DispatcherDto> dispatcherDtos = dispatcherService.findAll();
-        Date startLunch;
-        Date endLunch;
-        Date currentDate;
-        String dayOfWeek;
-        DispatcherDto weekendDispatcher;
-        for (DispatcherDto dispatcherDto : dispatcherDtos) {
-            System.out.println(dispatcherDto);
-            startLunch = DateUtil.convertFromStringToLocalDateTimeViaInstant(dispatcherDto.getStartLunch().split(":"));
-            endLunch = DateUtil.convertFromStringToLocalDateTimeViaInstant(dispatcherDto.getEndLunch().split(":"));
-            currentDate = new Date();
-            dayOfWeek = LocalDate.now().getDayOfWeek().toString();
-            if (endLunch.getTime() > currentDate.getTime() &&
-                    currentDate.getTime() > startLunch.getTime() ||
-                    dayOfWeek.equalsIgnoreCase(dispatcherDto.getDayoff()))
-            {
-                weekendDispatcher = dispatcherDto;
-                assertFalse(weekendDispatcher.isWorkStatus(), "Диспетчер " + weekendDispatcher + " НЕ должен работать, но работает");
-            } else {
-                assertTrue(workerDispatcher.isWorkStatus(), "Диспетчер " + workerDispatcher + " должен работать, но НЕ работает");
-            }
-        }
+        DispatcherDto expected = dispatcherService.findById(workerDispatcher.getId());
+        assertTrue(isMakeEqual(expected, workerDispatcher));
+        assertTrue(workerDispatcher.isWorkStatus(), "Диспетчер " + workerDispatcher + " должен работать, но НЕ работает");
     }
 
     @Order(3)
@@ -141,6 +110,7 @@ public class TestDispatcherService {
         DispatcherDto dispatcherDto =
                 new DispatcherDto(1L, "Vladimir", "dayOff", "startLunch", "endLunch", true);
         MechanicDto mechanicDto = mechanicService.findById(1L);
+
         OrderNumberDto orderNumberDto = dispatcherService.assignCarToDriverAndCallClient(clientDto, dispatcherDto);
         String numberCar = orderNumberDto.getCar();
         CarDto carDto = carService.findByNumberCar(numberCar);
