@@ -5,6 +5,7 @@ import elp.max.e.taxistation.model.CarEntity;
 import elp.max.e.taxistation.service.carService.CarConverter;
 import elp.max.e.taxistation.service.carService.CarServiceImpl;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -27,6 +28,7 @@ class MechanicServiceImplTest {
     }
 
     @Test
+    @DisplayName("Проверить починку автомобиля")
     void repairCar() {
         CarEntity carEntity = CarConverter.fromCarDtoToCarEntity(carService.findById(3L));
         MechanicDto mechanicDto = mechanicService.findById(1L);

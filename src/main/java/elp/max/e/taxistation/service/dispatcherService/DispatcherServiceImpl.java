@@ -3,6 +3,7 @@ package elp.max.e.taxistation.service.dispatcherService;
 import elp.max.e.taxistation.dto.*;
 import elp.max.e.taxistation.repository.DispatcherRepository;
 import elp.max.e.taxistation.service.ServiceInterface;
+import elp.max.e.taxistation.service.carService.CarConverter;
 import elp.max.e.taxistation.service.carService.CarServiceImpl;
 import elp.max.e.taxistation.service.driverService.DriverServiceImpl;
 import elp.max.e.taxistation.service.orderNumberService.OrderNumberServiceImpl;
@@ -131,6 +132,9 @@ public class DispatcherServiceImpl implements ServiceInterface<DispatcherDto> {
 
         // исходя из каких-то данных, диспетчер будет знать время заказа
         releaseDriverAndCarAfterOrdering(driverDto, carDto, 20000L);
+        if (carDto.getResource() == 0) {
+            carService.sendCarForRepair(CarConverter.fromCarDtoToCarEntity(carDto));
+        }
         return orderNumberService.save(orderNumberDto);
     }
 

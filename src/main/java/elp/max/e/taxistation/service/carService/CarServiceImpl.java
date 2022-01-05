@@ -50,6 +50,17 @@ public class CarServiceImpl implements ServiceInterface<CarDto> {
         return carDto;
     }
 
+    @Transactional
+    public CarDto findByNumberCar(String number) {
+        CarDto carDto = null;
+        if (carRepository.findByNumberCar(number) != null) {
+            carDto = CarConverter.fromCarEntityToCarDto(carRepository.findByNumberCar(number));
+        } else {
+            throw new EntityNotFoundException("Автомобиль " + number + " не найден!");
+        }
+        return carDto;
+    }
+
     @Override
     @Transactional
     public CarDto save(CarDto dto) throws ValidationException {
@@ -84,7 +95,7 @@ public class CarServiceImpl implements ServiceInterface<CarDto> {
         }
     }
 
-    public CarDto getWorkerCar() throws ValidationException {
+    public CarDto getWorkerCar() {
         List<CarDto> carDtos = findAll();
 
         int workerResource;
@@ -95,12 +106,7 @@ public class CarServiceImpl implements ServiceInterface<CarDto> {
             busy = carDto.isBusy();
             workerResource = carDto.getResource();
             if (workerResource == 0) {
-                System.out.println("уехала на ремонт: " + carDto.getId());
-                busy = true;
-                carDto.setBusy(busy);
-                // хардкор, так как пока у нас 1 механик, в будущем можно также реализовать двух механиков с режимом работы
-                MechanicDto mechanicDto = mechanicService.findById(1L);
-                sendCarForRepair(CarConverter.fromCarDtoToCarEntity(carDto), mechanicDto);
+                sendCarForRepair(CarConverter.fromCarDtoToCarEntity(carDto));
             } else if (!busy) {
                 System.out.println("свободная " + carDto.getId());
                 --workerResource;
@@ -114,7 +120,12 @@ public class CarServiceImpl implements ServiceInterface<CarDto> {
         return workerCar;
     }
 
-    public void sendCarForRepair(CarEntity carEntity, MechanicDto mechanicDto) {
+    public void sendCarForRepair(CarEntity carEntity) {
+        System.out.println("уехала на ремонт: " + carEntity.getId());
+        boolean busy = true;
+        carEntity.setBusy(busy);
+        // хардкор, так как пока у нас 1 механик, в будущем можно также реализовать двух механиков с режимом работы
+        MechanicDto mechanicDto = mechanicService.findById(1L);
         carEntity.setMechanicEntity(MechanicConverter.fromMechanicDtoToMechanicEntity(mechanicDto));
         carEntity.setBusy(true);
 

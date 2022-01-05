@@ -4,6 +4,7 @@ import elp.max.e.taxistation.dto.*;
 import elp.max.e.taxistation.repository.DispatcherRepository;
 import elp.max.e.taxistation.service.carService.CarServiceImpl;
 import elp.max.e.taxistation.service.driverService.DriverServiceImpl;
+import elp.max.e.taxistation.service.mechanicService.MechanicServiceImpl;
 import elp.max.e.taxistation.service.orderNumberService.OrderNumberServiceImpl;
 import elp.max.e.taxistation.utils.DateUtil;
 import org.junit.jupiter.api.*;
@@ -26,12 +27,14 @@ import static org.junit.jupiter.api.Assertions.*;
 public class TestDispatcherService {
 
     private final DispatcherServiceImpl dispatcherService;
+    private final MechanicServiceImpl mechanicService;
     private final DriverServiceImpl driverService;
     private final CarServiceImpl carService;
 
     @Autowired
-    public TestDispatcherService(CarServiceImpl carService, DriverServiceImpl driverService, OrderNumberServiceImpl orderNumberService, DispatcherRepository dispatcherRepository) {
+    public TestDispatcherService(CarServiceImpl carService, DriverServiceImpl driverService, OrderNumberServiceImpl orderNumberService, DispatcherRepository dispatcherRepository, MechanicServiceImpl mechanicService) {
         this.dispatcherService = new DispatcherServiceImpl(carService, driverService, orderNumberService, dispatcherRepository);
+        this.mechanicService = mechanicService;
         this.driverService = driverService;
         this.carService = carService;
     }
@@ -128,6 +131,34 @@ public class TestDispatcherService {
         assertEquals(orderNumber, orderNumber, "Назначен неверный номер наряд-заказа: " + orderNumber);
         assertEquals("good luck", car, "Назначен неверный автомобиль: " + car);
         assertEquals("Aurora", driver, "Назначен неверный водитель: " + driver);
+    }
+
+    @Order(5)
+    @Test
+    @DisplayName("Проверить отправку автомобиля на ремонт после заказа, если ресурс равен 0, и его починку")
+    void sendCarForRepairIfResourceIsZeroAfterOrder() throws Exception {
+        ClientDto clientDto = new ClientDto(1L, "Tom", "No order");
+        DispatcherDto dispatcherDto =
+                new DispatcherDto(1L, "Vladimir", "dayOff", "startLunch", "endLunch", true);
+        MechanicDto mechanicDto = mechanicService.findById(1L);
+        OrderNumberDto orderNumberDto = dispatcherService.assignCarToDriverAndCallClient(clientDto, dispatcherDto);
+        String numberCar = orderNumberDto.getCar();
+        CarDto carDto = carService.findByNumberCar(numberCar);
+        System.out.println(carDto);
+
+        assertEquals("good luck", numberCar, "Назначен неверный автомобиль: " + numberCar);
+
+        int recoveredResource = mechanicDto.getResource();
+        long repairTime = mechanicDto.getRepairTime();
+        long timeAfterRepair = System.currentTimeMillis() + repairTime + 1000L;
+        while (timeAfterRepair >= System.currentTimeMillis()) {
+            if (timeAfterRepair == System.currentTimeMillis()) {
+                carDto = carService.findByNumberCar(numberCar);
+
+                Assertions.assertEquals(recoveredResource, carDto.getResource(), "Механик плохо постаралася: ресурс равен - " + carDto.getResource() + ", а должен быть - " + recoveredResource);
+                Assertions.assertFalse(carDto.isBusy(), "Автомобиль занят на ремонте: " + carDto.isBusy());
+            }
+        }
     }
 
     private Boolean isMakeEqual(DispatcherDto actual, DispatcherDto expected) {
