@@ -7,6 +7,16 @@ public class CarDto {
     private Integer resource;
     private boolean busy;
 
+    public CarDto() {
+    }
+
+    public CarDto(Long id, String numberCar, Integer resource, boolean busy) {
+        this.id = id;
+        this.numberCar = numberCar;
+        this.resource = resource;
+        this.busy = busy;
+    }
+
     public Long getId() {
         return id;
     }

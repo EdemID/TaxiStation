@@ -39,6 +39,17 @@ public class CarServiceImpl implements ServiceInterface<CarDto> {
                 .collect(Collectors.toList());
     }
 
+    @Transactional
+    public CarDto findById(Long id) {
+        CarDto carDto = null;
+        if (carRepository.findById(id).isPresent()) {
+            carDto = CarConverter.fromCarEntityToCarDto(carRepository.findById(id).get());
+        } else {
+            throw new EntityNotFoundException("Автомобиль " + id + " не найден!");
+        }
+        return carDto;
+    }
+
     @Override
     @Transactional
     public CarDto save(CarDto dto) throws ValidationException {
@@ -81,20 +92,21 @@ public class CarServiceImpl implements ServiceInterface<CarDto> {
         CarDto workerCar = null;
         for (CarDto carDto : carDtos) {
             System.out.println("id машинки " + carDto.getId());
+            busy = carDto.isBusy();
             workerResource = carDto.getResource();
-            if (workerResource != 0) {
+            if (workerResource == 0) {
+                System.out.println("уехала на ремонт: " + carDto.getId());
+                busy = true;
+                carDto.setBusy(busy);
+                // хардкор, так как пока у нас 1 механик и не придумал как убрать хардкор
+                sendCarForRepair(CarConverter.fromCarDtoToCarEntity(carDto), 1L);
+            } else if (!busy) {
                 System.out.println("свободная " + carDto.getId());
                 --workerResource;
                 carDto.setResource(workerResource);
                 carRepository.save(CarConverter.fromCarDtoToCarEntity(carDto));
                 workerCar = carDto;
                 break;
-            } else {
-                System.out.println("уехала на ремонт: " + carDto.getId());
-                busy = true;
-                carDto.setBusy(busy);
-                // хардкор, так как пока у нас 1 механик и не придумал как убрать хардкор
-                sendCarForRepair(CarConverter.fromCarDtoToCarEntity(carDto), 1L);
             }
             System.out.println(carDto.getResource());
         }

@@ -29,6 +29,13 @@ public class DriverServiceImpl implements ServiceInterface<DriverDto> {
                 .collect(Collectors.toList());
     }
 
+    @Transactional
+    public DriverDto findById(Long id) {
+        DriverEntity driverEntity = driverRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Водитель " + id + " не найден"));
+        return DriverConverter.fromDriverEntityToDriverDto(driverEntity);
+    }
+
     @Override
     public DriverDto save(DriverDto dto) throws ValidationException {
         return null;
@@ -65,25 +72,22 @@ public class DriverServiceImpl implements ServiceInterface<DriverDto> {
             System.out.println("водитель " + driverDto.getName());
 
             if (dayOfWeek.equalsIgnoreCase(driverDto.getDayoff())) {
-                System.out.println("водитель не работает " + driverDto.getName());
-
+                System.out.println("водитель не работает ВЫХОДНОЙ " + driverDto.getName());
                 workStatus = false;
-                driverDto.setWorkStatus(workStatus);
-                driverRepository.save(DriverConverter.fromDriverDtoToDriverEntity(driverDto));
-            }
-
-            System.out.println("водитель работает " + driverDto.getName());
-
-            if ("free".equalsIgnoreCase(car)) {
-                System.out.println("водитель свободен " + driverDto.getName());
-
+            } else {
+                System.out.println("водитель работает " + driverDto.getName());
                 workStatus = true;
+            }
+            driverDto.setWorkStatus(workStatus);
+            driverRepository.save(DriverConverter.fromDriverDtoToDriverEntity(driverDto));
+
+            if ("free".equalsIgnoreCase(car) && workStatus) {
+                System.out.println("водитель свободен и работает " + driverDto.getName());
                 car = "Назначается машина";
                 driverDto.setCar(car);
-                driverDto.setWorkStatus(workStatus);
-                System.out.println(driverDto.getId());
                 driverRepository.save(DriverConverter.fromDriverDtoToDriverEntity(driverDto));
                 workerDriverDto = driverDto;
+
                 break;
             }
         }

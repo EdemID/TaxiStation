@@ -10,6 +10,12 @@ public class ClientDto {
 
     }
 
+    public ClientDto(Long id, String name, String orderNumber) {
+        this.id = id;
+        this.name = name;
+        this.orderNumber = orderNumber;
+    }
+
     public Long getId() {
         return id;
     }

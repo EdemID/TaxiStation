@@ -96,6 +96,9 @@ public class MechanicServiceImpl implements ServiceInterface<MechanicDto> {
                     carEntity.setMechanicEntity(null);
                     carEntity.setBusy(false);
                     carEntity.setResource(5);
+                    /*
+                    почему save(), а не update() ? или логика одинаковая?
+                     */
                     carService.save(CarConverter.fromCarEntityToCarDto(carEntity));
                 } catch (ValidationException e) {
                     e.printStackTrace();
@@ -103,7 +106,7 @@ public class MechanicServiceImpl implements ServiceInterface<MechanicDto> {
             }
         };
         Timer timer = new Timer("Время ремонта");
-        long delay = 10000L;
-        timer.schedule(task, delay);
+        long repairTime = mechanicEntity.getRepairTime();
+        timer.schedule(task, repairTime);
     }
 }

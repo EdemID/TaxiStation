@@ -2,7 +2,6 @@ package elp.max.e.taxistation.service.clientService;
 
 import elp.max.e.taxistation.dto.ClientDto;
 import elp.max.e.taxistation.dto.DispatcherDto;
-import elp.max.e.taxistation.dto.DriverDto;
 import elp.max.e.taxistation.dto.OrderNumberDto;
 import elp.max.e.taxistation.model.ClientEntity;
 import elp.max.e.taxistation.repository.ClientRepository;
@@ -87,6 +86,10 @@ public class ClientServiceImpl implements ServiceInterface<ClientDto> {
         if (orderNumberDto == null) {
             throw new Exception();
         }
+
+        // в диспетчере не сможем добавить clientService, так здесь уже есть dispatcherService, иначе будет цикл бинов
+        clientDto.setOrderNumber(orderNumberDto.getNumber());
+        save(clientDto);
 
         /**
          *  данные заказ-наряда

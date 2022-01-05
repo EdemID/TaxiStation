@@ -21,7 +21,7 @@ public class DateUtil {
                         .toInstant());
     }
 
-    public static Date convertFromStringToDateViaInstant(String[] hoursAndMinutes) {
+    public static Date convertFromStringToLocalDateTimeViaInstant(String[] hoursAndMinutes) {
         List<Integer>  hoursAndMinutesList = Arrays.stream(hoursAndMinutes)
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());

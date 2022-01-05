@@ -11,15 +11,16 @@ public class MechanicEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String carBeingRepaired;
+    // в бд repair_time, так и остался varchar - как изменить тип столбца с элементами?
     @Column(name = "repair_time")
-    private String repairTime;
+    private Long repairTime;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "mechanicEntity")
     private List<CarEntity> brokenCars;
 
     public MechanicEntity() {
     }
 
-    public MechanicEntity(String carBeingRepaired, String repairTime) {
+    public MechanicEntity(String carBeingRepaired, Long repairTime) {
         this.carBeingRepaired = carBeingRepaired;
         this.repairTime = repairTime;
     }
@@ -40,11 +41,11 @@ public class MechanicEntity {
         this.carBeingRepaired = carBeingRepaired;
     }
 
-    public String getRepairTime() {
+    public Long getRepairTime() {
         return repairTime;
     }
 
-    public void setRepairTime(String repairTime) {
+    public void setRepairTime(long repairTime) {
         this.repairTime = repairTime;
     }
 

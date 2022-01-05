@@ -11,10 +11,13 @@ import elp.max.e.taxistation.utils.Utils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityNotFoundException;
 import javax.xml.bind.ValidationException;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.stream.Collectors;
 
 @Service
@@ -41,6 +44,11 @@ public class DispatcherServiceImpl implements ServiceInterface<DispatcherDto> {
                 .collect(Collectors.toList());
     }
 
+    @Transactional
+    public DispatcherDto findById(Long id) {
+        return DispatcherConverter.fromDispatcherEntityToDispatcherDto(dispatcherRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Диспетчер " + id + " не найден")));
+    }
+
     @Override
     @Transactional
     public DispatcherDto save(DispatcherDto dispatcherDto) throws ValidationException {
@@ -61,8 +69,8 @@ public class DispatcherServiceImpl implements ServiceInterface<DispatcherDto> {
         String dayOfWeek;
         DispatcherDto workerDispatcher = null;
         for (DispatcherDto dispatcherDto : dispatcherDtos) {
-            startLunch = DateUtil.convertFromStringToDateViaInstant(dispatcherDto.getStartLunch().split(":"));
-            endLunch = DateUtil.convertFromStringToDateViaInstant(dispatcherDto.getEndLunch().split(":"));
+            startLunch = DateUtil.convertFromStringToLocalDateTimeViaInstant(dispatcherDto.getStartLunch().split(":"));
+            endLunch = DateUtil.convertFromStringToLocalDateTimeViaInstant(dispatcherDto.getEndLunch().split(":"));
             currentDate = new Date();
             dayOfWeek = LocalDate.now().getDayOfWeek().toString();
             boolean workStatus;
@@ -79,7 +87,6 @@ public class DispatcherServiceImpl implements ServiceInterface<DispatcherDto> {
                 dispatcherDto.setWorkStatus(workStatus);
                 dispatcherRepository.save(DispatcherConverter.fromDispatcherDtoToDispatcherEntity(dispatcherDto));
                 workerDispatcher = dispatcherDto;
-                break;
             }
         }
         return workerDispatcher;
@@ -122,6 +129,32 @@ public class DispatcherServiceImpl implements ServiceInterface<DispatcherDto> {
         orderNumberDto.setDriver(driverDto.getName());
         orderNumberDto.setCar(carDto.getNumberCar());
 
+        // исходя из каких-то данных, диспетчер будет знать время заказа
+        releaseDriverAndCarAfterOrdering(driverDto, carDto, 20000L);
         return orderNumberService.save(orderNumberDto);
+    }
+
+    public void releaseDriverAndCarAfterOrdering(DriverDto driverDto, CarDto carDto, long orderTime) {
+        System.out.println("Метод releaseDriverAndCarAfterOrdering запущен: " + new Date());
+
+        TimerTask task = new TimerTask() {
+            @Override
+            public void run() {
+                System.out.println("Задача таск запущена: " + new Date());
+                try {
+                    driverDto.setBusy(false);
+                    driverDto.setCar("free");
+
+                    carDto.setBusy(false);
+
+                    driverService.update(driverDto.getId(), driverDto);
+                    carService.update(carDto.getId(), carDto);
+                } catch (ValidationException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        Timer timer = new Timer("Врема заказа");
+        timer.schedule(task, orderTime);
     }
 }

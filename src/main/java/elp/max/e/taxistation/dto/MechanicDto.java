@@ -6,7 +6,7 @@ public class MechanicDto {
 
     private Long id;
     private String carBeingRepaired;
-    private String repairTime;
+    private Long repairTime;
     private List<CarDto> brokenCars;
 
     public Long getId() {
@@ -25,11 +25,11 @@ public class MechanicDto {
         this.carBeingRepaired = carBeingRepaired;
     }
 
-    public String getRepairTime() {
+    public Long getRepairTime() {
         return repairTime;
     }
 
-    public void setRepairTime(String repairTime) {
+    public void setRepairTime(Long repairTime) {
         this.repairTime = repairTime;
     }
 
