@@ -21,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @AutoConfigureTestDatabase
 @ActiveProfiles("DispatcherService test")
 @TestPropertySource(locations = "classpath:application-test.properties")
-public class TestDispatcherService {
+public class DispatcherServiceImplTest {
 
     private final DispatcherServiceImpl dispatcherService;
     private final MechanicServiceImpl mechanicService;
@@ -29,7 +29,7 @@ public class TestDispatcherService {
     private final CarServiceImpl carService;
 
     @Autowired
-    public TestDispatcherService(CarServiceImpl carService, DriverServiceImpl driverService, OrderNumberServiceImpl orderNumberService, DispatcherRepository dispatcherRepository, MechanicServiceImpl mechanicService) {
+    public DispatcherServiceImplTest(CarServiceImpl carService, DriverServiceImpl driverService, OrderNumberServiceImpl orderNumberService, DispatcherRepository dispatcherRepository, MechanicServiceImpl mechanicService) {
         this.dispatcherService = new DispatcherServiceImpl(carService, driverService, orderNumberService, dispatcherRepository);
         this.mechanicService = mechanicService;
         this.driverService = driverService;

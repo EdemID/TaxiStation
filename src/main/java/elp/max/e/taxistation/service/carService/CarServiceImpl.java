@@ -113,7 +113,6 @@ public class CarServiceImpl implements ServiceInterface<CarDto> {
                 carDto.setResource(workerResource);
                 carRepository.save(CarConverter.fromCarDtoToCarEntity(carDto));
                 workerCar = carDto;
-                break;
             }
             System.out.println(carDto.getResource());
         }
@@ -127,7 +126,6 @@ public class CarServiceImpl implements ServiceInterface<CarDto> {
         // хардкор, так как пока у нас 1 механик, в будущем можно также реализовать двух механиков с режимом работы
         MechanicDto mechanicDto = mechanicService.findById(1L);
         carEntity.setMechanicEntity(MechanicConverter.fromMechanicDtoToMechanicEntity(mechanicDto));
-        carEntity.setBusy(true);
 
         carRepository.save(carEntity);
 
