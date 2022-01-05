@@ -5,8 +5,8 @@ import java.util.List;
 public class MechanicDto {
 
     private Long id;
-    private String carBeingRepaired;
     private Long repairTime;
+    private Integer resource;
     private List<CarDto> brokenCars;
 
     public Long getId() {
@@ -17,20 +17,20 @@ public class MechanicDto {
         this.id = id;
     }
 
-    public String getCarBeingRepaired() {
-        return carBeingRepaired;
-    }
-
-    public void setCarBeingRepaired(String carBeingRepaired) {
-        this.carBeingRepaired = carBeingRepaired;
-    }
-
     public Long getRepairTime() {
         return repairTime;
     }
 
     public void setRepairTime(Long repairTime) {
         this.repairTime = repairTime;
+    }
+
+    public Integer getResource() {
+        return resource;
+    }
+
+    public void setResource(Integer resource) {
+        this.resource = resource;
     }
 
     public List<CarDto> getBrokenCars() {

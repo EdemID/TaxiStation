@@ -18,3 +18,10 @@ VALUES ('random', 5, true);
 
 INSERT INTO cars(number_car, resource, busy)
 VALUES ('good luck', 5, false);
+
+INSERT INTO cars(number_car, resource, busy)
+VALUES ('armagedon', 0, false);
+
+-- insert mechanic
+INSERT INTO service(repair_time, resource)
+VALUES (20000, 5);

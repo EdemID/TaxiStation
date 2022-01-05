@@ -21,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @AutoConfigureTestDatabase
-@ActiveProfiles("test")
+@ActiveProfiles("DispatcherService test")
 @TestPropertySource(locations = "classpath:application-test.properties")
 public class TestDispatcherService {
 
@@ -50,9 +50,7 @@ public class TestDispatcherService {
     @DisplayName("Проверить рабочего диспетчера")
     void getWorkerDispatcher() {
         DispatcherDto actual = dispatcherService.getWorkerDispatcher();
-
         DispatcherDto expected = dispatcherService.findById(actual.getId());
-
         assertTrue(isMakeEqual(expected, actual));
     }
 

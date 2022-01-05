@@ -11,8 +11,8 @@ public class MechanicConverter {
     public static MechanicEntity fromMechanicDtoToMechanicEntity(MechanicDto mechanicDto) {
         MechanicEntity mechanicEntity = new MechanicEntity();
         mechanicEntity.setId(mechanicDto.getId());
-        mechanicEntity.setCarBeingRepaired(mechanicDto.getCarBeingRepaired());
         mechanicEntity.setRepairTime(mechanicDto.getRepairTime());
+        mechanicEntity.setResource(mechanicDto.getResource());
         mechanicEntity.setBrokenCars(mechanicDto.getBrokenCars().stream()
                 .map(CarConverter::fromCarDtoToCarEntity)
                 .collect(Collectors.toList()));
@@ -22,8 +22,8 @@ public class MechanicConverter {
     public static MechanicDto fromMechanicEntityToMechanicDto(MechanicEntity mechanicEntity) {
         MechanicDto mechanicDto = new MechanicDto();
         mechanicDto.setId(mechanicEntity.getId());
-        mechanicDto.setCarBeingRepaired(mechanicEntity.getCarBeingRepaired());
         mechanicDto.setRepairTime(mechanicEntity.getRepairTime());
+        mechanicDto.setResource(mechanicEntity.getResource());
 /*
         List<CarEntity> carEntityList = mechanicEntity.getBrokenCars();
         System.out.println("размер carEntityList " + carEntityList.size());

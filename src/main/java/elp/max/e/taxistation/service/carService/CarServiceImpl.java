@@ -1,8 +1,8 @@
 package elp.max.e.taxistation.service.carService;
 
 import elp.max.e.taxistation.dto.CarDto;
+import elp.max.e.taxistation.dto.MechanicDto;
 import elp.max.e.taxistation.model.CarEntity;
-import elp.max.e.taxistation.model.MechanicEntity;
 import elp.max.e.taxistation.repository.CarRepository;
 import elp.max.e.taxistation.service.ServiceInterface;
 import elp.max.e.taxistation.service.mechanicService.MechanicConverter;
@@ -98,8 +98,9 @@ public class CarServiceImpl implements ServiceInterface<CarDto> {
                 System.out.println("уехала на ремонт: " + carDto.getId());
                 busy = true;
                 carDto.setBusy(busy);
-                // хардкор, так как пока у нас 1 механик и не придумал как убрать хардкор
-                sendCarForRepair(CarConverter.fromCarDtoToCarEntity(carDto), 1L);
+                // хардкор, так как пока у нас 1 механик, в будущем можно также реализовать двух механиков с режимом работы
+                MechanicDto mechanicDto = mechanicService.findById(1L);
+                sendCarForRepair(CarConverter.fromCarDtoToCarEntity(carDto), mechanicDto);
             } else if (!busy) {
                 System.out.println("свободная " + carDto.getId());
                 --workerResource;
@@ -113,13 +114,8 @@ public class CarServiceImpl implements ServiceInterface<CarDto> {
         return workerCar;
     }
 
-    public void sendCarForRepair(CarEntity carEntity, Long id) throws ValidationException {
-        MechanicEntity mechanicEntity = MechanicConverter.fromMechanicDtoToMechanicEntity(mechanicService.findById(id));
-        mechanicEntity.setCarBeingRepaired("Автомобиль " + carEntity.getNumberCar() + " в ремонте");
-        mechanicEntity.setCarBeingRepaired(carEntity.getNumberCar());
-        mechanicService.update(id, MechanicConverter.fromMechanicEntityToMechanicDto(mechanicEntity));
-
-        carEntity.setMechanicEntity(mechanicEntity);
+    public void sendCarForRepair(CarEntity carEntity, MechanicDto mechanicDto) {
+        carEntity.setMechanicEntity(MechanicConverter.fromMechanicDtoToMechanicEntity(mechanicDto));
         carEntity.setBusy(true);
 
         carRepository.save(carEntity);
@@ -127,6 +123,6 @@ public class CarServiceImpl implements ServiceInterface<CarDto> {
         /**
          * если создать бин карСервиса, то будет цикл: карСервис <-> механикСервис
          */
-        mechanicService.repairCar(id, carEntity, this);
+        mechanicService.repairCar(mechanicDto, carEntity, this);
     }
 }

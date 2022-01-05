@@ -55,7 +55,6 @@ public class MechanicServiceImpl implements ServiceInterface<MechanicDto> {
         MechanicEntity mechanicEntity = mechanicRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Механик " + dto + " не найден"));
 
-        mechanicEntity.setCarBeingRepaired(dto.getCarBeingRepaired());
         mechanicEntity.setRepairTime(dto.getRepairTime());
         mechanicEntity = mechanicRepository.save(mechanicEntity);
 
@@ -78,8 +77,8 @@ public class MechanicServiceImpl implements ServiceInterface<MechanicDto> {
         }
     }
 
-    public void repairCar(Long id, CarEntity carEntity, CarServiceImpl carService) {
-        MechanicEntity mechanicEntity = MechanicConverter.fromMechanicDtoToMechanicEntity(findById(id));
+    public void repairCar(MechanicDto mechanicDto, CarEntity carEntity, CarServiceImpl carService) {
+        MechanicEntity mechanicEntity = MechanicConverter.fromMechanicDtoToMechanicEntity(mechanicDto);
 
         System.out.println("Метод repairCar запущен: " + new Date());
 
@@ -88,14 +87,10 @@ public class MechanicServiceImpl implements ServiceInterface<MechanicDto> {
             public void run() {
                 System.out.println("Задача таск запущена: " + new Date());
                 try {
-                    mechanicEntity.setCarBeingRepaired("Автомобиль " + carEntity.getNumberCar() + " не на ремонте");
-
-                    update(id, MechanicConverter.fromMechanicEntityToMechanicDto(mechanicEntity));
-
                     // как избавиться от механика?
                     carEntity.setMechanicEntity(null);
                     carEntity.setBusy(false);
-                    carEntity.setResource(5);
+                    carEntity.setResource(mechanicEntity.getResource());
                     /*
                     почему save(), а не update() ? или логика одинаковая?
                      */
