@@ -98,7 +98,7 @@ public class DispatcherServiceImplTest {
         assertEquals("Tom", client, "Назначен неверный клиент: " + client);
         assertEquals("Vladimir", dispatcher, "Назначен неверный диспетчер: " + dispatcher);
         assertEquals(orderNumber, orderNumber, "Назначен неверный номер наряд-заказа: " + orderNumber);
-        assertEquals("good luck", car, "Назначен неверный автомобиль: " + car);
+        assertEquals("good luck-car", car, "Назначен неверный автомобиль: " + car);
         assertEquals("Aurora", driver, "Назначен неверный водитель: " + driver);
     }
 
@@ -116,17 +116,19 @@ public class DispatcherServiceImplTest {
         CarDto carDto = carService.findByNumberCar(numberCar);
         System.out.println(carDto);
 
-        assertEquals("good luck", numberCar, "Назначен неверный автомобиль: " + numberCar);
-
-        int recoveredResource = mechanicDto.getResource();
-        long repairTime = mechanicDto.getRepairTime();
-        long timeAfterRepair = System.currentTimeMillis() + repairTime + 1000L;
-        while (timeAfterRepair >= System.currentTimeMillis()) {
-            if (timeAfterRepair == System.currentTimeMillis()) {
-                carDto = carService.findByNumberCar(numberCar);
-
-                Assertions.assertEquals(recoveredResource, carDto.getResource(), "Механик плохо постаралася: ресурс равен - " + carDto.getResource() + ", а должен быть - " + recoveredResource);
-                Assertions.assertFalse(carDto.isBusy(), "Автомобиль занят на ремонте: " + carDto.isBusy());
+        if (carDto.getResource() == 0) {
+            assertEquals(numberCar, carDto.getNumberCar(), "Назначен неверный автомобиль: " + numberCar);
+            int recoveredResource = mechanicDto.getResource();
+            long repairTime = mechanicDto.getRepairTime();
+            long timeAfterRepair = System.currentTimeMillis() + repairTime + 1000L;
+            while (timeAfterRepair >= System.currentTimeMillis()) {
+                if (timeAfterRepair == System.currentTimeMillis()) {
+                    carDto = carService.findById(carDto.getId());
+                    System.out.println(carDto.getId());
+                    System.out.println(carDto.getResource());
+                    Assertions.assertEquals(recoveredResource, carDto.getResource(), "Механик плохо постаралася: ресурс равен - " + carDto.getResource() + ", а должен быть - " + recoveredResource);
+                    Assertions.assertFalse(carDto.isBusy(), "Автомобиль занят на ремонте: " + carDto.isBusy());
+                }
             }
         }
     }

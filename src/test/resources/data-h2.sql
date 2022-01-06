@@ -1,6 +1,9 @@
 -- insert clients
 INSERT INTO clients(name, order_number)
 VALUES ('Danil-client', 'No order');
+
+INSERT INTO clients(name, order_number)
+VALUES ('Masha-client', 'No order');
 -- insert dispatchers
 INSERT INTO dispatchers(name, dayoff, start_lunch, end_lunch, workstatus)
 VALUES ('Germany-dispatcher','Sunday', '19:00', '21:00', true);
@@ -10,7 +13,7 @@ VALUES ('Mikhail-dispatcher','Sunday', '13:00', '23:00', true);
 
 -- insert drivers
 INSERT INTO drivers(name, dayoff, car, workStatus, busy)
-VALUES ('Nikola-driver', 'Sunday', 'едет на машине', true, true);
+VALUES ('Nikola-driver', 'Sunday', 'free', true, false );
 
 INSERT INTO drivers(name, dayoff, car, workStatus, busy)
 VALUES ('Aurora-driver', 'Sunday', 'free', true, false );

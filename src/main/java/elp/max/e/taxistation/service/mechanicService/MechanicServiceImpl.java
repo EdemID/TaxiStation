@@ -90,6 +90,7 @@ public class MechanicServiceImpl implements ServiceInterface<MechanicDto> {
                     // как избавиться от механика?
                     carEntity.setMechanicEntity(null);
                     carEntity.setBusy(false);
+                    System.out.println("Автомобиль отремантирован: " + carEntity.getResource());
                     carEntity.setResource(mechanicEntity.getResource());
                     /*
                     почему save(), а не update() ? или логика одинаковая?

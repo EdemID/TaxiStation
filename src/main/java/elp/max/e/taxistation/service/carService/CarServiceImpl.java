@@ -113,6 +113,8 @@ public class CarServiceImpl implements ServiceInterface<CarDto> {
                 carDto.setResource(workerResource);
                 carRepository.save(CarConverter.fromCarDtoToCarEntity(carDto));
                 workerCar = carDto;
+
+                break;
             }
             System.out.println(carDto.getResource());
         }

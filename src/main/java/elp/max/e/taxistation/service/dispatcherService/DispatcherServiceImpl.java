@@ -98,6 +98,8 @@ public class DispatcherServiceImpl implements ServiceInterface<DispatcherDto> {
                 dispatcherDto.setWorkStatus(workStatus);
                 dispatcherRepository.save(DispatcherConverter.fromDispatcherDtoToDispatcherEntity(dispatcherDto));
                 workerDispatcher = dispatcherDto;
+
+                break;
             }
         }
         return workerDispatcher;
