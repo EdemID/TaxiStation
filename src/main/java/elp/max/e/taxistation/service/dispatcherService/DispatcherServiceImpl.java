@@ -22,6 +22,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.stream.Collectors;
 
+import static java.util.Objects.isNull;
+
 @Service
 public class DispatcherServiceImpl implements ServiceInterface<DispatcherDto> {
 
@@ -62,8 +64,10 @@ public class DispatcherServiceImpl implements ServiceInterface<DispatcherDto> {
 
     @Override
     @Transactional
-    public DispatcherDto save(DispatcherDto dispatcherDto) throws ValidationException {
-        return null;
+    public DispatcherDto save(DispatcherDto dto) throws ValidationException {
+        validateDispatcherDto(dto);
+        DispatcherEntity dispatcherEntity = dispatcherRepository.save(DispatcherConverter.fromDispatcherDtoToDispatcherEntity(dto));
+        return DispatcherConverter.fromDispatcherEntityToDispatcherDto(dispatcherEntity);
     }
 
     @Override
@@ -85,6 +89,8 @@ public class DispatcherServiceImpl implements ServiceInterface<DispatcherDto> {
             currentDate = new Date();
             dayOfWeek = LocalDate.now().getDayOfWeek().toString();
             boolean workStatus;
+            System.out.println(dispatcherDto.getName());
+            System.out.println(dispatcherDto.getDayoff());
             if (endLunch.getTime() > currentDate.getTime() &&
                     currentDate.getTime() > startLunch.getTime() ||
                     dayOfWeek.equalsIgnoreCase(dispatcherDto.getDayoff()))
@@ -174,5 +180,14 @@ public class DispatcherServiceImpl implements ServiceInterface<DispatcherDto> {
         };
         Timer timer = new Timer("Врема заказа");
         timer.schedule(task, orderTime);
+    }
+
+    private void validateDispatcherDto(DispatcherDto dto) throws ValidationException {
+        if (isNull(dto)) {
+            throw new ValidationException("Object dispatcher is null");
+        }
+        if (isNull(dto.getName()) || dto.getName().isEmpty()) {
+            throw new ValidationException("Name is empty");
+        }
     }
 }

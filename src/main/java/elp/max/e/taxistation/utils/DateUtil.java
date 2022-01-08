@@ -33,4 +33,10 @@ public class DateUtil {
 
         return convertToDateViaInstant(dateTime);
     }
+
+    public static String convertFromLocalDateTimeToString(LocalDateTime localDateTime) {
+        return localDateTime.getHour() +
+               ":" +
+               localDateTime.getMinute();
+    }
 }

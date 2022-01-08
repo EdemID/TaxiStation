@@ -1,9 +1,12 @@
 package elp.max.e.taxistation.service.driverService;
 
+import elp.max.e.taxistation.dto.ClientDto;
 import elp.max.e.taxistation.dto.DriverDto;
+import elp.max.e.taxistation.model.ClientEntity;
 import elp.max.e.taxistation.model.DriverEntity;
 import elp.max.e.taxistation.repository.DriverRepository;
 import elp.max.e.taxistation.service.ServiceInterface;
+import elp.max.e.taxistation.service.clientService.ClientConverter;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,6 +15,8 @@ import javax.xml.bind.ValidationException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static java.util.Objects.isNull;
 
 @Service
 public class DriverServiceImpl implements ServiceInterface<DriverDto> {
@@ -46,8 +51,11 @@ public class DriverServiceImpl implements ServiceInterface<DriverDto> {
     }
 
     @Override
+    @Transactional
     public DriverDto save(DriverDto dto) throws ValidationException {
-        return null;
+        validateDriverDto(dto);
+        DriverEntity driverEntity = driverRepository.save(DriverConverter.fromDriverDtoToDriverEntity(dto));
+        return DriverConverter.fromDriverEntityToDriverDto(driverEntity);
     }
 
     @Transactional
@@ -101,5 +109,14 @@ public class DriverServiceImpl implements ServiceInterface<DriverDto> {
             }
         }
         return workerDriverDto;
+    }
+
+    private void validateDriverDto(DriverDto dto) throws ValidationException {
+        if (isNull(dto)) {
+            throw new ValidationException("Object driver is null");
+        }
+        if (isNull(dto.getName()) || dto.getName().isEmpty()) {
+            throw new ValidationException("Name is empty");
+        }
     }
 }

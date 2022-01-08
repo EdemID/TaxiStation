@@ -1,32 +1,39 @@
 package elp.max.e.taxistation.controller;
 
+import elp.max.e.taxistation.BaseTest;
+import elp.max.e.taxistation.dto.CarDto;
+import elp.max.e.taxistation.dto.DriverDto;
 import elp.max.e.taxistation.dto.OrderNumberDto;
+import elp.max.e.taxistation.repository.DispatcherRepository;
+import elp.max.e.taxistation.service.carService.CarServiceImpl;
 import elp.max.e.taxistation.service.clientService.ClientServiceImpl;
+import elp.max.e.taxistation.service.driverService.DriverServiceImpl;
+import elp.max.e.taxistation.service.mechanicService.MechanicServiceImpl;
+import elp.max.e.taxistation.service.orderNumberService.OrderNumberServiceImpl;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.context.jdbc.Sql;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@SpringBootTest
-@AutoConfigureTestDatabase
-@ActiveProfiles("test")
-@TestPropertySource(locations = "classpath:application-test.properties")
-class ClientControllerTest {
+class ClientControllerTest extends BaseTest {
 
     private final ClientController clientController;
-    private final ClientServiceImpl clientService;
 
     @Autowired
-    ClientControllerTest(ClientController clientController, ClientServiceImpl clientService) {
+    public ClientControllerTest(ClientController clientController, CarServiceImpl carService, DriverServiceImpl driverService, OrderNumberServiceImpl orderNumberService, DispatcherRepository dispatcherRepository, MechanicServiceImpl mechanicService, ClientServiceImpl clientService) {
+        super(carService, driverService, orderNumberService, dispatcherRepository, mechanicService, clientService);
         this.clientController = clientController;
-        this.clientService = clientService;
     }
 
     @Test
+    @Sql({"/data/import_positive_data.sql", "/data/import_additional_car_and_driver.sql"})
+    @DisplayName("Проверить создание и содержание наряд-заказа у двух клиентов")
     void call() throws Exception {
         OrderNumberDto actualOrderNumber = clientController.call(1L);
         String expectedClientName = clientService.findById(1L).getName();

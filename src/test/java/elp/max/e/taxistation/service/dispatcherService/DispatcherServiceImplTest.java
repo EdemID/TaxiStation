@@ -1,43 +1,34 @@
 package elp.max.e.taxistation.service.dispatcherService;
 
+import elp.max.e.taxistation.BaseTest;
 import elp.max.e.taxistation.dto.*;
 import elp.max.e.taxistation.repository.DispatcherRepository;
 import elp.max.e.taxistation.service.carService.CarServiceImpl;
+import elp.max.e.taxistation.service.clientService.ClientServiceImpl;
 import elp.max.e.taxistation.service.driverService.DriverServiceImpl;
 import elp.max.e.taxistation.service.mechanicService.MechanicServiceImpl;
 import elp.max.e.taxistation.service.orderNumberService.OrderNumberServiceImpl;
+import elp.max.e.taxistation.utils.DateUtil;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.context.jdbc.Sql;
 
+import javax.xml.bind.ValidationException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest
-@AutoConfigureTestDatabase
-@ActiveProfiles("DispatcherService test")
-@TestPropertySource(locations = "classpath:application-test.properties")
-public class DispatcherServiceImplTest {
-
-    private final DispatcherServiceImpl dispatcherService;
-    private final MechanicServiceImpl mechanicService;
-    private final DriverServiceImpl driverService;
-    private final CarServiceImpl carService;
+public class DispatcherServiceImplTest extends BaseTest {
 
     @Autowired
-    public DispatcherServiceImplTest(CarServiceImpl carService, DriverServiceImpl driverService, OrderNumberServiceImpl orderNumberService, DispatcherRepository dispatcherRepository, MechanicServiceImpl mechanicService) {
-        this.dispatcherService = new DispatcherServiceImpl(carService, driverService, orderNumberService, dispatcherRepository);
-        this.mechanicService = mechanicService;
-        this.driverService = driverService;
-        this.carService = carService;
-    }
-
-    @BeforeEach
-    void setUp() {
+    public DispatcherServiceImplTest(CarServiceImpl carService, DriverServiceImpl driverService, OrderNumberServiceImpl orderNumberService, DispatcherRepository dispatcherRepository, MechanicServiceImpl mechanicService, ClientServiceImpl clientService) {
+        super(carService, driverService, orderNumberService, dispatcherRepository, mechanicService, clientService);
     }
 
     @AfterEach
@@ -47,6 +38,7 @@ public class DispatcherServiceImplTest {
     // как в тестах обновить на нужные значения сущностей
     @Order(1)
     @Test
+    @Sql({"/data/import_positive_data.sql"})
     @DisplayName("Проверить рабочего диспетчера")
     void getWorkerDispatcher() {
         DispatcherDto workerDispatcher = dispatcherService.getWorkerDispatcher();
@@ -57,10 +49,11 @@ public class DispatcherServiceImplTest {
 
     @Order(3)
     @Test
+    @Sql({"/data/import_positive_data.sql"})
     @DisplayName("Проверить смену статусов водителя и автомобиля после заказа")
     void releaseDriverAndCarAfterOrdering() {
-        DriverDto driverDto = driverService.findById(1L);
-        CarDto carDto = carService.findById(1L);
+        DriverDto driverDto = driverService.getWorkerDriver();
+        CarDto carDto = carService.getWorkerCar();
 
         long currentTime = new Date().getTime();
         long orderTime = 20000L;
@@ -79,14 +72,11 @@ public class DispatcherServiceImplTest {
 
     @Order(4)
     @Test
+    @Sql({"/data/import_positive_data.sql"})
     @DisplayName("Проверить создание и содержание наряд-заказа")
     void assignCarToDriverAndCallClient() throws Exception {
-        // данные для теста лучше создавать или брать из бд? если из бд, то нужно инжектить Сервисы других (отличных от тестируемой) сущностей в тесте?
-        // в автотестах создавали данные руками, но в специальном классе TestRunData
-        // здесь создаю клиента и диспетчера, так как в проверяемом методе нет их взаимодействия с бд
         ClientDto clientDto = new ClientDto(1L, "Tom", "No order");
-        DispatcherDto dispatcherDto =
-                new DispatcherDto(1L, "Vladimir", "dayOff", "startLunch", "endLunch", true);
+        DispatcherDto dispatcherDto = dispatcherService.getWorkerDispatcher();
 
         OrderNumberDto orderNumberDto = dispatcherService.assignCarToDriverAndCallClient(clientDto, dispatcherDto);
         String orderNumber = orderNumberDto.getNumber();
@@ -96,31 +86,35 @@ public class DispatcherServiceImplTest {
         String driver = orderNumberDto.getDriver();
 
         assertEquals("Tom", client, "Назначен неверный клиент: " + client);
-        assertEquals("Vladimir", dispatcher, "Назначен неверный диспетчер: " + dispatcher);
+        assertEquals("Vladimir-dispatcher-worker", dispatcher, "Назначен неверный диспетчер: " + dispatcher);
         assertEquals(orderNumber, orderNumber, "Назначен неверный номер наряд-заказа: " + orderNumber);
-        assertEquals("good luck-car", car, "Назначен неверный автомобиль: " + car);
-        assertEquals("Aurora", driver, "Назначен неверный водитель: " + driver);
+        assertEquals("car-not-busy", car, "Назначен неверный автомобиль: " + car);
+        assertEquals("Aurora-driver-not-busy", driver, "Назначен неверный водитель: " + driver);
     }
 
     @Order(5)
     @Test
+    @Sql({"/data/import_positive_data.sql"})
     @DisplayName("Проверить отправку автомобиля на ремонт после заказа, если ресурс равен 0, и его починку")
     void sendCarForRepairIfResourceIsZeroAfterOrder() throws Exception {
-        ClientDto clientDto = new ClientDto(1L, "Tom", "No order");
-        DispatcherDto dispatcherDto =
-                new DispatcherDto(1L, "Vladimir", "dayOff", "startLunch", "endLunch", true);
+        CarDto carDto = carService.getWorkerCar();
+        carDto.setResource(1);
+        carService.save(carDto);
+
+        ClientDto clientDto = clientService.findById(1L);
+        DispatcherDto dispatcherDto = dispatcherService.getWorkerDispatcher();
         MechanicDto mechanicDto = mechanicService.findById(1L);
 
         OrderNumberDto orderNumberDto = dispatcherService.assignCarToDriverAndCallClient(clientDto, dispatcherDto);
         String numberCar = orderNumberDto.getCar();
-        CarDto carDto = carService.findByNumberCar(numberCar);
+        carDto = carService.findByNumberCar(numberCar);
         System.out.println(carDto);
 
         if (carDto.getResource() == 0) {
             assertEquals(numberCar, carDto.getNumberCar(), "Назначен неверный автомобиль: " + numberCar);
             int recoveredResource = mechanicDto.getResource();
             long repairTime = mechanicDto.getRepairTime();
-            long timeAfterRepair = System.currentTimeMillis() + repairTime + 1000L;
+            long timeAfterRepair = System.currentTimeMillis() + repairTime + 2000L;
             while (timeAfterRepair >= System.currentTimeMillis()) {
                 if (timeAfterRepair == System.currentTimeMillis()) {
                     carDto = carService.findById(carDto.getId());

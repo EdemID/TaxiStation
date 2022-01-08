@@ -3,7 +3,7 @@ package elp.max.e.taxistation.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "order_numbers")
+@Table(name = "order_number")
 public class OrderNumberEntity {
 
     @Id
