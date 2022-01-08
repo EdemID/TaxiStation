@@ -58,7 +58,7 @@ public class BaseTest {
         DispatcherDto dispatcherLunch = dispatcherService.findById(2L);
         dispatcherLunch.setStartLunch(startLunch);
         dispatcherLunch.setEndLunch(endLunch);
-        dispatcherDayoff.setWorkStatus(true);
+        dispatcherLunch.setWorkStatus(true);
         dispatcherService.save(dispatcherLunch);
 
         DriverDto driverDayoff = driverService.findById(1L);

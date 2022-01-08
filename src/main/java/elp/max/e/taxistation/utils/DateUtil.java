@@ -25,6 +25,8 @@ public class DateUtil {
         List<Integer>  hoursAndMinutesList = Arrays.stream(hoursAndMinutes)
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
+        //  работает только для текущего дня. например, если сейчас 8.01.22 23:55
+        //  и задать время 08:00, то день так и останется 8.01.22
         LocalDateTime dateTime = LocalDateTime.now()
                 .withHour(hoursAndMinutesList.get(0))
                 .withMinute(hoursAndMinutesList.get(1))

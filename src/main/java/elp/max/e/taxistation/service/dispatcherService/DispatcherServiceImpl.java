@@ -89,12 +89,14 @@ public class DispatcherServiceImpl implements ServiceInterface<DispatcherDto> {
             currentDate = new Date();
             dayOfWeek = LocalDate.now().getDayOfWeek().toString();
             boolean workStatus;
-            System.out.println(dispatcherDto.getName());
-            System.out.println(dispatcherDto.getDayoff());
-            if (endLunch.getTime() > currentDate.getTime() &&
-                    currentDate.getTime() > startLunch.getTime() ||
+            System.out.println(346 + dispatcherDto.getName());
+            System.out.println(346 + endLunch.toString());
+            System.out.println(346 +  startLunch.toString());
+            if ((endLunch.getTime() > currentDate.getTime() &&
+                    currentDate.getTime() > startLunch.getTime()) ||
                     dayOfWeek.equalsIgnoreCase(dispatcherDto.getDayoff()))
             {
+                System.out.println(234 + dispatcherDto.toString());
                 workStatus = false;
                 dispatcherDto.setWorkStatus(workStatus);
                 dispatcherRepository.save(DispatcherConverter.fromDispatcherDtoToDispatcherEntity(dispatcherDto));
