@@ -27,7 +27,7 @@ class ClientControllerTest extends BaseTest {
 
     @Test
     @Sql(value = {"/data/import_positive_data.sql", "/data/import_additional_car_and_driver.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
-    @Sql(value = {"/data/delete_positive_data.sql", "/data/import_additional_car_and_driver.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+    @Sql(value = {"/data/delete_positive_data.sql", "/data/delete_additional_car_and_driver.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @DisplayName("Проверить создание и содержание наряд-заказа у двух клиентов")
     void call() throws Exception {
         OrderNumberDto actualOrderNumber = clientController.call(1L);

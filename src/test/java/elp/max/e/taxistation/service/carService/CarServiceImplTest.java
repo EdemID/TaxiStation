@@ -25,7 +25,8 @@ class CarServiceImplTest extends BaseTest {
     }
 
     @Test
-    @Sql({"/data/import_positive_data.sql"})
+    @Sql(value = {"/data/import_positive_data.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(value = {"/data/delete_positive_data.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @DisplayName("Проверить рабочий автомобиль")
     void getWorkerCar() {
         CarDto workerCar = carService.getWorkerCar();
