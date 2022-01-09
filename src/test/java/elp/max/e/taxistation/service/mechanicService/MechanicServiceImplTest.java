@@ -50,4 +50,33 @@ class MechanicServiceImplTest extends BaseTest {
             }
         }
     }
+
+    @Test
+    @Sql(value = {"/data/import_positive_data.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(value = {"/data/delete_positive_data.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+    @DisplayName("Проверить починку двух автомобилей сразу")
+    void repairTwoCars() throws ValidationException {
+        CarEntity carEntityWithZeroResource = new CarEntity(10L, "add", 0, false);
+
+        CarDto carDto = carService.getWorkerCar();
+        carDto.setResource(0);
+        carService.save(carDto);
+        CarEntity carEntity = CarConverter.fromCarDtoToCarEntity(carDto);
+        MechanicDto mechanicDto = mechanicService.findById(1L);
+
+        int recoveredResource = mechanicDto.getResource();
+        long repairTime = mechanicDto.getRepairTime();
+        mechanicService.repairCar(mechanicDto, carEntity, carService);
+        mechanicService.repairCar(mechanicDto, carEntityWithZeroResource, carService);
+
+        long timeAfterRepair = System.currentTimeMillis() + repairTime + 1000L;
+        while (timeAfterRepair >= System.currentTimeMillis()) {
+            if (timeAfterRepair == System.currentTimeMillis()) {
+                carEntity = CarConverter.fromCarDtoToCarEntity(carService.findByNumberCar(carEntity.getNumberCar()));
+
+                Assertions.assertEquals(recoveredResource, carEntity.getResource(), "Механик плохо постаралася: ресурс равен - " + carEntity.getResource() + ", а должен быть - " + recoveredResource);
+                Assertions.assertFalse(carEntity.isBusy(), "Автомобиль занят на ремонте: " + carEntity.isBusy());
+            }
+        }
+    }
 }

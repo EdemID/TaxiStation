@@ -104,7 +104,7 @@ public class DispatcherServiceImplTest extends BaseTest {
             assertEquals(numberCar, carDto.getNumberCar(), "Назначен неверный автомобиль: " + numberCar);
             int recoveredResource = mechanicDto.getResource();
             long repairTime = mechanicDto.getRepairTime();
-            long timeAfterRepair = System.currentTimeMillis() + repairTime + 2000L;
+            long timeAfterRepair = System.currentTimeMillis() + repairTime + 1000L;
             while (timeAfterRepair >= System.currentTimeMillis()) {
                 if (timeAfterRepair == System.currentTimeMillis()) {
                     carDto = carService.findById(carDto.getId());

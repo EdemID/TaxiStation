@@ -20,7 +20,8 @@ public class CarEntity {
     public CarEntity() {
     }
 
-    public CarEntity(String numberCar, Integer resource, boolean busy) {
+    public CarEntity(Long id, String numberCar, Integer resource, boolean busy) {
+        this.id = id;
         this.numberCar = numberCar;
         this.resource = resource;
         this.busy = busy;
