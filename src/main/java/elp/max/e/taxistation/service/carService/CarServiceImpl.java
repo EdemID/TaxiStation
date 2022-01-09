@@ -88,16 +88,6 @@ public class CarServiceImpl implements ServiceInterface<CarDto> {
         carRepository.deleteById(id);
     }
 
-    @Override
-    public void validateDto(CarDto dto) throws ValidationException {
-        if (isNull(dto)) {
-            throw new ValidationException("Object car is null");
-        }
-        if (isNull(dto.getNumberCar()) || dto.getNumberCar().isEmpty()) {
-            throw new ValidationException("Number car is empty");
-        }
-    }
-
     public CarDto getWorkerCar() {
         List<CarDto> carDtos = findAll();
 
@@ -138,5 +128,15 @@ public class CarServiceImpl implements ServiceInterface<CarDto> {
          * если создать бин карСервиса, то будет цикл: карСервис <-> механикСервис
          */
         mechanicService.repairCar(mechanicDto, carEntity, this);
+    }
+
+    @Override
+    public void validateDto(CarDto dto) throws ValidationException {
+        if (isNull(dto)) {
+            throw new ValidationException("Object car is null");
+        }
+        if (isNull(dto.getNumberCar()) || dto.getNumberCar().isEmpty()) {
+            throw new ValidationException("Number car is empty");
+        }
     }
 }

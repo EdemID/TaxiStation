@@ -9,6 +9,7 @@ import elp.max.e.taxistation.service.carService.CarServiceImpl;
 import elp.max.e.taxistation.service.driverService.DriverServiceImpl;
 import elp.max.e.taxistation.service.orderNumberService.OrderNumberServiceImpl;
 import elp.max.e.taxistation.utils.DateUtil;
+import elp.max.e.taxistation.utils.DtoNotFoundException;
 import elp.max.e.taxistation.utils.Utils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -132,12 +133,12 @@ public class DispatcherServiceImpl implements ServiceInterface<DispatcherDto> {
         CarDto carDto = findWorkerCar();
         System.out.println(carDto);
         if (carDto == null) {
-            throw new Exception();
+            throw new DtoNotFoundException("Автомобиль");
         }
         DriverDto driverDto = findWorkerDriver();
         System.out.println(driverDto);
         if (driverDto == null) {
-            throw new Exception();
+            throw new DtoNotFoundException("Водитель");
         }
 
         //заняты клиентом

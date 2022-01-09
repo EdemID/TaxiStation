@@ -7,6 +7,7 @@ import elp.max.e.taxistation.model.ClientEntity;
 import elp.max.e.taxistation.repository.ClientRepository;
 import elp.max.e.taxistation.service.ServiceInterface;
 import elp.max.e.taxistation.service.dispatcherService.DispatcherServiceImpl;
+import elp.max.e.taxistation.utils.DtoNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -81,12 +82,12 @@ public class ClientServiceImpl implements ServiceInterface<ClientDto> {
 
         DispatcherDto dispatcherDto = dispatcherService.getWorkerDispatcher();
         if (dispatcherDto == null) {
-            throw new Exception();
+            throw new DtoNotFoundException("Диспетчер");
         }
 
         OrderNumberDto orderNumberDto = dispatcherService.assignCarToDriverAndCallClient(clientDto, dispatcherDto);
         if (orderNumberDto == null) {
-            throw new Exception();
+            throw new DtoNotFoundException("Наряд-заказ");
         }
 
         // в диспетчере не сможем добавить clientService, так здесь уже есть dispatcherService, иначе будет цикл бинов
