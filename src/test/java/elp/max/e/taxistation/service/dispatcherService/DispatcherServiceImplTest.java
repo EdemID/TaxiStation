@@ -24,7 +24,6 @@ public class DispatcherServiceImplTest extends BaseTest {
     }
 
     // как в тестах обновить на нужные значения сущностей
-    @Order(1)
     @Test
     @Sql(value = {"/data/import_positive_data.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
     @Sql(value = {"/data/delete_positive_data.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
@@ -36,7 +35,6 @@ public class DispatcherServiceImplTest extends BaseTest {
         assertTrue(workerDispatcher.isWorkStatus(), "Диспетчер " + workerDispatcher + " должен работать, но НЕ работает");
     }
 
-    @Order(3)
     @Test
     @DisplayName("Проверить смену статусов водителя и автомобиля после заказа")
     void releaseDriverAndCarAfterOrdering() {
@@ -62,7 +60,6 @@ public class DispatcherServiceImplTest extends BaseTest {
         }
     }
 
-    @Order(4)
     @Test
     @Sql(value = {"/data/import_positive_data.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
     @Sql(value = {"/data/delete_positive_data.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
@@ -85,7 +82,6 @@ public class DispatcherServiceImplTest extends BaseTest {
         assertEquals("Aurora-driver-not-busy", driver, "Назначен неверный водитель: " + driver);
     }
 
-    @Order(5)
     @Test
     @Sql(value = {"/data/import_positive_data.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
     @Sql(value = {"/data/delete_positive_data.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
