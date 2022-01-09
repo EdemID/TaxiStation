@@ -34,6 +34,7 @@ public class DriverServiceImpl implements ServiceInterface<DriverDto> {
                 .collect(Collectors.toList());
     }
 
+    @Override
     @Transactional
     public DriverDto findById(Long id) {
         DriverEntity driverEntity = driverRepository.findById(id)
@@ -53,13 +54,15 @@ public class DriverServiceImpl implements ServiceInterface<DriverDto> {
     @Override
     @Transactional
     public DriverDto save(DriverDto dto) throws ValidationException {
-        validateDriverDto(dto);
+        validateDto(dto);
         DriverEntity driverEntity = driverRepository.save(DriverConverter.fromDriverDtoToDriverEntity(dto));
         return DriverConverter.fromDriverEntityToDriverDto(driverEntity);
     }
 
+    @Override
     @Transactional
     public DriverDto update(Long id, DriverDto dto) throws ValidationException {
+        validateDto(dto);
         DriverEntity driverEntity = driverRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Водитель " + dto + " не найден"));
         driverEntity.setName(dto.getName());
@@ -111,7 +114,8 @@ public class DriverServiceImpl implements ServiceInterface<DriverDto> {
         return workerDriverDto;
     }
 
-    private void validateDriverDto(DriverDto dto) throws ValidationException {
+    @Override
+    public void validateDto(DriverDto dto) throws ValidationException {
         if (isNull(dto)) {
             throw new ValidationException("Object driver is null");
         }

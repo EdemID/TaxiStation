@@ -5,6 +5,7 @@ import elp.max.e.taxistation.model.OrderNumberEntity;
 import elp.max.e.taxistation.repository.OrderNumberRepository;
 import elp.max.e.taxistation.service.ServiceInterface;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.xml.bind.ValidationException;
 import java.util.List;
@@ -26,10 +27,22 @@ public class OrderNumberServiceImpl implements ServiceInterface<OrderNumberDto> 
     }
 
     @Override
+    @Transactional
+    public OrderNumberDto findById(Long id) {
+        return null;
+    }
+
+    @Override
     public OrderNumberDto save(OrderNumberDto dto) throws ValidationException {
         validateOrderNumberDto(dto);
         OrderNumberEntity orderNumberEntity = orderNumberRepository.save(OrderNumberConverter.fromOrderNumberDtoToOrderNumberEntity(dto));
         return OrderNumberConverter.fromOrderNumberEntityToOrderNumberDto(orderNumberEntity);
+    }
+
+    @Override
+    @Transactional
+    public OrderNumberDto update(Long id, OrderNumberDto dto) throws ValidationException {
+        return null;
     }
 
     @Override
@@ -44,5 +57,10 @@ public class OrderNumberServiceImpl implements ServiceInterface<OrderNumberDto> 
         if (isNull(dto.getNumber()) || dto.getNumber().isEmpty()) {
             throw new ValidationException("Number is empty");
         }
+    }
+
+    @Override
+    public void validateDto(OrderNumberDto dto) throws ValidationException {
+
     }
 }

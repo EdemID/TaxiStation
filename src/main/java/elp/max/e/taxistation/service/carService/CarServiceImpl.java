@@ -39,6 +39,7 @@ public class CarServiceImpl implements ServiceInterface<CarDto> {
                 .collect(Collectors.toList());
     }
 
+    @Override
     @Transactional
     public CarDto findById(Long id) {
         CarDto carDto = null;
@@ -64,14 +65,15 @@ public class CarServiceImpl implements ServiceInterface<CarDto> {
     @Override
     @Transactional
     public CarDto save(CarDto dto) throws ValidationException {
-        validateCarDto(dto);
+        validateDto(dto);
         CarEntity savedCar = carRepository.save(CarConverter.fromCarDtoToCarEntity(dto));
         return CarConverter.fromCarEntityToCarDto(savedCar);
     }
 
+    @Override
     @Transactional
     public CarDto update(Long id, CarDto dto) throws ValidationException {
-        validateCarDto(dto);
+        validateDto(dto);
         CarEntity carEntity = carRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Автомобиль " + dto + " не найден"));
         carEntity.setNumberCar(dto.getNumberCar());
@@ -86,7 +88,8 @@ public class CarServiceImpl implements ServiceInterface<CarDto> {
         carRepository.deleteById(id);
     }
 
-    private void validateCarDto(CarDto dto) throws ValidationException {
+    @Override
+    public void validateDto(CarDto dto) throws ValidationException {
         if (isNull(dto)) {
             throw new ValidationException("Object car is null");
         }

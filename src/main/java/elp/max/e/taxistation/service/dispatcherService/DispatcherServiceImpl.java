@@ -48,6 +48,7 @@ public class DispatcherServiceImpl implements ServiceInterface<DispatcherDto> {
                 .collect(Collectors.toList());
     }
 
+    @Override
     @Transactional
     public DispatcherDto findById(Long id) {
         return DispatcherConverter.fromDispatcherEntityToDispatcherDto(dispatcherRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Диспетчер " + id + " не найден")));
@@ -65,9 +66,15 @@ public class DispatcherServiceImpl implements ServiceInterface<DispatcherDto> {
     @Override
     @Transactional
     public DispatcherDto save(DispatcherDto dto) throws ValidationException {
-        validateDispatcherDto(dto);
+        validateDto(dto);
         DispatcherEntity dispatcherEntity = dispatcherRepository.save(DispatcherConverter.fromDispatcherDtoToDispatcherEntity(dto));
         return DispatcherConverter.fromDispatcherEntityToDispatcherDto(dispatcherEntity);
+    }
+
+    @Override
+    @Transactional
+    public DispatcherDto update(Long id, DispatcherDto dto) throws ValidationException {
+        return null;
     }
 
     @Override
@@ -113,11 +120,11 @@ public class DispatcherServiceImpl implements ServiceInterface<DispatcherDto> {
         return workerDispatcher;
     }
 
-    private CarDto findWorkerCar() throws ValidationException {
+    private CarDto findWorkerCar() {
         return carService.getWorkerCar();
     }
 
-    private DriverDto findWorkerDriver() throws ValidationException {
+    private DriverDto findWorkerDriver() {
         return driverService.getWorkerDriver();
     }
 
@@ -184,7 +191,8 @@ public class DispatcherServiceImpl implements ServiceInterface<DispatcherDto> {
         timer.schedule(task, orderTime);
     }
 
-    private void validateDispatcherDto(DispatcherDto dto) throws ValidationException {
+    @Override
+    public void validateDto(DispatcherDto dto) throws ValidationException {
         if (isNull(dto)) {
             throw new ValidationException("Object dispatcher is null");
         }

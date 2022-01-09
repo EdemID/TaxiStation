@@ -8,18 +8,10 @@ import elp.max.e.taxistation.service.clientService.ClientServiceImpl;
 import elp.max.e.taxistation.service.driverService.DriverServiceImpl;
 import elp.max.e.taxistation.service.mechanicService.MechanicServiceImpl;
 import elp.max.e.taxistation.service.orderNumberService.OrderNumberServiceImpl;
-import elp.max.e.taxistation.utils.DateUtil;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.jdbc.Sql;
 
-import javax.xml.bind.ValidationException;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;

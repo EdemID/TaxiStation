@@ -30,6 +30,16 @@ public class ClientServiceImpl implements ServiceInterface<ClientDto> {
         this.dispatcherService = dispatcherService;
     }
 
+    @Override
+    @Transactional
+    public List<ClientDto> findAll() {
+        return clientRepository.findAll()
+                .stream()
+                .map(ClientConverter::fromClientEntityToClientDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     @Transactional(readOnly = true)
     public ClientDto findById(Long clientId) throws EntityNotFoundException {
         ClientEntity clientEntity;
@@ -41,25 +51,17 @@ public class ClientServiceImpl implements ServiceInterface<ClientDto> {
         return ClientConverter.fromClientEntityToClientDto(clientEntity);
     }
 
-    @Override
-    @Transactional
-    public List<ClientDto> findAll() {
-        return clientRepository.findAll()
-                .stream()
-                .map(ClientConverter::fromClientEntityToClientDto)
-                .collect(Collectors.toList());
-    }
-
     @Transactional
     public ClientDto save(ClientDto dto) throws ValidationException {
-        validateClientDto(dto);
+        validateDto(dto);
         ClientEntity clientEntity = clientRepository.save(ClientConverter.fromClientDtoToClientEntity(dto));
         return ClientConverter.fromClientEntityToClientDto(clientEntity);
     }
 
+    @Override
     @Transactional
     public ClientDto update(Long id, ClientDto dto) throws ValidationException {
-        validateClientDto(dto);
+        validateDto(dto);
         ClientEntity clientEntity = clientRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Клиент " + dto + " не найден!"));
         clientEntity.setName(dto.getName());
@@ -104,7 +106,8 @@ public class ClientServiceImpl implements ServiceInterface<ClientDto> {
         return orderNumberDto;
     }
 
-    private void validateClientDto(ClientDto dto) throws ValidationException {
+    @Override
+    public void validateDto(ClientDto dto) throws ValidationException {
         if (isNull(dto)) {
             throw new ValidationException("Object client is null");
         }

@@ -28,6 +28,7 @@ public class MechanicServiceImpl implements ServiceInterface<MechanicDto> {
         this.mechanicRepository = mechanicRepository;
     }
 
+    @Override
     @Transactional
     public MechanicDto findById(Long id) {
         MechanicEntity mechanicEntity = null;
@@ -49,9 +50,10 @@ public class MechanicServiceImpl implements ServiceInterface<MechanicDto> {
         return null;
     }
 
+    @Override
     @Transactional
     public MechanicDto update(Long id, MechanicDto dto) throws ValidationException {
-        validationMechanicDto(dto);
+        validateDto(dto);
         MechanicEntity mechanicEntity = mechanicRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Механик " + dto + " не найден"));
 
@@ -68,7 +70,8 @@ public class MechanicServiceImpl implements ServiceInterface<MechanicDto> {
 
     }
 
-    private void validationMechanicDto(MechanicDto dto) throws ValidationException {
+    @Override
+    public void validateDto(MechanicDto dto) throws ValidationException {
         if (isNull(dto)) {
             throw new ValidationException("Object mechanic is null");
         }

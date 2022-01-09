@@ -4,17 +4,12 @@ import elp.max.e.taxistation.BaseTest;
 import elp.max.e.taxistation.dto.*;
 import elp.max.e.taxistation.repository.DispatcherRepository;
 import elp.max.e.taxistation.service.carService.CarServiceImpl;
-import elp.max.e.taxistation.service.dispatcherService.DispatcherServiceImpl;
 import elp.max.e.taxistation.service.driverService.DriverServiceImpl;
 import elp.max.e.taxistation.service.mechanicService.MechanicServiceImpl;
 import elp.max.e.taxistation.service.orderNumberService.OrderNumberServiceImpl;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.jdbc.Sql;
 
 import static org.junit.jupiter.api.Assertions.*;
