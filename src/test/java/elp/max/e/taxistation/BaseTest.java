@@ -10,6 +10,7 @@ import elp.max.e.taxistation.service.driverService.DriverServiceImpl;
 import elp.max.e.taxistation.service.mechanicService.MechanicServiceImpl;
 import elp.max.e.taxistation.service.orderNumberService.OrderNumberServiceImpl;
 import elp.max.e.taxistation.utils.DateUtil;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -65,5 +66,9 @@ public class BaseTest {
         driverDayoff.setDayoff(dayOfWeek);
         driverDayoff.setWorkStatus(false);
         driverService.save(driverDayoff);
+    }
+
+    @AfterEach
+    void tearDown() {
     }
 }

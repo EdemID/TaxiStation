@@ -17,7 +17,7 @@ INSERT INTO driver(name, dayoff, car, workStatus, busy)
 VALUES ('driver-dayoff', 'dayoff', 'free', false, false );
 
 INSERT INTO driver(name, dayoff, car, workStatus, busy)
-VALUES ('driver-busy', 'dayoff', 'random car', true, true);
+VALUES ('driver-busy', 'dayoff', 'busy_car', true, true);
 
 -- insert car
 INSERT INTO car(number_car, resource, busy)

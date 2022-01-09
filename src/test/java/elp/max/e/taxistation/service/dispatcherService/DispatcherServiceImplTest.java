@@ -23,14 +23,11 @@ public class DispatcherServiceImplTest extends BaseTest {
         super(carService, driverService, orderNumberService, dispatcherRepository, mechanicService, clientService);
     }
 
-    @AfterEach
-    void tearDown() {
-    }
-
     // как в тестах обновить на нужные значения сущностей
     @Order(1)
     @Test
-    @Sql({"/data/import_positive_data.sql"})
+    @Sql(value = {"/data/import_positive_data.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(value = {"/data/delete_positive_data.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @DisplayName("Проверить рабочего диспетчера")
     void getWorkerDispatcher() {
         DispatcherDto workerDispatcher = dispatcherService.getWorkerDispatcher();
@@ -41,17 +38,20 @@ public class DispatcherServiceImplTest extends BaseTest {
 
     @Order(3)
     @Test
-    @Sql({"/data/import_positive_data.sql"})
     @DisplayName("Проверить смену статусов водителя и автомобиля после заказа")
     void releaseDriverAndCarAfterOrdering() {
-        DriverDto driverDto = driverService.getWorkerDriver();
-        CarDto carDto = carService.getWorkerCar();
+        DriverDto driverDto = driverService.findByName("driver-busy");
+        CarDto carDto = carService.findByNumberCar("busy_car");
 
         long currentTime = new Date().getTime();
         long orderTime = 20000L;
         long endTimer = currentTime + orderTime + 1000L;
         dispatcherService.releaseDriverAndCarAfterOrdering(driverDto, carDto, orderTime);
-
+        // проверка до завершения заказа
+        assertTrue(driverDto.isBusy());
+        assertTrue(carDto.isBusy());
+        assertEquals(carDto.getNumberCar(), driverDto.getCar());
+        // проверка после завершения заказа
         while (endTimer >= System.currentTimeMillis()){
             if (endTimer == System.currentTimeMillis()) {
                 assertFalse(driverDto.isBusy());
@@ -64,7 +64,8 @@ public class DispatcherServiceImplTest extends BaseTest {
 
     @Order(4)
     @Test
-    @Sql({"/data/import_positive_data.sql"})
+    @Sql(value = {"/data/import_positive_data.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(value = {"/data/delete_positive_data.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @DisplayName("Проверить создание и содержание наряд-заказа")
     void assignCarToDriverAndCallClient() throws Exception {
         ClientDto clientDto = new ClientDto(1L, "Tom", "No order");
@@ -86,7 +87,8 @@ public class DispatcherServiceImplTest extends BaseTest {
 
     @Order(5)
     @Test
-    @Sql({"/data/import_positive_data.sql"})
+    @Sql(value = {"/data/import_positive_data.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(value = {"/data/delete_positive_data.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @DisplayName("Проверить отправку автомобиля на ремонт после заказа, если ресурс равен 0, и его починку")
     void sendCarForRepairIfResourceIsZeroAfterOrder() throws Exception {
         CarDto carDto = carService.getWorkerCar();

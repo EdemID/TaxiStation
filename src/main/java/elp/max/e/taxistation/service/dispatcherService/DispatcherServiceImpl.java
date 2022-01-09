@@ -180,7 +180,10 @@ public class DispatcherServiceImpl implements ServiceInterface<DispatcherDto> {
                     driverDto.setCar("free");
 
                     carDto.setBusy(false);
-
+                    System.out.println("=================");
+                    System.out.println(driverDto.getId());
+                    System.out.println(driverDto.getName());
+                    System.out.println("=================");
                     driverService.update(driverDto.getId(), driverDto);
                     carService.update(carDto.getId(), carDto);
                 } catch (ValidationException e) {
