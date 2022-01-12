@@ -48,8 +48,9 @@ public class BaseTest {
     @BeforeEach
     void setUp() throws ValidationException {
         String dayOfWeek = LocalDate.now().getDayOfWeek().toString();
-        String startLunch = DateUtil.convertFromLocalDateTimeToString(LocalDateTime.now());
-        String endLunch = DateUtil.convertFromLocalDateTimeToString(LocalDateTime.now().plusHours(1));
+        // если стартЛанч - 22:30, а эндЛанч - 00:30, то dispatcherLunch остается доступным
+        String startLunch = DateUtil.convertFromLocalDateTimeToString(LocalDateTime.now().minusHours(1));
+        String endLunch = DateUtil.convertFromLocalDateTimeToString(LocalDateTime.now().plusMinutes(7));
 
         DispatcherDto dispatcherDayoff = dispatcherService.findById(1L);
         dispatcherDayoff.setDayoff(dayOfWeek);

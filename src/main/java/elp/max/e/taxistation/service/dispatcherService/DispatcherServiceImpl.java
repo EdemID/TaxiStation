@@ -121,7 +121,7 @@ public class DispatcherServiceImpl implements ServiceInterface<DispatcherDto> {
         return workerDispatcher;
     }
 
-    private CarDto findWorkerCar() {
+    private CarDto findWorkerCar() throws ValidationException {
         return carService.getWorkerCar();
     }
 

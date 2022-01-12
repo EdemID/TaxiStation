@@ -1,0 +1,1 @@
+DELETE FROM car WHERE number_car = 'car-zero';

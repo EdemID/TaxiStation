@@ -15,15 +15,18 @@ public class MechanicEntity {
     private Long repairTime;
     @Column(name = "resource", columnDefinition = "integer DEFAULT 5")
     private Integer resource;
+    @Column(name = "busy", columnDefinition = "boolean DEFAULT false")
+    private boolean busy;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "mechanicEntity")
     private List<CarEntity> brokenCars;
 
     public MechanicEntity() {
     }
 
-    public MechanicEntity(Long repairTime, Integer resource) {
+    public MechanicEntity(Long repairTime, Integer resource, boolean busy) {
         this.repairTime = repairTime;
         this.resource = resource;
+        this.busy = busy;
     }
 
     public Long getId() {
@@ -48,6 +51,14 @@ public class MechanicEntity {
 
     public void setResource(Integer resource) {
         this.resource = resource;
+    }
+
+    public boolean isBusy() {
+        return busy;
+    }
+
+    public void setBusy(boolean busy) {
+        this.busy = busy;
     }
 
     public List<CarEntity> getBrokenCars() {

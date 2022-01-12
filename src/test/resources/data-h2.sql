@@ -24,5 +24,5 @@ INSERT INTO car(number_car, resource, busy)
 VALUES ('busy_car', 5, true);
 
 -- insert mechanic
-INSERT INTO service(repair_time, resource)
-VALUES (20000, 5);
+INSERT INTO service(repair_time, resource, busy)
+VALUES (20000, 5, false);
