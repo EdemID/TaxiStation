@@ -2,9 +2,6 @@ package elp.max.e.taxistation.service.mechanicService;
 
 import elp.max.e.taxistation.dto.MechanicDto;
 import elp.max.e.taxistation.model.MechanicEntity;
-import elp.max.e.taxistation.service.carService.CarConverter;
-
-import java.util.stream.Collectors;
 
 public class MechanicConverter {
 
@@ -13,9 +10,10 @@ public class MechanicConverter {
         mechanicEntity.setId(mechanicDto.getId());
         mechanicEntity.setRepairTime(mechanicDto.getRepairTime());
         mechanicEntity.setResource(mechanicDto.getResource());
-        mechanicEntity.setBrokenCars(mechanicDto.getBrokenCars().stream()
-                .map(CarConverter::fromCarDtoToCarEntity)
-                .collect(Collectors.toList()));
+        mechanicEntity.setBusy(mechanicDto.isBusy());
+//        mechanicEntity.setBrokenCars(mechanicDto.getBrokenCars().stream()
+//                .map(CarConverter::fromCarDtoToCarEntity)
+//                .collect(Collectors.toList()));
         return mechanicEntity;
     }
 
@@ -24,19 +22,10 @@ public class MechanicConverter {
         mechanicDto.setId(mechanicEntity.getId());
         mechanicDto.setRepairTime(mechanicEntity.getRepairTime());
         mechanicDto.setResource(mechanicEntity.getResource());
-/*
-        List<CarEntity> carEntityList = mechanicEntity.getBrokenCars();
-        System.out.println("размер carEntityList " + carEntityList.size());
-        List<CarDto> carDtos = new ArrayList<>();
-        for (CarEntity carEntity : carEntityList) {
-            System.out.println("1");
-            carDtos.add(CarConverter.fromCarEntityToCarDto(carEntity));
-        }
-        mechanicDto.setBrokenCars(carDtos);
-*/
-        mechanicDto.setBrokenCars(mechanicEntity.getBrokenCars().stream()
-                .map(CarConverter::fromCarEntityToCarDto)
-                .collect(Collectors.toList()));
+        mechanicDto.setBusy(mechanicEntity.isBusy());
+//        mechanicDto.setBrokenCars(mechanicEntity.getBrokenCars().stream()
+//                .map(CarConverter::fromCarEntityToCarDto)
+//                .collect(Collectors.toList()));
         return mechanicDto;
     }
 }

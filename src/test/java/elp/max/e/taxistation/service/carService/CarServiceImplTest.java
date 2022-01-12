@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.jdbc.Sql;
 
+import javax.xml.bind.ValidationException;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -28,7 +29,7 @@ class CarServiceImplTest extends BaseTest {
     @Sql(value = {"/data/import_positive_data.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
     @Sql(value = {"/data/delete_positive_data.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @DisplayName("Проверить рабочий автомобиль")
-    void getWorkerCar() {
+    void getWorkerCar() throws ValidationException {
         CarDto workerCar = carService.getWorkerCar();
         assertFalse(workerCar.isBusy());
     }
@@ -37,7 +38,7 @@ class CarServiceImplTest extends BaseTest {
     @Sql(value = {"/data/import_positive_data.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
     @Sql(value = {"/data/delete_positive_data.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @DisplayName("Проверить отправку автомобиля на ремонт")
-    void sendCarForRepair() {
+    void sendCarForRepair() throws ValidationException {
         List<CarDto> carDtos = carService.findAll();
         for (CarDto carDto : carDtos) {
             if (carDto.getResource() == 0) {

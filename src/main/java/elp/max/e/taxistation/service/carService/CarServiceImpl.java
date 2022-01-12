@@ -88,7 +88,7 @@ public class CarServiceImpl implements ServiceInterface<CarDto> {
         carRepository.deleteById(id);
     }
 
-    public CarDto getWorkerCar() {
+    public CarDto getWorkerCar() throws ValidationException {
         List<CarDto> carDtos = findAll();
 
         int workerResource;
@@ -114,7 +114,7 @@ public class CarServiceImpl implements ServiceInterface<CarDto> {
         return workerCar;
     }
 
-    public void sendCarForRepair(CarEntity carEntity) {
+    public void sendCarForRepair(CarEntity carEntity) throws ValidationException {
         System.out.println("уехала на ремонт: " + carEntity.getId());
         boolean busy = true;
         carEntity.setBusy(busy);

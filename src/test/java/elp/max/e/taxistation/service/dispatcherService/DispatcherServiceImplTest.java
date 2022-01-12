@@ -75,6 +75,9 @@ public class DispatcherServiceImplTest extends BaseTest {
         String car = orderNumberDto.getCar();
         String driver = orderNumberDto.getDriver();
 
+        System.out.println("dispatcher lunch start " + dispatcherService.findByName(dispatcher).getStartLunch());
+        System.out.println("dispatcher lunch end " + dispatcherService.findByName(dispatcher).getEndLunch());
+
         assertEquals("Tom", client, "Назначен неверный клиент: " + client);
         assertEquals("Vladimir-dispatcher-worker", dispatcher, "Назначен неверный диспетчер: " + dispatcher);
         assertEquals(orderNumber, orderNumber, "Назначен неверный номер наряд-заказа: " + orderNumber);

@@ -7,6 +7,7 @@ public class MechanicDto {
     private Long id;
     private Long repairTime;
     private Integer resource;
+    private boolean busy;
     private List<CarDto> brokenCars;
 
     public Long getId() {
@@ -31,6 +32,14 @@ public class MechanicDto {
 
     public void setResource(Integer resource) {
         this.resource = resource;
+    }
+
+    public boolean isBusy() {
+        return busy;
+    }
+
+    public void setBusy(boolean busy) {
+        this.busy = busy;
     }
 
     public List<CarDto> getBrokenCars() {
