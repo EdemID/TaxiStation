@@ -2,6 +2,7 @@ package elp.max.e.taxistation.service.carService;
 
 import elp.max.e.taxistation.BaseTest;
 import elp.max.e.taxistation.dto.CarDto;
+import elp.max.e.taxistation.exception.ValidationDtoException;
 import elp.max.e.taxistation.repository.DispatcherRepository;
 import elp.max.e.taxistation.service.clientService.ClientServiceImpl;
 import elp.max.e.taxistation.service.driverService.DriverServiceImpl;
@@ -12,7 +13,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.jdbc.Sql;
 
-import javax.xml.bind.ValidationException;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -29,7 +29,7 @@ class CarServiceImplTest extends BaseTest {
     @Sql(value = {"/data/import_positive_data.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
     @Sql(value = {"/data/delete_positive_data.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @DisplayName("Проверить рабочий автомобиль")
-    void getWorkerCar() throws ValidationException {
+    void getWorkerCar() throws ValidationDtoException {
         CarDto workerCar = carService.getWorkerCar();
         assertFalse(workerCar.isBusy());
     }
@@ -38,7 +38,7 @@ class CarServiceImplTest extends BaseTest {
     @Sql(value = {"/data/import_positive_data.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
     @Sql(value = {"/data/delete_positive_data.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @DisplayName("Проверить отправку автомобиля на ремонт")
-    void sendCarForRepair() throws ValidationException {
+    void sendCarForRepair() throws ValidationDtoException {
         List<CarDto> carDtos = carService.findAll();
         for (CarDto carDto : carDtos) {
             if (carDto.getResource() == 0) {

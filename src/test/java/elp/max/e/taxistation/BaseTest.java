@@ -2,6 +2,7 @@ package elp.max.e.taxistation;
 
 import elp.max.e.taxistation.dto.DispatcherDto;
 import elp.max.e.taxistation.dto.DriverDto;
+import elp.max.e.taxistation.exception.ValidationDtoException;
 import elp.max.e.taxistation.repository.DispatcherRepository;
 import elp.max.e.taxistation.service.carService.CarServiceImpl;
 import elp.max.e.taxistation.service.clientService.ClientServiceImpl;
@@ -15,11 +16,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
 
-import javax.xml.bind.ValidationException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -46,7 +45,7 @@ public class BaseTest {
     }
 
     @BeforeEach
-    void setUp() throws ValidationException {
+    void setUp() throws ValidationDtoException {
         String dayOfWeek = LocalDate.now().getDayOfWeek().toString();
         // если стартЛанч - 22:30, а эндЛанч - 00:30, то dispatcherLunch остается доступным
         String startLunch = DateUtil.convertFromLocalDateTimeToString(LocalDateTime.now().minusHours(1));

@@ -1,6 +1,8 @@
 package elp.max.e.taxistation.service.mechanicService;
 
 import elp.max.e.taxistation.dto.MechanicDto;
+import elp.max.e.taxistation.exception.EntityNotFoundException;
+import elp.max.e.taxistation.exception.ValidationDtoException;
 import elp.max.e.taxistation.model.CarEntity;
 import elp.max.e.taxistation.model.MechanicEntity;
 import elp.max.e.taxistation.repository.MechanicRepository;
@@ -9,8 +11,6 @@ import elp.max.e.taxistation.service.carService.CarServiceImpl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityNotFoundException;
-import javax.xml.bind.ValidationException;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.*;
@@ -44,13 +44,13 @@ public class MechanicServiceImpl implements ServiceInterface<MechanicDto> {
 
     @Transactional
     @Override
-    public MechanicDto save(MechanicDto dto) throws ValidationException {
+    public MechanicDto save(MechanicDto dto) throws ValidationDtoException {
         return null;
     }
 
     @Override
     @Transactional
-    public MechanicDto update(Long id, MechanicDto dto) throws ValidationException {
+    public MechanicDto update(Long id, MechanicDto dto) throws ValidationDtoException {
         validateDto(dto);
         MechanicEntity mechanicEntity = mechanicRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Механик " + dto + " не найден"));
@@ -71,16 +71,16 @@ public class MechanicServiceImpl implements ServiceInterface<MechanicDto> {
     }
 
     @Override
-    public void validateDto(MechanicDto dto) throws ValidationException {
+    public void validateDto(MechanicDto dto) throws ValidationDtoException {
         if (isNull(dto)) {
-            throw new ValidationException("Object mechanic is null");
+            throw new ValidationDtoException("Mechanic is null");
         }
         if (isNull(dto.getId())) {
-            throw new ValidationException("Id ");
+            throw new ValidationDtoException("Mechanic id is null");
         }
     }
 
-    public long repairCar(MechanicDto mechanicDto, CarEntity carEntity, CarServiceImpl carService) throws ValidationException {
+    public long repairCar(MechanicDto mechanicDto, CarEntity carEntity, CarServiceImpl carService) throws ValidationDtoException {
         MechanicEntity mechanicEntity = MechanicConverter.fromMechanicDtoToMechanicEntity(mechanicDto);
 
         System.out.println("Метод repairCar запущен: " + new Date());

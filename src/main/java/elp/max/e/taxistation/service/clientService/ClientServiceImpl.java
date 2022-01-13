@@ -3,16 +3,15 @@ package elp.max.e.taxistation.service.clientService;
 import elp.max.e.taxistation.dto.ClientDto;
 import elp.max.e.taxistation.dto.DispatcherDto;
 import elp.max.e.taxistation.dto.OrderNumberDto;
+import elp.max.e.taxistation.exception.EntityNotFoundException;
+import elp.max.e.taxistation.exception.ValidationDtoException;
 import elp.max.e.taxistation.model.ClientEntity;
 import elp.max.e.taxistation.repository.ClientRepository;
 import elp.max.e.taxistation.service.ServiceInterface;
 import elp.max.e.taxistation.service.dispatcherService.DispatcherServiceImpl;
-import elp.max.e.taxistation.utils.DtoNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityNotFoundException;
-import javax.xml.bind.ValidationException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -53,7 +52,7 @@ public class ClientServiceImpl implements ServiceInterface<ClientDto> {
     }
 
     @Transactional
-    public ClientDto save(ClientDto dto) throws ValidationException {
+    public ClientDto save(ClientDto dto) throws ValidationDtoException {
         validateDto(dto);
         ClientEntity clientEntity = clientRepository.save(ClientConverter.fromClientDtoToClientEntity(dto));
         return ClientConverter.fromClientEntityToClientDto(clientEntity);
@@ -61,7 +60,7 @@ public class ClientServiceImpl implements ServiceInterface<ClientDto> {
 
     @Override
     @Transactional
-    public ClientDto update(Long id, ClientDto dto) throws ValidationException {
+    public ClientDto update(Long id, ClientDto dto) throws ValidationDtoException {
         validateDto(dto);
         ClientEntity clientEntity = clientRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Клиент " + dto + " не найден!"));
@@ -81,15 +80,9 @@ public class ClientServiceImpl implements ServiceInterface<ClientDto> {
 
 
         DispatcherDto dispatcherDto = dispatcherService.getWorkerDispatcher();
-        if (dispatcherDto == null) {
-            throw new DtoNotFoundException("Диспетчер");
-        }
 
         // в диспетчере не сможем добавить clientService, так здесь уже есть dispatcherService, иначе будет цикл бинов
         OrderNumberDto orderNumberDto = dispatcherService.assignCarToDriverAndCallClient(clientDto, dispatcherDto, this);
-        if (orderNumberDto == null) {
-            throw new DtoNotFoundException("Наряд-заказ");
-        }
 
         clientDto.setOrderNumber(orderNumberDto.getNumber());
         save(clientDto);
@@ -108,12 +101,12 @@ public class ClientServiceImpl implements ServiceInterface<ClientDto> {
     }
 
     @Override
-    public void validateDto(ClientDto dto) throws ValidationException {
+    public void validateDto(ClientDto dto) throws ValidationDtoException {
         if (isNull(dto)) {
-            throw new ValidationException("Object client is null");
+            throw new ValidationDtoException("Client is null");
         }
         if (isNull(dto.getName()) || dto.getName().isEmpty()) {
-            throw new ValidationException("Name is empty");
+            throw new ValidationDtoException("Client name is empty");
         }
     }
 }

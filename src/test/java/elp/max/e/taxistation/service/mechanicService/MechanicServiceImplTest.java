@@ -3,6 +3,7 @@ package elp.max.e.taxistation.service.mechanicService;
 import elp.max.e.taxistation.BaseTest;
 import elp.max.e.taxistation.dto.CarDto;
 import elp.max.e.taxistation.dto.MechanicDto;
+import elp.max.e.taxistation.exception.ValidationDtoException;
 import elp.max.e.taxistation.model.CarEntity;
 import elp.max.e.taxistation.repository.DispatcherRepository;
 import elp.max.e.taxistation.service.carService.CarConverter;
@@ -16,8 +17,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.jdbc.Sql;
 
-import javax.xml.bind.ValidationException;
-
 class MechanicServiceImplTest extends BaseTest {
 
     @Autowired
@@ -29,7 +28,7 @@ class MechanicServiceImplTest extends BaseTest {
     @Sql(value = {"/data/import_positive_data.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
     @Sql(value = {"/data/delete_positive_data.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @DisplayName("Проверить починку автомобиля")
-    void repairCar() throws ValidationException {
+    void repairCar() throws ValidationDtoException {
         CarDto carDto = carService.getWorkerCar();
         carDto.setResource(0);
         carService.save(carDto);
@@ -55,7 +54,7 @@ class MechanicServiceImplTest extends BaseTest {
     @Sql(value = {"/data/import_positive_data.sql", "/data/import_car_with_zero_resource.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
     @Sql(value = {"/data/delete_positive_data.sql", "/data/delete_car_with_zero_resource.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @DisplayName("Проверить починку двух автомобилей сразу")
-    void repairTwoCars() throws ValidationException, InterruptedException {
+    void repairTwoCars() throws ValidationDtoException, InterruptedException {
         CarDto carDto = carService.getWorkerCar();
         carDto.setResource(0);
         carService.save(carDto);

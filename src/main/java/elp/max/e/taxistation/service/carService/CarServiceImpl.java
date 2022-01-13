@@ -2,6 +2,8 @@ package elp.max.e.taxistation.service.carService;
 
 import elp.max.e.taxistation.dto.CarDto;
 import elp.max.e.taxistation.dto.MechanicDto;
+import elp.max.e.taxistation.exception.EntityNotFoundException;
+import elp.max.e.taxistation.exception.ValidationDtoException;
 import elp.max.e.taxistation.model.CarEntity;
 import elp.max.e.taxistation.repository.CarRepository;
 import elp.max.e.taxistation.service.ServiceInterface;
@@ -11,8 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityNotFoundException;
-import javax.xml.bind.ValidationException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -64,7 +64,7 @@ public class CarServiceImpl implements ServiceInterface<CarDto> {
 
     @Override
     @Transactional
-    public CarDto save(CarDto dto) throws ValidationException {
+    public CarDto save(CarDto dto) throws ValidationDtoException {
         validateDto(dto);
         CarEntity savedCar = carRepository.save(CarConverter.fromCarDtoToCarEntity(dto));
         return CarConverter.fromCarEntityToCarDto(savedCar);
@@ -72,7 +72,7 @@ public class CarServiceImpl implements ServiceInterface<CarDto> {
 
     @Override
     @Transactional
-    public CarDto update(Long id, CarDto dto) throws ValidationException {
+    public CarDto update(Long id, CarDto dto) throws ValidationDtoException {
         validateDto(dto);
         CarEntity carEntity = carRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Автомобиль " + dto + " не найден"));
@@ -88,7 +88,7 @@ public class CarServiceImpl implements ServiceInterface<CarDto> {
         carRepository.deleteById(id);
     }
 
-    public CarDto getWorkerCar() throws ValidationException {
+    public CarDto getWorkerCar() throws ValidationDtoException {
         List<CarDto> carDtos = findAll();
 
         int workerResource;
@@ -114,7 +114,7 @@ public class CarServiceImpl implements ServiceInterface<CarDto> {
         return workerCar;
     }
 
-    public void sendCarForRepair(CarEntity carEntity) throws ValidationException {
+    public void sendCarForRepair(CarEntity carEntity) throws ValidationDtoException {
         System.out.println("уехала на ремонт: " + carEntity.getId());
         boolean busy = true;
         carEntity.setBusy(busy);
@@ -131,12 +131,12 @@ public class CarServiceImpl implements ServiceInterface<CarDto> {
     }
 
     @Override
-    public void validateDto(CarDto dto) throws ValidationException {
+    public void validateDto(CarDto dto) throws ValidationDtoException {
         if (isNull(dto)) {
-            throw new ValidationException("Object car is null");
+            throw new ValidationDtoException("Car is null");
         }
         if (isNull(dto.getNumberCar()) || dto.getNumberCar().isEmpty()) {
-            throw new ValidationException("Number car is empty");
+            throw new ValidationDtoException("Number car is empty");
         }
     }
 }

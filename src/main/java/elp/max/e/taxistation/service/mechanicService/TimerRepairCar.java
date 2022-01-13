@@ -1,12 +1,12 @@
 package elp.max.e.taxistation.service.mechanicService;
 
 import elp.max.e.taxistation.dto.MechanicDto;
+import elp.max.e.taxistation.exception.ValidationDtoException;
 import elp.max.e.taxistation.model.CarEntity;
 import elp.max.e.taxistation.model.MechanicEntity;
 import elp.max.e.taxistation.service.carService.CarConverter;
 import elp.max.e.taxistation.service.carService.CarServiceImpl;
 
-import javax.xml.bind.ValidationException;
 import java.util.Date;
 import java.util.TimerTask;
 
@@ -42,7 +42,7 @@ public class TimerRepairCar extends TimerTask {
             mechanicDto.setBusy(false);
             mechanicService.update(mechanicDto.getId(), mechanicDto);
             System.out.println("Механик освободился");
-        } catch (ValidationException e) {
+        } catch (ValidationDtoException e) {
             e.printStackTrace();
         }
     }

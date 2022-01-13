@@ -52,4 +52,14 @@ class ClientServiceImplTest extends BaseTest {
             }
         }
     }
+
+    @Test
+    @Sql(value = {"/data/import_positive_data.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(value = {"/data/delete_positive_data.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+    @DisplayName("Проверить отправку автомобиля на ремонт")
+    void findByIdForWrongResult() {
+        long clientId = 100;
+        System.out.println(clientService.findById(clientId));
+        assertEquals("Клиент " + clientId + " не найден!", clientService.findById(clientId), "Клиент " + clientId + " найден!");
+    }
 }

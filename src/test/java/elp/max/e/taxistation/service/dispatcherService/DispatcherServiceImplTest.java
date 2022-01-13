@@ -2,17 +2,20 @@ package elp.max.e.taxistation.service.dispatcherService;
 
 import elp.max.e.taxistation.BaseTest;
 import elp.max.e.taxistation.dto.*;
+import elp.max.e.taxistation.exception.ValidationDtoException;
+import elp.max.e.taxistation.exception.WorkerDtoNotFoundException;
 import elp.max.e.taxistation.repository.DispatcherRepository;
 import elp.max.e.taxistation.service.carService.CarServiceImpl;
 import elp.max.e.taxistation.service.clientService.ClientServiceImpl;
 import elp.max.e.taxistation.service.driverService.DriverServiceImpl;
 import elp.max.e.taxistation.service.mechanicService.MechanicServiceImpl;
 import elp.max.e.taxistation.service.orderNumberService.OrderNumberServiceImpl;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.jdbc.Sql;
 
-import javax.xml.bind.ValidationException;
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -38,7 +41,7 @@ public class DispatcherServiceImplTest extends BaseTest {
 
     @Test
     @DisplayName("Проверить смену статусов водителя и автомобиля и состояние наряд-заказа у клиента после заказа")
-    void releaseDriverAndCarAfterOrdering() throws ValidationException {
+    void releaseDriverAndCarAfterOrdering() throws ValidationDtoException {
         ClientDto clientDto = clientService.findById(1L);
         clientDto.setOrderNumber("Random order");
         System.out.println(clientDto.getOrderNumber());
@@ -125,6 +128,26 @@ public class DispatcherServiceImplTest extends BaseTest {
                     Assertions.assertFalse(carDto.isBusy(), "Автомобиль занят на ремонте: " + carDto.isBusy());
                 }
             }
+        }
+    }
+
+    @Test
+    @DisplayName("Проверить, что не будет создан наряд-заказ из-за нерабочего водителя")
+    void negativeTestAssignCarToDriverAndCallClient() throws Exception {
+        ClientDto clientDto = new ClientDto(1L, "Tom", "No order");
+        DispatcherDto dispatcherDto = dispatcherService.findById(1L);
+        dispatcherDto.setDayoff("random");
+        System.out.println(dispatcherDto.getName()  + " disp");
+        OrderNumberDto orderNumberDto = null;
+        try {
+            orderNumberDto = dispatcherService.assignCarToDriverAndCallClient(clientDto, dispatcherDto, clientService);
+        }
+        catch (WorkerDtoNotFoundException e) {
+            assertEquals("Водители не работают!", e.getMessage(), "Водитель работает" );
+        }
+        // сломать тест
+        if (orderNumberDto != null) {
+            fail("Водитель работает: " + orderNumberDto.getDriver());
         }
     }
 

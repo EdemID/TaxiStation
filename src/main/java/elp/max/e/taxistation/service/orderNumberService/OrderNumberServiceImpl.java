@@ -1,13 +1,13 @@
 package elp.max.e.taxistation.service.orderNumberService;
 
 import elp.max.e.taxistation.dto.OrderNumberDto;
+import elp.max.e.taxistation.exception.ValidationDtoException;
 import elp.max.e.taxistation.model.OrderNumberEntity;
 import elp.max.e.taxistation.repository.OrderNumberRepository;
 import elp.max.e.taxistation.service.ServiceInterface;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.xml.bind.ValidationException;
 import java.util.List;
 
 import static java.util.Objects.isNull;
@@ -33,7 +33,7 @@ public class OrderNumberServiceImpl implements ServiceInterface<OrderNumberDto> 
     }
 
     @Override
-    public OrderNumberDto save(OrderNumberDto dto) throws ValidationException {
+    public OrderNumberDto save(OrderNumberDto dto) throws ValidationDtoException {
         validateOrderNumberDto(dto);
         OrderNumberEntity orderNumberEntity = orderNumberRepository.save(OrderNumberConverter.fromOrderNumberDtoToOrderNumberEntity(dto));
         return OrderNumberConverter.fromOrderNumberEntityToOrderNumberDto(orderNumberEntity);
@@ -41,7 +41,7 @@ public class OrderNumberServiceImpl implements ServiceInterface<OrderNumberDto> 
 
     @Override
     @Transactional
-    public OrderNumberDto update(Long id, OrderNumberDto dto) throws ValidationException {
+    public OrderNumberDto update(Long id, OrderNumberDto dto) throws ValidationDtoException {
         return null;
     }
 
@@ -50,17 +50,17 @@ public class OrderNumberServiceImpl implements ServiceInterface<OrderNumberDto> 
 
     }
 
-    private void validateOrderNumberDto(OrderNumberDto dto) throws ValidationException {
+    private void validateOrderNumberDto(OrderNumberDto dto) throws ValidationDtoException {
         if (isNull(dto)) {
-            throw new ValidationException("Object client is null");
+            throw new ValidationDtoException("Object client is null");
         }
         if (isNull(dto.getNumber()) || dto.getNumber().isEmpty()) {
-            throw new ValidationException("Number is empty");
+            throw new ValidationDtoException("Number is empty");
         }
     }
 
     @Override
-    public void validateDto(OrderNumberDto dto) throws ValidationException {
+    public void validateDto(OrderNumberDto dto) throws ValidationDtoException {
 
     }
 }

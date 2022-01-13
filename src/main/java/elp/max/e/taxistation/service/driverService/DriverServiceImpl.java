@@ -1,17 +1,14 @@
 package elp.max.e.taxistation.service.driverService;
 
-import elp.max.e.taxistation.dto.ClientDto;
 import elp.max.e.taxistation.dto.DriverDto;
-import elp.max.e.taxistation.model.ClientEntity;
+import elp.max.e.taxistation.exception.EntityNotFoundException;
+import elp.max.e.taxistation.exception.ValidationDtoException;
 import elp.max.e.taxistation.model.DriverEntity;
 import elp.max.e.taxistation.repository.DriverRepository;
 import elp.max.e.taxistation.service.ServiceInterface;
-import elp.max.e.taxistation.service.clientService.ClientConverter;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityNotFoundException;
-import javax.xml.bind.ValidationException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -53,7 +50,7 @@ public class DriverServiceImpl implements ServiceInterface<DriverDto> {
 
     @Override
     @Transactional
-    public DriverDto save(DriverDto dto) throws ValidationException {
+    public DriverDto save(DriverDto dto) throws ValidationDtoException {
         validateDto(dto);
         DriverEntity driverEntity = driverRepository.save(DriverConverter.fromDriverDtoToDriverEntity(dto));
         return DriverConverter.fromDriverEntityToDriverDto(driverEntity);
@@ -61,7 +58,7 @@ public class DriverServiceImpl implements ServiceInterface<DriverDto> {
 
     @Override
     @Transactional
-    public DriverDto update(Long id, DriverDto dto) throws ValidationException {
+    public DriverDto update(Long id, DriverDto dto) throws ValidationDtoException {
         validateDto(dto);
         DriverEntity driverEntity = driverRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Водитель " + dto + " не найден"));
@@ -115,12 +112,12 @@ public class DriverServiceImpl implements ServiceInterface<DriverDto> {
     }
 
     @Override
-    public void validateDto(DriverDto dto) throws ValidationException {
+    public void validateDto(DriverDto dto) throws ValidationDtoException {
         if (isNull(dto)) {
-            throw new ValidationException("Object driver is null");
+            throw new ValidationDtoException("Driver is null");
         }
         if (isNull(dto.getName()) || dto.getName().isEmpty()) {
-            throw new ValidationException("Name is empty");
+            throw new ValidationDtoException("Driver name is empty");
         }
     }
 }

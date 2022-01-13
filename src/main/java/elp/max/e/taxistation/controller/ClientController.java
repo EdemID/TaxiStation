@@ -2,12 +2,11 @@ package elp.max.e.taxistation.controller;
 
 import elp.max.e.taxistation.dto.ClientDto;
 import elp.max.e.taxistation.dto.OrderNumberDto;
+import elp.max.e.taxistation.exception.ValidationDtoException;
 import elp.max.e.taxistation.service.clientService.ClientServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
-import javax.xml.bind.ValidationException;
 
 import java.util.List;
 
@@ -25,12 +24,12 @@ public class ClientController {
     }
 
     @PostMapping(value = "/create", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
-    public ClientDto create(@RequestBody ClientDto clientDto) throws ValidationException {
+    public ClientDto create(@RequestBody ClientDto clientDto) throws ValidationDtoException {
         return clientService.save(clientDto);
     }
 
     @PatchMapping(value = "/update/{clientId}", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
-    public ClientDto update(@PathVariable Long clientId, @RequestBody ClientDto clientDto) throws ValidationException {
+    public ClientDto update(@PathVariable Long clientId, @RequestBody ClientDto clientDto) throws ValidationDtoException {
         return clientService.update(clientId, clientDto);
     }
 

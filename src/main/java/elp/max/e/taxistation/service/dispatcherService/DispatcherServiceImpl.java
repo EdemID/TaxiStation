@@ -1,6 +1,9 @@
 package elp.max.e.taxistation.service.dispatcherService;
 
 import elp.max.e.taxistation.dto.*;
+import elp.max.e.taxistation.exception.EntityNotFoundException;
+import elp.max.e.taxistation.exception.ValidationDtoException;
+import elp.max.e.taxistation.exception.WorkerDtoNotFoundException;
 import elp.max.e.taxistation.model.DispatcherEntity;
 import elp.max.e.taxistation.repository.DispatcherRepository;
 import elp.max.e.taxistation.service.ServiceInterface;
@@ -10,13 +13,10 @@ import elp.max.e.taxistation.service.clientService.ClientServiceImpl;
 import elp.max.e.taxistation.service.driverService.DriverServiceImpl;
 import elp.max.e.taxistation.service.orderNumberService.OrderNumberServiceImpl;
 import elp.max.e.taxistation.utils.DateUtil;
-import elp.max.e.taxistation.utils.DtoNotFoundException;
 import elp.max.e.taxistation.utils.Utils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityNotFoundException;
-import javax.xml.bind.ValidationException;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
@@ -67,7 +67,7 @@ public class DispatcherServiceImpl implements ServiceInterface<DispatcherDto> {
 
     @Override
     @Transactional
-    public DispatcherDto save(DispatcherDto dto) throws ValidationException {
+    public DispatcherDto save(DispatcherDto dto) throws ValidationDtoException {
         validateDto(dto);
         DispatcherEntity dispatcherEntity = dispatcherRepository.save(DispatcherConverter.fromDispatcherDtoToDispatcherEntity(dto));
         return DispatcherConverter.fromDispatcherEntityToDispatcherDto(dispatcherEntity);
@@ -75,7 +75,7 @@ public class DispatcherServiceImpl implements ServiceInterface<DispatcherDto> {
 
     @Override
     @Transactional
-    public DispatcherDto update(Long id, DispatcherDto dto) throws ValidationException {
+    public DispatcherDto update(Long id, DispatcherDto dto) throws ValidationDtoException {
         return null;
     }
 
@@ -119,10 +119,13 @@ public class DispatcherServiceImpl implements ServiceInterface<DispatcherDto> {
                 break;
             }
         }
+        if (workerDispatcher == null) {
+            throw new WorkerDtoNotFoundException("Диспетчеры");
+        }
         return workerDispatcher;
     }
 
-    private CarDto findWorkerCar() throws ValidationException {
+    private CarDto findWorkerCar() throws ValidationDtoException {
         return carService.getWorkerCar();
     }
 
@@ -131,15 +134,16 @@ public class DispatcherServiceImpl implements ServiceInterface<DispatcherDto> {
     }
 
     public OrderNumberDto assignCarToDriverAndCallClient(ClientDto clientDto, DispatcherDto dispatcherDto, ClientServiceImpl clientService) throws Exception {
-        CarDto carDto = findWorkerCar();
-        System.out.println(carDto);
-        if (carDto == null) {
-            throw new DtoNotFoundException("Автомобиль");
-        }
         DriverDto driverDto = findWorkerDriver();
         System.out.println(driverDto);
         if (driverDto == null) {
-            throw new DtoNotFoundException("Водитель");
+            throw new WorkerDtoNotFoundException("Водители");
+        }
+
+        CarDto carDto = findWorkerCar();
+        System.out.println(carDto);
+        if (carDto == null) {
+            throw new WorkerDtoNotFoundException("Автомобили");
         }
 
         //заняты клиентом
@@ -196,7 +200,7 @@ public class DispatcherServiceImpl implements ServiceInterface<DispatcherDto> {
                     if (carDto.getResource() == 0) {
                         carService.sendCarForRepair(CarConverter.fromCarDtoToCarEntity(carDto));
                     }
-                } catch (ValidationException e) {
+                } catch (ValidationDtoException e) {
                     e.printStackTrace();
                 }
             }
@@ -206,12 +210,12 @@ public class DispatcherServiceImpl implements ServiceInterface<DispatcherDto> {
     }
 
     @Override
-    public void validateDto(DispatcherDto dto) throws ValidationException {
+    public void validateDto(DispatcherDto dto) throws ValidationDtoException {
         if (isNull(dto)) {
-            throw new ValidationException("Object dispatcher is null");
+            throw new ValidationDtoException("Dispatcher is null");
         }
         if (isNull(dto.getName()) || dto.getName().isEmpty()) {
-            throw new ValidationException("Name is empty");
+            throw new ValidationDtoException("Dispatcher name is empty");
         }
     }
 }
