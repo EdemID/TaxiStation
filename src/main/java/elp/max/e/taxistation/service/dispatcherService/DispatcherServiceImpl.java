@@ -6,6 +6,7 @@ import elp.max.e.taxistation.repository.DispatcherRepository;
 import elp.max.e.taxistation.service.ServiceInterface;
 import elp.max.e.taxistation.service.carService.CarConverter;
 import elp.max.e.taxistation.service.carService.CarServiceImpl;
+import elp.max.e.taxistation.service.clientService.ClientServiceImpl;
 import elp.max.e.taxistation.service.driverService.DriverServiceImpl;
 import elp.max.e.taxistation.service.orderNumberService.OrderNumberServiceImpl;
 import elp.max.e.taxistation.utils.DateUtil;
@@ -129,7 +130,7 @@ public class DispatcherServiceImpl implements ServiceInterface<DispatcherDto> {
         return driverService.getWorkerDriver();
     }
 
-    public OrderNumberDto assignCarToDriverAndCallClient(ClientDto clientDto, DispatcherDto dispatcherDto) throws Exception {
+    public OrderNumberDto assignCarToDriverAndCallClient(ClientDto clientDto, DispatcherDto dispatcherDto, ClientServiceImpl clientService) throws Exception {
         CarDto carDto = findWorkerCar();
         System.out.println(carDto);
         if (carDto == null) {
@@ -161,14 +162,12 @@ public class DispatcherServiceImpl implements ServiceInterface<DispatcherDto> {
         orderNumberDto.setCar(carDto.getNumberCar());
 
         // исходя из каких-то данных, диспетчер будет знать время заказа
-        releaseDriverAndCarAfterOrdering(driverDto, carDto, 20000L);
-        if (carDto.getResource() == 0) {
-            carService.sendCarForRepair(CarConverter.fromCarDtoToCarEntity(carDto));
-        }
+        releaseDriverAndCarAfterOrdering(driverDto, carDto, clientDto, clientService, 20000L);
+
         return orderNumberService.save(orderNumberDto);
     }
 
-    public void releaseDriverAndCarAfterOrdering(DriverDto driverDto, CarDto carDto, long orderTime) {
+    public void releaseDriverAndCarAfterOrdering(DriverDto driverDto, CarDto carDto, ClientDto clientDto, ClientServiceImpl clientService, long orderTime) {
         System.out.println("Метод releaseDriverAndCarAfterOrdering запущен: " + new Date());
 
         TimerTask task = new TimerTask() {
@@ -180,12 +179,23 @@ public class DispatcherServiceImpl implements ServiceInterface<DispatcherDto> {
                     driverDto.setCar("free");
 
                     carDto.setBusy(false);
+
+                    clientDto.setOrderNumber("No order");
+
                     System.out.println("=================");
                     System.out.println(driverDto.getId());
                     System.out.println(driverDto.getName());
+                    System.out.println(clientDto.getOrderNumber());
                     System.out.println("=================");
+
                     driverService.update(driverDto.getId(), driverDto);
                     carService.update(carDto.getId(), carDto);
+                    clientService.update(clientDto.getId(), clientDto);
+
+                    // проверяем ресурс и отправляем после заказа машину, если равен 0
+                    if (carDto.getResource() == 0) {
+                        carService.sendCarForRepair(CarConverter.fromCarDtoToCarEntity(carDto));
+                    }
                 } catch (ValidationException e) {
                     e.printStackTrace();
                 }

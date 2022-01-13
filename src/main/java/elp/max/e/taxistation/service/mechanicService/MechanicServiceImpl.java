@@ -101,7 +101,7 @@ public class MechanicServiceImpl implements ServiceInterface<MechanicDto> {
         // Останавливаем пул потоков
         executor.shutdown();
 
-        System.out.println("ремонт закончен: " + carEntity.getNumberCar());
+        System.out.println("ремонт: " + carEntity.getNumberCar());
         return System.currentTimeMillis();
     }
 }

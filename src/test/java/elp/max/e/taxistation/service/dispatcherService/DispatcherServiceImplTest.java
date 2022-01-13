@@ -12,6 +12,7 @@ import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.jdbc.Sql;
 
+import javax.xml.bind.ValidationException;
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -36,25 +37,31 @@ public class DispatcherServiceImplTest extends BaseTest {
     }
 
     @Test
-    @DisplayName("Проверить смену статусов водителя и автомобиля после заказа")
-    void releaseDriverAndCarAfterOrdering() {
+    @DisplayName("Проверить смену статусов водителя и автомобиля и состояние наряд-заказа у клиента после заказа")
+    void releaseDriverAndCarAfterOrdering() throws ValidationException {
+        ClientDto clientDto = clientService.findById(1L);
+        clientDto.setOrderNumber("Random order");
+        System.out.println(clientDto.getOrderNumber());
+        clientService.update(clientDto.getId(), clientDto);
         DriverDto driverDto = driverService.findByName("driver-busy");
         CarDto carDto = carService.findByNumberCar("busy_car");
 
         long currentTime = new Date().getTime();
         long orderTime = 20000L;
         long endTimer = currentTime + orderTime + 1000L;
-        dispatcherService.releaseDriverAndCarAfterOrdering(driverDto, carDto, orderTime);
+        dispatcherService.releaseDriverAndCarAfterOrdering(driverDto, carDto, clientDto, clientService, orderTime);
         // проверка до завершения заказа
         assertTrue(driverDto.isBusy());
         assertTrue(carDto.isBusy());
         assertEquals(carDto.getNumberCar(), driverDto.getCar());
+        assertEquals("Random order", clientDto.getOrderNumber());
         // проверка после завершения заказа
         while (endTimer >= System.currentTimeMillis()){
             if (endTimer == System.currentTimeMillis()) {
                 assertFalse(driverDto.isBusy());
                 assertFalse(carDto.isBusy());
                 assertEquals("free", driverDto.getCar());
+                assertEquals("No order", clientDto.getOrderNumber());
                 break;
             }
         }
@@ -68,7 +75,7 @@ public class DispatcherServiceImplTest extends BaseTest {
         ClientDto clientDto = new ClientDto(1L, "Tom", "No order");
         DispatcherDto dispatcherDto = dispatcherService.getWorkerDispatcher();
 
-        OrderNumberDto orderNumberDto = dispatcherService.assignCarToDriverAndCallClient(clientDto, dispatcherDto);
+        OrderNumberDto orderNumberDto = dispatcherService.assignCarToDriverAndCallClient(clientDto, dispatcherDto, clientService);
         String orderNumber = orderNumberDto.getNumber();
         String client = orderNumberDto.getClient();
         String dispatcher = orderNumberDto.getDispatcher();
@@ -98,7 +105,7 @@ public class DispatcherServiceImplTest extends BaseTest {
         DispatcherDto dispatcherDto = dispatcherService.getWorkerDispatcher();
         MechanicDto mechanicDto = mechanicService.findById(1L);
 
-        OrderNumberDto orderNumberDto = dispatcherService.assignCarToDriverAndCallClient(clientDto, dispatcherDto);
+        OrderNumberDto orderNumberDto = dispatcherService.assignCarToDriverAndCallClient(clientDto, dispatcherDto, clientService);
         String numberCar = orderNumberDto.getCar();
         carDto = carService.findByNumberCar(numberCar);
         System.out.println(carDto);
@@ -107,7 +114,8 @@ public class DispatcherServiceImplTest extends BaseTest {
             assertEquals(numberCar, carDto.getNumberCar(), "Назначен неверный автомобиль: " + numberCar);
             int recoveredResource = mechanicDto.getResource();
             long repairTime = mechanicDto.getRepairTime();
-            long timeAfterRepair = System.currentTimeMillis() + repairTime + 1000L;
+            long orderTime = 20000L;
+            long timeAfterRepair = System.currentTimeMillis() + repairTime + orderTime + 1000L;
             while (timeAfterRepair >= System.currentTimeMillis()) {
                 if (timeAfterRepair == System.currentTimeMillis()) {
                     carDto = carService.findById(carDto.getId());

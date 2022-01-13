@@ -85,12 +85,12 @@ public class ClientServiceImpl implements ServiceInterface<ClientDto> {
             throw new DtoNotFoundException("Диспетчер");
         }
 
-        OrderNumberDto orderNumberDto = dispatcherService.assignCarToDriverAndCallClient(clientDto, dispatcherDto);
+        // в диспетчере не сможем добавить clientService, так здесь уже есть dispatcherService, иначе будет цикл бинов
+        OrderNumberDto orderNumberDto = dispatcherService.assignCarToDriverAndCallClient(clientDto, dispatcherDto, this);
         if (orderNumberDto == null) {
             throw new DtoNotFoundException("Наряд-заказ");
         }
 
-        // в диспетчере не сможем добавить clientService, так здесь уже есть dispatcherService, иначе будет цикл бинов
         clientDto.setOrderNumber(orderNumberDto.getNumber());
         save(clientDto);
 
