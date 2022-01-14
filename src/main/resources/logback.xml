@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- encoders are assigned the type
+             ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
+        <encoder>
+<!--    В pattern мы указываем, что в лог нужно писать сначала дату с временем %d{dd.MM.yyyy HH:mm:ss.SSS},-->
+<!--    потом название потока [%thread], затем пять символов уровеня логирования %-5level, затем название логера,-->
+<!--    пытаясь уместить его в 36 символов, %logger{36}, затем сообщение логера %msg и перевод строки %n.-->
+            <pattern>%d{dd.MM.yyyy HH:mm:ss.SSS} [%thread] %-5level %logger{20} - %msg%n</pattern>
+        </encoder>
+    </appender>
+<!--    <logger name="org.apache.catalina.core" level="OFF" />-->
+    <root level="info">
+        <appender-ref ref="STDOUT" />
+    </root>
+</configuration>

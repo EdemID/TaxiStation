@@ -4,6 +4,8 @@ import elp.max.e.taxistation.dto.ClientDto;
 import elp.max.e.taxistation.dto.OrderNumberDto;
 import elp.max.e.taxistation.exception.ValidationDtoException;
 import elp.max.e.taxistation.service.clientService.ClientServiceImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +18,8 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RequestMapping("/client")
 public class ClientController {
 
+    private static final Logger logger = LoggerFactory.getLogger(ClientController.class);
+
     private final ClientServiceImpl clientService;
 
     @Autowired
@@ -25,22 +29,36 @@ public class ClientController {
 
     @PostMapping(value = "/create", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
     public ClientDto create(@RequestBody ClientDto clientDto) throws ValidationDtoException {
-        return clientService.save(clientDto);
+        logger.info("Get-request received with clientDto: {}", clientDto);
+        ClientDto savedClientDto = clientService.save(clientDto);
+        logger.info("The result is returned: {}", savedClientDto);
+        return savedClientDto;
     }
 
     @PatchMapping(value = "/update/{clientId}", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
     public ClientDto update(@PathVariable Long clientId, @RequestBody ClientDto clientDto) throws ValidationDtoException {
-        return clientService.update(clientId, clientDto);
+        logger.info("Get-request received with" + System.lineSeparator() +
+                     "clientId: {}" + System.lineSeparator() +
+                     "clientDto: {}", clientId, clientDto);
+        ClientDto updatedClientDto = clientService.update(clientId, clientDto);
+        logger.info("The result is returned: {}", updatedClientDto);
+        return updatedClientDto;
     }
 
     @GetMapping(value = "/all")
     public List<ClientDto> findAll() {
-        return clientService.findAll();
+        logger.info("Get-request 'findAll()' received");
+        List<ClientDto> clientDtos = clientService.findAll();
+        logger.info("The result is returned: {}", clientDtos);
+        return clientDtos;
     }
 
     @GetMapping(value = "/{clientId}", produces = APPLICATION_JSON_VALUE)
     public ClientDto findById(@PathVariable Long clientId) {
-        return clientService.findById(clientId);
+        logger.info("Get-request received with clientId: {}", clientId);
+        ClientDto clientDto = clientService.findById(clientId);
+        logger.info("The result is returned: {}", clientDto);
+        return clientDto;
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
@@ -58,7 +76,10 @@ public class ClientController {
 
     @GetMapping(value = "/{clientId}/call", produces = APPLICATION_JSON_VALUE)
     public OrderNumberDto call(@PathVariable Long clientId) throws Exception {
-        return clientService.call(clientId);
+        logger.info("Get-request received with clientId: {}", clientId);
+        OrderNumberDto orderNumberDto = clientService.call(clientId);
+        logger.info("The result is returned: {}", orderNumberDto);
+        return orderNumberDto;
     }
 
     /*
