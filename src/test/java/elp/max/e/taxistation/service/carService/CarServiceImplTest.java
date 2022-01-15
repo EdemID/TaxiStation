@@ -29,9 +29,9 @@ class CarServiceImplTest extends BaseTest {
     @Sql(value = {"/data/import_positive_data.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
     @Sql(value = {"/data/delete_positive_data.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @DisplayName("Проверить рабочий автомобиль")
-    void getWorkerCar() throws ValidationDtoException {
-        CarDto workerCar = carService.getWorkerCar();
-        assertFalse(workerCar.isBusy());
+    void getWorkingCar() throws ValidationDtoException {
+        CarDto workingCar = carService.getWorkingCar();
+        assertFalse(workingCar.isBusy());
     }
 
     @Test

@@ -68,4 +68,16 @@ public class DriverDto {
     public void setBusy(boolean busy) {
         this.busy = busy;
     }
+
+    @Override
+    public String toString() {
+        return "DriverDto{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", dayoff='" + dayoff + '\'' +
+                ", car='" + car + '\'' +
+                ", workStatus=" + workStatus +
+                ", busy=" + busy +
+                '}';
+    }
 }

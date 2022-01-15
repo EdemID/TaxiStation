@@ -23,11 +23,11 @@ class DriverServiceImplTest extends BaseTest {
     @Test
     @Sql(value = {"/data/import_positive_data.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
     @Sql(value = {"/data/delete_positive_data.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
-    void getWorkerDriver() {
-        DriverDto workerDriver = driverService.getWorkerDriver();
-        DriverDto expected = driverService.findById(workerDriver.getId());
-        assertTrue(isMakeEqual(workerDriver, expected));
-        assertTrue(workerDriver.isWorkStatus());
+    void getworkingDriver() {
+        DriverDto workingDriver = driverService.getWorkingDriver();
+        DriverDto expected = driverService.findById(workingDriver.getId());
+        assertTrue(isMakeEqual(workingDriver, expected));
+        assertTrue(workingDriver.isWorkStatus());
     }
 
     private Boolean isMakeEqual(DriverDto actual, DriverDto expected) {

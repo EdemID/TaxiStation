@@ -39,4 +39,13 @@ public class ClientDto {
     public void setOrderNumber(String orderNumber) {
         this.orderNumber = orderNumber;
     }
+
+    @Override
+    public String toString() {
+        return "ClientDto{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", orderNumber='" + orderNumber + '\'' +
+                '}';
+    }
 }

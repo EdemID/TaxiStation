@@ -49,4 +49,15 @@ public class MechanicDto {
     public void setBrokenCars(List<CarDto> brokenCars) {
         this.brokenCars = brokenCars;
     }
+
+    @Override
+    public String toString() {
+        return "MechanicDto{" +
+                "id=" + id +
+                ", repairTime=" + repairTime +
+                ", resource=" + resource +
+                ", busy=" + busy +
+                ", brokenCars=" + brokenCars +
+                '}';
+    }
 }

@@ -3,7 +3,7 @@ package elp.max.e.taxistation.service.dispatcherService;
 import elp.max.e.taxistation.BaseTest;
 import elp.max.e.taxistation.dto.*;
 import elp.max.e.taxistation.exception.ValidationDtoException;
-import elp.max.e.taxistation.exception.WorkerDtoNotFoundException;
+import elp.max.e.taxistation.exception.WorkingDtoNotFoundException;
 import elp.max.e.taxistation.repository.DispatcherRepository;
 import elp.max.e.taxistation.service.carService.CarServiceImpl;
 import elp.max.e.taxistation.service.clientService.ClientServiceImpl;
@@ -32,11 +32,11 @@ public class DispatcherServiceImplTest extends BaseTest {
     @Sql(value = {"/data/import_positive_data.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
     @Sql(value = {"/data/delete_positive_data.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @DisplayName("Проверить рабочего диспетчера")
-    void getWorkerDispatcher() {
-        DispatcherDto workerDispatcher = dispatcherService.getWorkerDispatcher();
-        DispatcherDto expected = dispatcherService.findById(workerDispatcher.getId());
-        assertTrue(isMakeEqual(expected, workerDispatcher));
-        assertTrue(workerDispatcher.isWorkStatus(), "Диспетчер " + workerDispatcher + " должен работать, но НЕ работает");
+    void getWorkingDispatcher() {
+        DispatcherDto workingDispatcher = dispatcherService.getWorkingDispatcher();
+        DispatcherDto expected = dispatcherService.findById(workingDispatcher.getId());
+        assertTrue(isMakeEqual(expected, workingDispatcher));
+        assertTrue(workingDispatcher.isWorkStatus(), "Диспетчер " + workingDispatcher + " должен работать, но НЕ работает");
     }
 
     @Test
@@ -44,7 +44,6 @@ public class DispatcherServiceImplTest extends BaseTest {
     void releaseDriverAndCarAfterOrdering() throws ValidationDtoException {
         ClientDto clientDto = clientService.findById(1L);
         clientDto.setOrderNumber("Random order");
-        System.out.println(clientDto.getOrderNumber());
         clientService.update(clientDto.getId(), clientDto);
         DriverDto driverDto = driverService.findByName("driver-busy");
         CarDto carDto = carService.findByNumberCar("busy_car");
@@ -52,7 +51,7 @@ public class DispatcherServiceImplTest extends BaseTest {
         long currentTime = new Date().getTime();
         long orderTime = 20000L;
         long endTimer = currentTime + orderTime + 1000L;
-        dispatcherService.releaseDriverAndCarAfterOrdering(driverDto, carDto, clientDto, clientService, orderTime);
+        dispatcherService.releaseClientAndDriverAndCarAfterOrdering(driverDto, carDto, clientDto, clientService, orderTime);
         // проверка до завершения заказа
         assertTrue(driverDto.isBusy());
         assertTrue(carDto.isBusy());
@@ -76,7 +75,7 @@ public class DispatcherServiceImplTest extends BaseTest {
     @DisplayName("Проверить создание и содержание наряд-заказа")
     void assignCarToDriverAndCallClient() throws Exception {
         ClientDto clientDto = new ClientDto(1L, "Tom", "No order");
-        DispatcherDto dispatcherDto = dispatcherService.getWorkerDispatcher();
+        DispatcherDto dispatcherDto = dispatcherService.getWorkingDispatcher();
 
         OrderNumberDto orderNumberDto = dispatcherService.assignCarToDriverAndCallClient(clientDto, dispatcherDto, clientService);
         String orderNumber = orderNumberDto.getNumber();
@@ -85,11 +84,8 @@ public class DispatcherServiceImplTest extends BaseTest {
         String car = orderNumberDto.getCar();
         String driver = orderNumberDto.getDriver();
 
-        System.out.println("dispatcher lunch start " + dispatcherService.findByName(dispatcher).getStartLunch());
-        System.out.println("dispatcher lunch end " + dispatcherService.findByName(dispatcher).getEndLunch());
-
         assertEquals("Tom", client, "Назначен неверный клиент: " + client);
-        assertEquals("Vladimir-dispatcher-worker", dispatcher, "Назначен неверный диспетчер: " + dispatcher);
+        assertEquals("Vladimir-dispatcher-working", dispatcher, "Назначен неверный диспетчер: " + dispatcher);
         assertEquals(orderNumber, orderNumber, "Назначен неверный номер наряд-заказа: " + orderNumber);
         assertEquals("car-not-busy", car, "Назначен неверный автомобиль: " + car);
         assertEquals("Aurora-driver-not-busy", driver, "Назначен неверный водитель: " + driver);
@@ -100,18 +96,17 @@ public class DispatcherServiceImplTest extends BaseTest {
     @Sql(value = {"/data/delete_positive_data.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @DisplayName("Проверить отправку автомобиля на ремонт после заказа, если ресурс равен 0, и его починку")
     void sendCarForRepairIfResourceIsZeroAfterOrder() throws Exception {
-        CarDto carDto = carService.getWorkerCar();
+        CarDto carDto = carService.getWorkingCar();
         carDto.setResource(1);
         carService.save(carDto);
 
         ClientDto clientDto = clientService.findById(1L);
-        DispatcherDto dispatcherDto = dispatcherService.getWorkerDispatcher();
+        DispatcherDto dispatcherDto = dispatcherService.getWorkingDispatcher();
         MechanicDto mechanicDto = mechanicService.findById(1L);
 
         OrderNumberDto orderNumberDto = dispatcherService.assignCarToDriverAndCallClient(clientDto, dispatcherDto, clientService);
         String numberCar = orderNumberDto.getCar();
         carDto = carService.findByNumberCar(numberCar);
-        System.out.println(carDto);
 
         if (carDto.getResource() == 0) {
             assertEquals(numberCar, carDto.getNumberCar(), "Назначен неверный автомобиль: " + numberCar);
@@ -122,8 +117,6 @@ public class DispatcherServiceImplTest extends BaseTest {
             while (timeAfterRepair >= System.currentTimeMillis()) {
                 if (timeAfterRepair == System.currentTimeMillis()) {
                     carDto = carService.findById(carDto.getId());
-                    System.out.println(carDto.getId());
-                    System.out.println(carDto.getResource());
                     Assertions.assertEquals(recoveredResource, carDto.getResource(), "Механик плохо постаралася: ресурс равен - " + carDto.getResource() + ", а должен быть - " + recoveredResource);
                     Assertions.assertFalse(carDto.isBusy(), "Автомобиль занят на ремонте: " + carDto.isBusy());
                 }
@@ -137,12 +130,11 @@ public class DispatcherServiceImplTest extends BaseTest {
         ClientDto clientDto = new ClientDto(1L, "Tom", "No order");
         DispatcherDto dispatcherDto = dispatcherService.findById(1L);
         dispatcherDto.setDayoff("random");
-        System.out.println(dispatcherDto.getName()  + " disp");
         OrderNumberDto orderNumberDto = null;
         try {
             orderNumberDto = dispatcherService.assignCarToDriverAndCallClient(clientDto, dispatcherDto, clientService);
         }
-        catch (WorkerDtoNotFoundException e) {
+        catch (WorkingDtoNotFoundException e) {
             assertEquals("Водители не работают!", e.getMessage(), "Водитель работает" );
         }
         // сломать тест

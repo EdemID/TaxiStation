@@ -3,6 +3,7 @@ package elp.max.e.taxistation.service.clientService;
 import elp.max.e.taxistation.dto.ClientDto;
 import elp.max.e.taxistation.dto.DispatcherDto;
 import elp.max.e.taxistation.dto.OrderNumberDto;
+import elp.max.e.taxistation.exception.CallBackException;
 import elp.max.e.taxistation.exception.EntityNotFoundException;
 import elp.max.e.taxistation.exception.ValidationDtoException;
 import elp.max.e.taxistation.model.ClientEntity;
@@ -47,7 +48,7 @@ public class ClientServiceImpl implements ServiceInterface<ClientDto> {
     @Override
     @Transactional(readOnly = true)
     public ClientDto findById(Long clientId) throws EntityNotFoundException {
-        logger.info("Client search by id in ClientServiceImpl.");
+        logger.info("Client search by id.");
         ClientEntity clientEntity;
         if (clientRepository.findById(clientId).isPresent()) {
             logger.info("Client with id={} found!", clientId);
@@ -75,6 +76,7 @@ public class ClientServiceImpl implements ServiceInterface<ClientDto> {
         ClientEntity clientEntity = clientRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Клиент " + dto + " не найден!"));
         clientEntity.setName(dto.getName());
+        clientEntity.setOrderNumber(dto.getOrderNumber());
         clientEntity = clientRepository.save(clientEntity);
         logger.info("Update the client with id: {}.", id);
         logger.info("Client updated: {}!", dto);
@@ -90,19 +92,25 @@ public class ClientServiceImpl implements ServiceInterface<ClientDto> {
         logger.info("Taxi call for client with id: {}!", id);
         //для гет-запроса, для пост-запроса возможно будет передаваться в параметрах
         ClientDto clientDto = findById(id);
-        DispatcherDto dispatcherDto = dispatcherService.getWorkerDispatcher();
+
+        if (!clientDto.getOrderNumber().equals("No order")) {
+            logger.info("The client called a taxi before completion. His order: {}", clientDto.getOrderNumber());
+            throw new CallBackException(clientDto.getOrderNumber());
+        }
+
+        DispatcherDto dispatcherDto = dispatcherService.getWorkingDispatcher();
         OrderNumberDto orderNumberDto = dispatcherService.assignCarToDriverAndCallClient(clientDto, dispatcherDto, this);
         clientDto.setOrderNumber(orderNumberDto.getNumber());
         save(clientDto);
 
         logger.info(
-                "Order data." + System.lineSeparator() +
-                "Order id: {}" + System.lineSeparator() +
-                "Order number: {}" + System.lineSeparator() +
-                "Client name: {}" + System.lineSeparator() +
-                "Dispatcher name: {}" + System.lineSeparator() +
-                "Driver name: {}" + System.lineSeparator() +
-                "Car number: {}" + System.lineSeparator(),
+                "Order data:" + System.lineSeparator() +
+                "-- Order id: {}" + System.lineSeparator() +
+                "-- Order number: {}" + System.lineSeparator() +
+                "-- Client name: {}" + System.lineSeparator() +
+                "-- Dispatcher name: {}" + System.lineSeparator() +
+                "-- Driver name: {}" + System.lineSeparator() +
+                "-- Car number: {}" + System.lineSeparator(),
                 orderNumberDto.getId(),
                 orderNumberDto.getNumber(),
                 orderNumberDto.getClient(),

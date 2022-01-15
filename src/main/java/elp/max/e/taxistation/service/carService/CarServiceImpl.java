@@ -9,6 +9,8 @@ import elp.max.e.taxistation.repository.CarRepository;
 import elp.max.e.taxistation.service.ServiceInterface;
 import elp.max.e.taxistation.service.mechanicService.MechanicConverter;
 import elp.max.e.taxistation.service.mechanicService.MechanicServiceImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +22,8 @@ import static java.util.Objects.isNull;
 
 @Service
 public class CarServiceImpl implements ServiceInterface<CarDto> {
+
+    private static final Logger logger = LoggerFactory.getLogger(CarServiceImpl.class);
 
     private final MechanicServiceImpl mechanicService;
     private final CarRepository carRepository;
@@ -53,7 +57,7 @@ public class CarServiceImpl implements ServiceInterface<CarDto> {
 
     @Transactional
     public CarDto findByNumberCar(String number) {
-        CarDto carDto = null;
+        CarDto carDto;
         if (carRepository.findByNumberCar(number) != null) {
             carDto = CarConverter.fromCarEntityToCarDto(carRepository.findByNumberCar(number));
         } else {
@@ -88,34 +92,35 @@ public class CarServiceImpl implements ServiceInterface<CarDto> {
         carRepository.deleteById(id);
     }
 
-    public CarDto getWorkerCar() throws ValidationDtoException {
+    public CarDto getWorkingCar() throws ValidationDtoException {
         List<CarDto> carDtos = findAll();
 
-        int workerResource;
+        int workingResource;
         boolean busy;
-        CarDto workerCar = null;
+        CarDto workingCar = null;
         for (CarDto carDto : carDtos) {
-            System.out.println("id машинки " + carDto.getId());
+            logger.info("Car with id: {}", carDto.getId());
             busy = carDto.isBusy();
-            workerResource = carDto.getResource();
-            if (workerResource == 0) {
+            workingResource = carDto.getResource();
+            if (workingResource == 0) {
+                logger.info("Car with id={} went to be repaired", carDto.getId());
                 sendCarForRepair(CarConverter.fromCarDtoToCarEntity(carDto));
             } else if (!busy) {
-                System.out.println("свободная " + carDto.getId());
-                --workerResource;
-                carDto.setResource(workerResource);
+                logger.info("Car with id={} not busy", carDto.getId());
+                --workingResource;
+                carDto.setResource(workingResource);
                 carRepository.save(CarConverter.fromCarDtoToCarEntity(carDto));
-                workerCar = carDto;
-
+                workingCar = carDto;
+                logger.info("Working car with id={} not busy", carDto.getId());
                 break;
             }
-            System.out.println(carDto.getResource());
+            logger.info("Car with id={} resource: {}", carDto.getId(), carDto.getResource());
         }
-        return workerCar;
+        return workingCar;
     }
 
     public void sendCarForRepair(CarEntity carEntity) throws ValidationDtoException {
-        System.out.println("уехала на ремонт: " + carEntity.getId());
+        logger.info("Car with id={} arrived for repair", carEntity.getId());
         boolean busy = true;
         carEntity.setBusy(busy);
         // хардкор, так как пока у нас 1 механик, в будущем можно также реализовать двух механиков с режимом работы

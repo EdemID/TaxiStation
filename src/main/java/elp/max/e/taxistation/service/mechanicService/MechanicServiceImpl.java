@@ -8,6 +8,8 @@ import elp.max.e.taxistation.model.MechanicEntity;
 import elp.max.e.taxistation.repository.MechanicRepository;
 import elp.max.e.taxistation.service.ServiceInterface;
 import elp.max.e.taxistation.service.carService.CarServiceImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,6 +21,8 @@ import static java.util.Objects.isNull;
 
 @Service
 public class MechanicServiceImpl implements ServiceInterface<MechanicDto> {
+
+    private static final Logger logger = LoggerFactory.getLogger(MechanicServiceImpl.class);
 
     private final MechanicRepository mechanicRepository;
 
@@ -83,7 +87,7 @@ public class MechanicServiceImpl implements ServiceInterface<MechanicDto> {
     public long repairCar(MechanicDto mechanicDto, CarEntity carEntity, CarServiceImpl carService) throws ValidationDtoException {
         MechanicEntity mechanicEntity = MechanicConverter.fromMechanicDtoToMechanicEntity(mechanicDto);
 
-        System.out.println("Метод repairCar запущен: " + new Date());
+        logger.info("Метод repairCar запущен: {}", new Date());
         ExecutorService executor = Executors.newFixedThreadPool(1);
         Callable<TimerRepairCar> callable = new CallableClass(carEntity, carService, mechanicEntity, mechanicDto, this);
         Future<TimerRepairCar> future = executor.submit(callable);
@@ -92,8 +96,7 @@ public class MechanicServiceImpl implements ServiceInterface<MechanicDto> {
         TimerRepairCar s;
         try {
             s = future.get();
-            System.out.println("Результат выполнения нити Callable: " + s.scheduledExecutionTime());
-
+            logger.info("Результат выполнения нити Callable: {}", s.scheduledExecutionTime());
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
@@ -101,7 +104,7 @@ public class MechanicServiceImpl implements ServiceInterface<MechanicDto> {
         // Останавливаем пул потоков
         executor.shutdown();
 
-        System.out.println("ремонт: " + carEntity.getNumberCar());
+        logger.info("Car with number car={} under repair", carEntity.getNumberCar());
         return System.currentTimeMillis();
     }
 }

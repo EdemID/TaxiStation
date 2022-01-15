@@ -6,6 +6,8 @@ import elp.max.e.taxistation.exception.ValidationDtoException;
 import elp.max.e.taxistation.model.DriverEntity;
 import elp.max.e.taxistation.repository.DriverRepository;
 import elp.max.e.taxistation.service.ServiceInterface;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,6 +19,8 @@ import static java.util.Objects.isNull;
 
 @Service
 public class DriverServiceImpl implements ServiceInterface<DriverDto> {
+
+    private static final Logger logger = LoggerFactory.getLogger(DriverServiceImpl.class);
 
     private final DriverRepository driverRepository;
 
@@ -76,39 +80,39 @@ public class DriverServiceImpl implements ServiceInterface<DriverDto> {
 
     }
 
-    public DriverDto getWorkerDriver() {
+    public DriverDto getWorkingDriver() {
         List<DriverDto> driverDtos = findAll();
         String car;
         String dayOfWeek;
-        DriverDto workerDriverDto = null;
+        DriverDto workingDriverDto = null;
         for(DriverDto driverDto : driverDtos) {
             car = driverDto.getCar();
             dayOfWeek = LocalDate.now().getDayOfWeek().toString();
             boolean workStatus;
 
-            System.out.println("водитель " + driverDto.getName());
+            logger.info("Driver with name={}", driverDto.getName());
 
             if (dayOfWeek.equalsIgnoreCase(driverDto.getDayoff())) {
-                System.out.println("водитель не работает ВЫХОДНОЙ " + driverDto.getName());
+                logger.info("Driver with id={} not working: {}", driverDto.getId(), driverDto);
                 workStatus = false;
             } else {
-                System.out.println("водитель работает " + driverDto.getName());
+                logger.info("Driver with id={} working: {}", driverDto.getId(), driverDto);
                 workStatus = true;
             }
             driverDto.setWorkStatus(workStatus);
             driverRepository.save(DriverConverter.fromDriverDtoToDriverEntity(driverDto));
 
             if ("free".equalsIgnoreCase(car) && workStatus) {
-                System.out.println("водитель свободен и работает " + driverDto.getName());
+                logger.info("Working driver with name={} not busy", driverDto.getName());
                 car = "Назначается машина";
                 driverDto.setCar(car);
                 driverRepository.save(DriverConverter.fromDriverDtoToDriverEntity(driverDto));
-                workerDriverDto = driverDto;
+                workingDriverDto = driverDto;
 
                 break;
             }
         }
-        return workerDriverDto;
+        return workingDriverDto;
     }
 
     @Override

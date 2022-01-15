@@ -48,4 +48,14 @@ public class CarDto {
     public void setBusy(boolean busy) {
         this.busy = busy;
     }
+
+    @Override
+    public String toString() {
+        return "CarDto{" +
+                "id=" + id +
+                ", numberCar='" + numberCar + '\'' +
+                ", resource=" + resource +
+                ", busy=" + busy +
+                '}';
+    }
 }

@@ -29,7 +29,7 @@ class MechanicServiceImplTest extends BaseTest {
     @Sql(value = {"/data/delete_positive_data.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @DisplayName("Проверить починку автомобиля")
     void repairCar() throws ValidationDtoException {
-        CarDto carDto = carService.getWorkerCar();
+        CarDto carDto = carService.getWorkingCar();
         carDto.setResource(0);
         carService.save(carDto);
         CarEntity carEntity = CarConverter.fromCarDtoToCarEntity(carDto);
@@ -55,7 +55,7 @@ class MechanicServiceImplTest extends BaseTest {
     @Sql(value = {"/data/delete_positive_data.sql", "/data/delete_car_with_zero_resource.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @DisplayName("Проверить починку двух автомобилей сразу")
     void repairTwoCars() throws ValidationDtoException, InterruptedException {
-        CarDto carDto = carService.getWorkerCar();
+        CarDto carDto = carService.getWorkingCar();
         carDto.setResource(0);
         carService.save(carDto);
         CarEntity carEntity = CarConverter.fromCarDtoToCarEntity(carDto);
@@ -67,15 +67,11 @@ class MechanicServiceImplTest extends BaseTest {
         int recoveredResource = mechanicDto.getResource();
         long repairTime = mechanicDto.getRepairTime();
 
-        System.out.println("Первый");
         long repairCarStartTime = mechanicService.repairCar(mechanicDto, carEntity, carService);
 
         Thread.sleep(7000);
 
-        System.out.println("Второй");
         long repairSecondCarStartTime = mechanicService.repairCar(mechanicDto, carEntityWithZeroResource, carService);
-        System.out.println("====================");
-        System.out.println();
         long timeAfterRepair = repairCarStartTime + repairTime + 1000L;
         while (timeAfterRepair >= System.currentTimeMillis()) {
             if (timeAfterRepair == System.currentTimeMillis()) {

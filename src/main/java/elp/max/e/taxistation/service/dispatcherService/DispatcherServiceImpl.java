@@ -3,7 +3,7 @@ package elp.max.e.taxistation.service.dispatcherService;
 import elp.max.e.taxistation.dto.*;
 import elp.max.e.taxistation.exception.EntityNotFoundException;
 import elp.max.e.taxistation.exception.ValidationDtoException;
-import elp.max.e.taxistation.exception.WorkerDtoNotFoundException;
+import elp.max.e.taxistation.exception.WorkingDtoNotFoundException;
 import elp.max.e.taxistation.model.DispatcherEntity;
 import elp.max.e.taxistation.repository.DispatcherRepository;
 import elp.max.e.taxistation.service.ServiceInterface;
@@ -14,6 +14,8 @@ import elp.max.e.taxistation.service.driverService.DriverServiceImpl;
 import elp.max.e.taxistation.service.orderNumberService.OrderNumberServiceImpl;
 import elp.max.e.taxistation.utils.DateUtil;
 import elp.max.e.taxistation.utils.Utils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,6 +30,8 @@ import static java.util.Objects.isNull;
 
 @Service
 public class DispatcherServiceImpl implements ServiceInterface<DispatcherDto> {
+
+    private static Logger logger = LoggerFactory.getLogger(DispatcherServiceImpl.class);
 
     private final CarServiceImpl carService;
     private final DriverServiceImpl driverService;
@@ -85,76 +89,77 @@ public class DispatcherServiceImpl implements ServiceInterface<DispatcherDto> {
 
     }
 
-    public DispatcherDto getWorkerDispatcher() {
+    public DispatcherDto getWorkingDispatcher() {
         List<DispatcherDto> dispatcherDtos = findAll();
         Date startLunch;
         Date endLunch;
         Date currentDate;
         String dayOfWeek;
-        DispatcherDto workerDispatcher = null;
+        DispatcherDto workingDispatcher = null;
         for (DispatcherDto dispatcherDto : dispatcherDtos) {
             startLunch = DateUtil.convertFromStringToLocalDateTimeViaInstant(dispatcherDto.getStartLunch().split(":"));
             endLunch = DateUtil.convertFromStringToLocalDateTimeViaInstant(dispatcherDto.getEndLunch().split(":"));
             currentDate = new Date();
             dayOfWeek = LocalDate.now().getDayOfWeek().toString();
             boolean workStatus;
-            System.out.println(346 + dispatcherDto.getName());
-            System.out.println(346 + endLunch.toString());
-            System.out.println(346 +  startLunch.toString());
+            logger.info("Dispatcher with id={}: {}", dispatcherDto.getId(), dispatcherDto);
             if ((endLunch.getTime() > currentDate.getTime() &&
                     currentDate.getTime() > startLunch.getTime()) ||
                     dayOfWeek.equalsIgnoreCase(dispatcherDto.getDayoff()))
             {
-                System.out.println(234 + dispatcherDto.toString());
+                logger.info("Dispatcher with id={} not working: {}", dispatcherDto.getId(), dispatcherDto.toString());
                 workStatus = false;
                 dispatcherDto.setWorkStatus(workStatus);
                 dispatcherRepository.save(DispatcherConverter.fromDispatcherDtoToDispatcherEntity(dispatcherDto));
             }
             else {
+                logger.info("Dispatcher with id={} working: {}", dispatcherDto.getId(), dispatcherDto.toString());
                 workStatus = true;
                 dispatcherDto.setWorkStatus(workStatus);
                 dispatcherRepository.save(DispatcherConverter.fromDispatcherDtoToDispatcherEntity(dispatcherDto));
-                workerDispatcher = dispatcherDto;
+                workingDispatcher = dispatcherDto;
 
                 break;
             }
         }
-        if (workerDispatcher == null) {
-            throw new WorkerDtoNotFoundException("Диспетчеры");
+        if (workingDispatcher == null) {
+            throw new WorkingDtoNotFoundException("Диспетчеры");
         }
-        return workerDispatcher;
+        return workingDispatcher;
     }
 
-    private CarDto findWorkerCar() throws ValidationDtoException {
-        return carService.getWorkerCar();
+    private CarDto findWorkingCar() throws ValidationDtoException {
+        return carService.getWorkingCar();
     }
 
-    private DriverDto findWorkerDriver() {
-        return driverService.getWorkerDriver();
+    private DriverDto findWorkingDriver() {
+        return driverService.getWorkingDriver();
     }
 
     public OrderNumberDto assignCarToDriverAndCallClient(ClientDto clientDto, DispatcherDto dispatcherDto, ClientServiceImpl clientService) throws Exception {
-        DriverDto driverDto = findWorkerDriver();
-        System.out.println(driverDto);
+        DriverDto driverDto = findWorkingDriver();
         if (driverDto == null) {
-            throw new WorkerDtoNotFoundException("Водители");
+            logger.info("Not found a working driver");
+            throw new WorkingDtoNotFoundException("Водители");
         }
+        logger.info("Found a working driver with name={}", driverDto.getName());
 
-        CarDto carDto = findWorkerCar();
-        System.out.println(carDto);
+        CarDto carDto = findWorkingCar();
         if (carDto == null) {
-            throw new WorkerDtoNotFoundException("Автомобили");
+            logger.info("Not found a working car");
+            throw new WorkingDtoNotFoundException("Автомобили");
         }
+        logger.info("Found a working car with number={}", carDto.getNumberCar());
 
         //заняты клиентом
         driverDto.setBusy(true);
-        System.out.println("Driver " + driverDto.getName() + " занят");
+        logger.info("Working driver with name={} is busy with client who has an name={}", driverDto.getName(), clientDto.getName());
         carDto.setBusy(true);
-        System.out.println("Car " + carDto.getNumberCar() + " занят");
+        logger.info("Working car with number={} is busy with client who has an name={}", carDto.getNumberCar(), clientDto.getName());
 
         driverDto.setCar(carDto.getNumberCar());
-        System.out.println(driverDto.getName());
-        System.out.println(driverDto.getId());
+        logger.info("Assign car={} to driver={}", carDto.getNumberCar(), driverDto.getName());
+
         driverDto = driverService.update(driverDto.getId(), driverDto);
         carDto = carService.update(carDto.getId(), carDto);
 
@@ -166,18 +171,17 @@ public class DispatcherServiceImpl implements ServiceInterface<DispatcherDto> {
         orderNumberDto.setCar(carDto.getNumberCar());
 
         // исходя из каких-то данных, диспетчер будет знать время заказа
-        releaseDriverAndCarAfterOrdering(driverDto, carDto, clientDto, clientService, 20000L);
+        releaseClientAndDriverAndCarAfterOrdering(driverDto, carDto, clientDto, clientService, 20000L);
 
         return orderNumberService.save(orderNumberDto);
     }
 
-    public void releaseDriverAndCarAfterOrdering(DriverDto driverDto, CarDto carDto, ClientDto clientDto, ClientServiceImpl clientService, long orderTime) {
-        System.out.println("Метод releaseDriverAndCarAfterOrdering запущен: " + new Date());
-
+    public void releaseClientAndDriverAndCarAfterOrdering(DriverDto driverDto, CarDto carDto, ClientDto clientDto, ClientServiceImpl clientService, long orderTime) {
+        logger.info("Метод releaseDriverAndCarAfterOrdering запущен: {}", new Date());
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
-                System.out.println("Задача таск запущена: " + new Date());
+                logger.info("Задача таск запущена: {}", new Date());
                 try {
                     driverDto.setBusy(false);
                     driverDto.setCar("free");
@@ -185,12 +189,6 @@ public class DispatcherServiceImpl implements ServiceInterface<DispatcherDto> {
                     carDto.setBusy(false);
 
                     clientDto.setOrderNumber("No order");
-
-                    System.out.println("=================");
-                    System.out.println(driverDto.getId());
-                    System.out.println(driverDto.getName());
-                    System.out.println(clientDto.getOrderNumber());
-                    System.out.println("=================");
 
                     driverService.update(driverDto.getId(), driverDto);
                     carService.update(carDto.getId(), carDto);
@@ -206,6 +204,7 @@ public class DispatcherServiceImpl implements ServiceInterface<DispatcherDto> {
             }
         };
         Timer timer = new Timer("Врема заказа");
+        logger.info("Start timer \"Врема заказа\" in: {} mc", orderTime);
         timer.schedule(task, orderTime);
     }
 

@@ -6,11 +6,15 @@ import elp.max.e.taxistation.model.CarEntity;
 import elp.max.e.taxistation.model.MechanicEntity;
 import elp.max.e.taxistation.service.carService.CarConverter;
 import elp.max.e.taxistation.service.carService.CarServiceImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Date;
 import java.util.TimerTask;
 
 public class TimerRepairCar extends TimerTask {
+
+    private static Logger logger = LoggerFactory.getLogger(TimerRepairCar.class);
 
     private CarEntity carEntity;
     private CarServiceImpl carService;
@@ -28,20 +32,19 @@ public class TimerRepairCar extends TimerTask {
 
     @Override
     public void run() {
-
-        System.out.println("Задача таск запущена: " + new Date());
+        logger.info("Задача таск запущена: {}", new Date());
         try {
             // как избавиться от механика?
             carEntity.setMechanicEntity(null);
             carEntity.setBusy(false);
-            System.out.println("Автомобиль отремантирован, был: " + carEntity.getResource());
+            logger.info("Car resource before repair: {}", carEntity.getResource());
             carEntity.setResource(mechanicEntity.getResource());
-            System.out.println("Автомобиль отремантирован, стал: " + carEntity.getResource());
+            logger.info("Car resource after repair: {}", carEntity.getResource());
             carService.update(carEntity.getId(), CarConverter.fromCarEntityToCarDto(carEntity));
 
             mechanicDto.setBusy(false);
             mechanicService.update(mechanicDto.getId(), mechanicDto);
-            System.out.println("Механик освободился");
+            logger.info("Mechanic freed");
         } catch (ValidationDtoException e) {
             e.printStackTrace();
         }

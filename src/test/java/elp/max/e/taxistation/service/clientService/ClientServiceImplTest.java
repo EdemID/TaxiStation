@@ -59,7 +59,6 @@ class ClientServiceImplTest extends BaseTest {
     @DisplayName("Проверить отправку автомобиля на ремонт")
     void findByIdForWrongResult() {
         long clientId = 100;
-        System.out.println(clientService.findById(clientId));
         assertEquals("Клиент " + clientId + " не найден!", clientService.findById(clientId), "Клиент " + clientId + " найден!");
     }
 }

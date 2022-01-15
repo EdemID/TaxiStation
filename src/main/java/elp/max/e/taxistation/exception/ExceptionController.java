@@ -9,13 +9,19 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class ExceptionController {
 
     @ExceptionHandler(value = {
-            WorkerDtoNotFoundException.class,
+            WorkingDtoNotFoundException.class,
             EntityNotFoundException.class,
             ValidationDtoException.class
     })
     public ResponseEntity<Response> handleException(RuntimeException e) {
         Response response = new Response(e.getMessage());
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(value = CallBackException.class)
+    public ResponseEntity<Response> handleCallBackException(RuntimeException e) {
+        Response response = new Response(e.getMessage());
+        return new ResponseEntity<>(response, HttpStatus.TOO_MANY_REQUESTS);
     }
 
     static class Response {

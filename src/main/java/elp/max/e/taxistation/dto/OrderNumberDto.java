@@ -68,4 +68,16 @@ public class OrderNumberDto {
     public void setCar(String car) {
         this.car = car;
     }
+
+    @Override
+    public String toString() {
+        return "OrderNumberDto{" +
+                "id=" + id +
+                ", number='" + number + '\'' +
+                ", client='" + client + '\'' +
+                ", dispatcher='" + dispatcher + '\'' +
+                ", driver='" + driver + '\'' +
+                ", car='" + car + '\'' +
+                '}';
+    }
 }
