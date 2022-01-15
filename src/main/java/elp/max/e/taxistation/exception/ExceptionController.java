@@ -18,8 +18,8 @@ public class ExceptionController {
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler(value = CallBackException.class)
-    public ResponseEntity<Response> handleCallBackException(RuntimeException e) {
+    @ExceptionHandler(value = CallBeforeCompletionOfOrderException.class)
+    public ResponseEntity<Response> handleCallBeforeCompletionOfOrderException(RuntimeException e) {
         Response response = new Response(e.getMessage());
         return new ResponseEntity<>(response, HttpStatus.TOO_MANY_REQUESTS);
     }

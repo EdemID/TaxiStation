@@ -3,7 +3,7 @@ package elp.max.e.taxistation.controller;
 import elp.max.e.taxistation.dto.ClientDto;
 import elp.max.e.taxistation.dto.OrderNumberDto;
 import elp.max.e.taxistation.exception.ValidationDtoException;
-import elp.max.e.taxistation.service.clientService.ClientServiceImpl;
+import elp.max.e.taxistation.service.client.ClientServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
