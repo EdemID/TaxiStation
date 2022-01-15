@@ -8,6 +8,7 @@ import elp.max.e.taxistation.repository.DriverRepository;
 import elp.max.e.taxistation.service.ServiceInterface;
 import elp.max.e.taxistation.service.driver.converter.Driver2DriverDto;
 import elp.max.e.taxistation.service.driver.converter.DriverDto2Driver;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -20,15 +21,12 @@ import java.util.stream.Collectors;
 import static java.util.Objects.isNull;
 
 @Service
+@RequiredArgsConstructor
 public class DriverServiceImpl implements ServiceInterface<DriverDto> {
 
     private static final Logger logger = LoggerFactory.getLogger(DriverServiceImpl.class);
 
     private final DriverRepository driverRepository;
-
-    public DriverServiceImpl(DriverRepository driverRepository) {
-        this.driverRepository = driverRepository;
-    }
 
     @Override
     public List<DriverDto> findAll() {

@@ -11,9 +11,9 @@ import elp.max.e.taxistation.service.car.converter.Car2CarDto;
 import elp.max.e.taxistation.service.car.converter.CarDto2Car;
 import elp.max.e.taxistation.service.mechanic.MechanicServiceImpl;
 import elp.max.e.taxistation.service.mechanic.converter.MechanicDto2Mechanic;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,18 +23,13 @@ import java.util.stream.Collectors;
 import static java.util.Objects.isNull;
 
 @Service
+@RequiredArgsConstructor
 public class CarServiceImpl implements ServiceInterface<CarDto> {
 
     private static final Logger logger = LoggerFactory.getLogger(CarServiceImpl.class);
 
     private final MechanicServiceImpl mechanicService;
     private final CarRepository carRepository;
-
-    @Autowired
-    public CarServiceImpl(MechanicServiceImpl mechanicService, CarRepository carRepository) {
-        this.mechanicService = mechanicService;
-        this.carRepository = carRepository;
-    }
 
     @Override
     @Transactional

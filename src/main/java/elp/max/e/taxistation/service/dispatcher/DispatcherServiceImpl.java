@@ -15,6 +15,7 @@ import elp.max.e.taxistation.service.driver.DriverServiceImpl;
 import elp.max.e.taxistation.service.orderNumber.OrderNumberServiceImpl;
 import elp.max.e.taxistation.utils.DateUtil;
 import elp.max.e.taxistation.utils.Utils;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -30,6 +31,7 @@ import java.util.stream.Collectors;
 import static java.util.Objects.isNull;
 
 @Service
+@RequiredArgsConstructor
 public class DispatcherServiceImpl implements ServiceInterface<DispatcherDto> {
 
     private static Logger logger = LoggerFactory.getLogger(DispatcherServiceImpl.class);
@@ -38,13 +40,6 @@ public class DispatcherServiceImpl implements ServiceInterface<DispatcherDto> {
     private final DriverServiceImpl driverService;
     private final OrderNumberServiceImpl orderNumberService;
     private final DispatcherRepository dispatcherRepository;
-
-    public DispatcherServiceImpl(CarServiceImpl carService, DriverServiceImpl driverService, OrderNumberServiceImpl orderNumberService, DispatcherRepository dispatcherRepository) {
-        this.carService = carService;
-        this.driverService = driverService;
-        this.orderNumberService = orderNumberService;
-        this.dispatcherRepository = dispatcherRepository;
-    }
 
     @Override
     @Transactional
@@ -182,7 +177,7 @@ public class DispatcherServiceImpl implements ServiceInterface<DispatcherDto> {
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
-                logger.info("Задача таск запущена: {}", new Date());
+                logger.info("Задача \"Врема заказа\" запущена: {}", new Date());
                 try {
                     driverDto.setBusy(false);
                     driverDto.setCar("free");
@@ -197,8 +192,10 @@ public class DispatcherServiceImpl implements ServiceInterface<DispatcherDto> {
 
                     // проверяем ресурс и отправляем после заказа машину, если равен 0
                     if (carDto.getResource() == 0) {
+                        logger.info("Автомоболь с id={} и ресурсом={} отправлен на ремонт после заказа", carDto.getId(), carDto.getResource());
                         carService.sendCarForRepair(CarDto2Car.convert(carDto));
                     }
+                    logger.info("Конец заказа: {}", new Date());
                 } catch (ValidationDtoException e) {
                     e.printStackTrace();
                 }
@@ -206,6 +203,7 @@ public class DispatcherServiceImpl implements ServiceInterface<DispatcherDto> {
         };
         Timer timer = new Timer("Врема заказа");
         logger.info("Start timer \"Врема заказа\" in: {} mc", orderTime);
+        logger.info("Начало заказа: {}", new Date());
         timer.schedule(task, orderTime);
     }
 

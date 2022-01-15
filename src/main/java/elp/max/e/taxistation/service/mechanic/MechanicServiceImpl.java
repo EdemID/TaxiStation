@@ -11,6 +11,8 @@ import elp.max.e.taxistation.service.car.CarServiceImpl;
 import elp.max.e.taxistation.service.car.converter.Car2CarDto;
 import elp.max.e.taxistation.service.mechanic.converter.Mechanic2MechanicDto;
 import elp.max.e.taxistation.service.mechanic.converter.MechanicDto2Mechanic;
+import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -25,15 +27,12 @@ import java.util.concurrent.*;
 import static java.util.Objects.isNull;
 
 @Service
+@RequiredArgsConstructor
 public class MechanicServiceImpl implements ServiceInterface<MechanicDto> {
 
     private static final Logger logger = LoggerFactory.getLogger(MechanicServiceImpl.class);
 
     private final MechanicRepository mechanicRepository;
-
-    public MechanicServiceImpl(MechanicRepository mechanicRepository) {
-        this.mechanicRepository = mechanicRepository;
-    }
 
     @Override
     @Transactional
@@ -113,6 +112,7 @@ public class MechanicServiceImpl implements ServiceInterface<MechanicDto> {
         return System.currentTimeMillis();
     }
 
+    @AllArgsConstructor
     private static class CallableClass implements Callable<TimerRepairCar> {
 
         private static Logger logger = LoggerFactory.getLogger(CallableClass.class);
@@ -122,14 +122,6 @@ public class MechanicServiceImpl implements ServiceInterface<MechanicDto> {
         private MechanicEntity mechanicEntity;
         private MechanicDto mechanicDto;
         private MechanicServiceImpl mechanicService;
-
-        public CallableClass(CarEntity carEntity, CarServiceImpl carService, MechanicEntity mechanicEntity, MechanicDto mechanicDto, MechanicServiceImpl mechanicService) {
-            this.carEntity = carEntity;
-            this.carService = carService;
-            this.mechanicEntity = mechanicEntity;
-            this.mechanicDto = mechanicDto;
-            this.mechanicService = mechanicService;
-        }
 
         @Override
         public TimerRepairCar call() {
@@ -152,10 +144,12 @@ public class MechanicServiceImpl implements ServiceInterface<MechanicDto> {
             Timer timer = new Timer("Время ремонта");
             timer.schedule(task, repairTime);
             logger.info("Start timer \"Время ремонта\" in: {} mc", repairTime);
+            logger.info("Начало ремонта: {}", new Date());
             return task;
         }
     }
 
+    @AllArgsConstructor
     private static class TimerRepairCar extends TimerTask {
 
         private static Logger logger = LoggerFactory.getLogger(TimerRepairCar.class);
@@ -166,17 +160,9 @@ public class MechanicServiceImpl implements ServiceInterface<MechanicDto> {
         private MechanicDto mechanicDto;
         private MechanicServiceImpl mechanicService;
 
-        public TimerRepairCar(CarEntity carEntity, CarServiceImpl carService, MechanicEntity mechanicEntity, MechanicDto mechanicDto, MechanicServiceImpl mechanicService) {
-            this.carEntity = carEntity;
-            this.carService = carService;
-            this.mechanicEntity = mechanicEntity;
-            this.mechanicDto = mechanicDto;
-            this.mechanicService = mechanicService;
-        }
-
         @Override
         public void run() {
-            logger.info("Задача таск запущена: {}", new Date());
+            logger.info("Задача \"Время ремонта\" запущена: {}", new Date());
             try {
                 // как избавиться от механика?
                 carEntity.setMechanicEntity(null);
@@ -189,6 +175,7 @@ public class MechanicServiceImpl implements ServiceInterface<MechanicDto> {
                 mechanicDto.setBusy(false);
                 mechanicService.update(mechanicDto.getId(), mechanicDto);
                 logger.info("Mechanic freed");
+                logger.info("Конец ремонта: {}", new Date());
             } catch (ValidationDtoException e) {
                 e.printStackTrace();
             }

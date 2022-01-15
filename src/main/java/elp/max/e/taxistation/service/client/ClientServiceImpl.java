@@ -12,9 +12,9 @@ import elp.max.e.taxistation.service.ServiceInterface;
 import elp.max.e.taxistation.service.client.converter.Client2ClientDto;
 import elp.max.e.taxistation.service.client.converter.ClientDto2Client;
 import elp.max.e.taxistation.service.dispatcher.DispatcherServiceImpl;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -23,19 +23,13 @@ import java.util.stream.Collectors;
 import static java.util.Objects.isNull;
 
 @org.springframework.stereotype.Service
+@RequiredArgsConstructor
 public class ClientServiceImpl implements ServiceInterface<ClientDto> {
 
     private static final Logger logger = LoggerFactory.getLogger(ClientServiceImpl.class);
 
     private final ClientRepository clientRepository;
     private final DispatcherServiceImpl dispatcherService;
-
-    @Autowired
-    public ClientServiceImpl(ClientRepository clientRepository,
-                             DispatcherServiceImpl dispatcherService) {
-        this.clientRepository = clientRepository;
-        this.dispatcherService = dispatcherService;
-    }
 
     @Override
     @Transactional

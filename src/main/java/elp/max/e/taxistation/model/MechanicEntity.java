@@ -1,10 +1,17 @@
 package elp.max.e.taxistation.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Table(name = "service")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class MechanicEntity {
 
     @Id
@@ -19,53 +26,4 @@ public class MechanicEntity {
     private boolean busy;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "mechanicEntity")
     private List<CarEntity> brokenCars;
-
-    public MechanicEntity() {
-    }
-
-    public MechanicEntity(Long repairTime, Integer resource, boolean busy) {
-        this.repairTime = repairTime;
-        this.resource = resource;
-        this.busy = busy;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getRepairTime() {
-        return repairTime;
-    }
-
-    public void setRepairTime(Long repairTime) {
-        this.repairTime = repairTime;
-    }
-
-    public Integer getResource() {
-        return resource;
-    }
-
-    public void setResource(Integer resource) {
-        this.resource = resource;
-    }
-
-    public boolean isBusy() {
-        return busy;
-    }
-
-    public void setBusy(boolean busy) {
-        this.busy = busy;
-    }
-
-    public List<CarEntity> getBrokenCars() {
-        return brokenCars;
-    }
-
-    public void setBrokenCars(List<CarEntity> brokenCars) {
-        this.brokenCars = brokenCars;
-    }
 }

@@ -1,9 +1,16 @@
 package elp.max.e.taxistation.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "car")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class CarEntity {
 
     @Id
@@ -16,61 +23,4 @@ public class CarEntity {
     @ManyToOne
     @JoinColumn(name = "mechanic_id")
     private MechanicEntity mechanicEntity;
-
-    public CarEntity() {
-    }
-
-    public CarEntity(Long id, String numberCar, Integer resource, boolean busy) {
-        this.id = id;
-        this.numberCar = numberCar;
-        this.resource = resource;
-        this.busy = busy;
-    }
-
-    @Override
-    public String toString() {
-        return String.format(
-                "Car[id=%d, numberCar='%s', resource='%s', busy='%s']",
-                id, numberCar, resource, busy);
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getNumberCar() {
-        return numberCar;
-    }
-
-    public void setNumberCar(String numberCar) {
-        this.numberCar = numberCar;
-    }
-
-    public Integer getResource() {
-        return resource;
-    }
-
-    public void setResource(Integer resource) {
-        this.resource = resource;
-    }
-
-    public boolean isBusy() {
-        return busy;
-    }
-
-    public void setBusy(boolean busy) {
-        this.busy = busy;
-    }
-
-    public MechanicEntity getMechanicEntity() {
-        return mechanicEntity;
-    }
-
-    public void setMechanicEntity(MechanicEntity mechanicEntity) {
-        this.mechanicEntity = mechanicEntity;
-    }
 }
