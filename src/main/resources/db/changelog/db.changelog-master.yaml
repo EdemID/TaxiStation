@@ -1,0 +1,433 @@
+databaseChangeLog:
+- changeSet:
+    id: 1642332702871-1
+    author: EIdrisov (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: clients_pkey
+            name: id
+            type: INTEGER
+        - column:
+            constraints:
+              nullable: false
+            name: name
+            type: VARCHAR(20)
+        - column:
+            defaultValue: No order
+            name: order_number
+            type: VARCHAR
+        tableName: client
+- changeSet:
+    id: 1642332702871-2
+    author: EIdrisov (generated)
+    changes:
+    - loadData:
+        columns:
+        - column:
+            header: id
+            name: id
+            type: NUMERIC
+        - column:
+            header: name
+            name: name
+            type: STRING
+        - column:
+            header: order_number
+            name: order_number
+            type: STRING
+        commentLineStartsWith: '#'
+        encoding: UTF-8
+        file: data/client.csv
+        quotchar: '"'
+        separator: ','
+        tableName: client
+- changeSet:
+    id: 1642332702871-3
+    author: EIdrisov (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: dispatchers_pkey
+            name: id
+            type: INTEGER
+        - column:
+            constraints:
+              nullable: false
+            name: name
+            type: VARCHAR(20)
+        - column:
+            constraints:
+              nullable: false
+            name: dayoff
+            type: VARCHAR(10)
+        - column:
+            defaultValue: '13:00'
+            name: start_lunch
+            type: VARCHAR(5)
+        - column:
+            defaultValue: '14:00'
+            name: end_lunch
+            type: VARCHAR(5)
+        - column:
+            defaultValueBoolean: true
+            name: workstatus
+            type: BOOLEAN
+        tableName: dispatcher
+- changeSet:
+    id: 1642332702871-4
+    author: EIdrisov (generated)
+    changes:
+    - loadData:
+        columns:
+        - column:
+            header: id
+            name: id
+            type: NUMERIC
+        - column:
+            header: name
+            name: name
+            type: STRING
+        - column:
+            header: dayoff
+            name: dayoff
+            type: STRING
+        - column:
+            header: start_lunch
+            name: start_lunch
+            type: STRING
+        - column:
+            header: end_lunch
+            name: end_lunch
+            type: STRING
+        - column:
+            header: workstatus
+            name: workstatus
+            type: BOOLEAN
+        commentLineStartsWith: '#'
+        encoding: UTF-8
+        file: data/dispatcher.csv
+        quotchar: '"'
+        separator: ','
+        tableName: dispatcher
+- changeSet:
+    id: 1642332702871-5
+    author: EIdrisov (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: drivers_pkey
+            name: id
+            type: INTEGER
+        - column:
+            constraints:
+              nullable: false
+            name: name
+            type: VARCHAR(20)
+        - column:
+            constraints:
+              nullable: false
+            name: dayoff
+            type: VARCHAR(10)
+        - column:
+            defaultValue: Free
+            name: car
+            type: VARCHAR(20)
+        - column:
+            constraints:
+              nullable: false
+            defaultValueBoolean: true
+            name: workstatus
+            type: BOOLEAN
+        - column:
+            defaultValueBoolean: false
+            name: busy
+            type: BOOLEAN
+        tableName: driver
+- changeSet:
+    id: 1642332702871-6
+    author: EIdrisov (generated)
+    changes:
+    - loadData:
+        columns:
+        - column:
+            header: id
+            name: id
+            type: NUMERIC
+        - column:
+            header: name
+            name: name
+            type: STRING
+        - column:
+            header: dayoff
+            name: dayoff
+            type: STRING
+        - column:
+            header: car
+            name: car
+            type: STRING
+        - column:
+            header: workstatus
+            name: workstatus
+            type: BOOLEAN
+        - column:
+            header: busy
+            name: busy
+            type: BOOLEAN
+        commentLineStartsWith: '#'
+        encoding: UTF-8
+        file: data/driver.csv
+        quotchar: '"'
+        separator: ','
+        tableName: driver
+- changeSet:
+    id: 1642332702871-7
+    author: EIdrisov (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: service_pkey
+            name: id
+            type: INTEGER
+        - column:
+            defaultValue: '24:00'
+            name: repair_time
+            type: VARCHAR
+        - column:
+            defaultValueNumeric: 5
+            name: resource
+            type: INTEGER
+        - column:
+            defaultValueBoolean: false
+            name: busy
+            type: BOOLEAN
+        tableName: service
+- changeSet:
+    id: 1642332702871-8
+    author: EIdrisov (generated)
+    changes:
+    - loadData:
+        columns:
+        - column:
+            header: id
+            name: id
+            type: NUMERIC
+        - column:
+            header: repair_time
+            name: repair_time
+            type: STRING
+        - column:
+            header: resource
+            name: resource
+            type: NUMERIC
+        - column:
+            header: busy
+            name: busy
+            type: BOOLEAN
+        commentLineStartsWith: '#'
+        encoding: UTF-8
+        file: data/service.csv
+        quotchar: '"'
+        separator: ','
+        tableName: service
+- changeSet:
+    id: 1642332702871-9
+    author: EIdrisov (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: order_numbers_pkey
+            name: id
+            type: INTEGER
+        - column:
+            constraints:
+              nullable: false
+            name: number
+            type: VARCHAR
+        - column:
+            constraints:
+              nullable: false
+            name: client
+            type: VARCHAR
+        - column:
+            constraints:
+              nullable: false
+            name: dispatcher
+            type: VARCHAR
+        - column:
+            constraints:
+              nullable: false
+            name: driver
+            type: VARCHAR
+        - column:
+            constraints:
+              nullable: false
+            name: car
+            type: VARCHAR
+        tableName: order_number
+- changeSet:
+    id: 1642332702871-10
+    author: EIdrisov (generated)
+    changes:
+    - loadData:
+        columns:
+        - column:
+            header: id
+            name: id
+            type: NUMERIC
+        - column:
+            header: number
+            name: number
+            type: STRING
+        - column:
+            header: client
+            name: client
+            type: STRING
+        - column:
+            header: dispatcher
+            name: dispatcher
+            type: STRING
+        - column:
+            header: driver
+            name: driver
+            type: STRING
+        - column:
+            header: car
+            name: car
+            type: STRING
+        commentLineStartsWith: '#'
+        encoding: UTF-8
+        file: data/order_number.csv
+        quotchar: '"'
+        separator: ','
+        tableName: order_number
+- changeSet:
+    id: 1642332702871-11
+    author: EIdrisov (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: cars_pkey
+            name: id
+            type: INTEGER
+        - column:
+            constraints:
+              nullable: false
+            name: number_car
+            type: VARCHAR
+        - column:
+            defaultValueNumeric: 864000000
+            name: resource
+            type: BIGINT
+        - column:
+            defaultValueBoolean: false
+            name: busy
+            type: BOOLEAN
+        - column:
+            name: mechanic_id
+            type: BIGINT
+        tableName: car
+- changeSet:
+    id: 1642332702871-12
+    author: EIdrisov (generated)
+    changes:
+    - loadData:
+        columns:
+        - column:
+            header: id
+            name: id
+            type: NUMERIC
+        - column:
+            header: number_car
+            name: number_car
+            type: STRING
+        - column:
+            header: resource
+            name: resource
+            type: NUMERIC
+        - column:
+            header: busy
+            name: busy
+            type: BOOLEAN
+        - column:
+            header: mechanic_id
+            name: mechanic_id
+            type: skip
+        commentLineStartsWith: '#'
+        encoding: UTF-8
+        file: data/car.csv
+        quotchar: '"'
+        separator: ','
+        tableName: car
+- changeSet:
+    id: 1642332702871-13
+    author: EIdrisov (generated)
+    changes:
+    - createSequence:
+        cacheSize: 1
+        cycle: false
+        dataType: bigint
+        incrementBy: 1
+        maxValue: 9223372036854775807
+        minValue: 1
+        sequenceName: hibernate_sequence
+        startValue: 1
+- changeSet:
+    id: 1642332702871-14
+    author: EIdrisov (generated)
+    changes:
+    - createSequence:
+        cacheSize: 1
+        cycle: false
+        dataType: bigint
+        incrementBy: 1
+        maxValue: 9223372036854775807
+        minValue: 1
+        sequenceName: my_seq_gen
+        startValue: 1
+- changeSet:
+    id: 1642332702871-15
+    author: EIdrisov (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: mechanic_id
+        baseTableName: car
+        constraintName: fkeg41k3o53bbbf7hugsce1km5i
+        deferrable: false
+        initiallyDeferred: false
+        onDelete: NO ACTION
+        onUpdate: NO ACTION
+        referencedColumnNames: id
+        referencedTableName: service
+        validate: true
+

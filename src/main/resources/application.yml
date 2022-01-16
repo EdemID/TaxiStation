@@ -1,0 +1,11 @@
+spring:
+  liquibase:
+    enabled: true
+  datasource:
+    url: jdbc:postgresql://localhost:5432/taxi_station
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: 0
+  jpa:
+    database-platform: org.hibernate.PostgreSQLDialect
+
