@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog>
+    <changeSet id="Alter table" author="Second Employee">
+        <sql>
+         alter table if exists car
+                add constraint FKg5qwfeydmo0tj386i1b4g673v
+                foreign key (mechanic_id)
+                references service
+        </sql>
+   </changeSet>
+</databaseChangeLog>

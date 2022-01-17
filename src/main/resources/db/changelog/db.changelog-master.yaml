@@ -1,0 +1,15 @@
+databaseChangeLog: #параметр в котором находятся миграции
+  - include: 
+      file: db/changelog/changeset/create-table-car.xml 
+  - include: 
+      file: db/changelog/changeset/create-table-client.xml 
+  - include: 
+      file: db/changelog/changeset/create-table-dispatcher.xml 
+  - include: 
+      file: db/changelog/changeset/create-table-driver.xml 
+  - include: 
+      file: db/changelog/changeset/create-table-order_number.xml 
+  - include: 
+      file: db/changelog/changeset/create-table-service.xml 
+  - include: 
+      file: db/changelog/changeset/alter-table-if-exists-car.xml

@@ -1,0 +1,952 @@
+17.01.2022 10:27:14.811 [main] INFO   e.m.e.t.TaxiStationApplication - Starting TaxiStationApplication using Java 11.0.6 on NB-100286 with PID 33492 (C:\Users\EIdrisov\IdeaProjects\Project\TaxiStation\target\classes started by EIdrisov in C:\Users\EIdrisov\IdeaProjects\Project\TaxiStation)
+17.01.2022 10:27:14.811 [main] INFO   e.m.e.t.TaxiStationApplication - No active profile set, falling back to default profiles: default
+17.01.2022 10:27:15.311 [main] INFO   o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+17.01.2022 10:27:15.373 [main] INFO   o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 56 ms. Found 6 JPA repository interfaces.
+17.01.2022 10:27:15.712 [main] INFO   o.s.b.w.e.t.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+17.01.2022 10:27:15.727 [main] INFO   o.a.c.h.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+17.01.2022 10:27:15.727 [main] INFO   o.a.c.c.StandardService - Starting service [Tomcat]
+17.01.2022 10:27:15.727 [main] INFO   o.a.c.c.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.56]
+17.01.2022 10:27:15.812 [main] INFO   o.a.c.c.C.[.[.[/] - Initializing Spring embedded WebApplicationContext
+17.01.2022 10:27:15.812 [main] INFO   o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 955 ms
+17.01.2022 10:27:16.091 [main] WARN   o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'liquibase' defined in class path resource [org/springframework/boot/autoconfigure/liquibase/LiquibaseAutoConfiguration$LiquibaseConfiguration.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [liquibase.integration.spring.SpringLiquibase]: Factory method 'liquibase' threw exception; nested exception is java.lang.NoSuchMethodError: 'void liquibase.integration.spring.SpringLiquibase.setClearCheckSums(boolean)'
+17.01.2022 10:27:16.091 [main] INFO   o.a.c.c.StandardService - Stopping service [Tomcat]
+17.01.2022 10:27:16.105 [main] INFO   o.s.b.a.l.ConditionEvaluationReportLoggingListener - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+17.01.2022 10:27:16.117 [main] ERROR  o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+An attempt was made to call a method that does not exist. The attempt was made from the following location:
+
+    org.springframework.boot.autoconfigure.liquibase.LiquibaseAutoConfiguration$LiquibaseConfiguration.liquibase(LiquibaseAutoConfiguration.java:94)
+
+The following method did not exist:
+
+    'void liquibase.integration.spring.SpringLiquibase.setClearCheckSums(boolean)'
+
+The calling method's class, org.springframework.boot.autoconfigure.liquibase.LiquibaseAutoConfiguration$LiquibaseConfiguration, was loaded from the following location:
+
+    jar:file:/C:/Users/EIdrisov/.m2/repository/org/springframework/boot/spring-boot-autoconfigure/2.6.2/spring-boot-autoconfigure-2.6.2.jar!/org/springframework/boot/autoconfigure/liquibase/LiquibaseAutoConfiguration$LiquibaseConfiguration.class
+
+The called method's class, liquibase.integration.spring.SpringLiquibase, is available from the following locations:
+
+    jar:file:/C:/Users/EIdrisov/.m2/repository/org/liquibase/liquibase-core/3.4.1/liquibase-core-3.4.1.jar!/liquibase/integration/spring/SpringLiquibase.class
+
+The called method's class hierarchy was loaded from the following locations:
+
+    liquibase.integration.spring.SpringLiquibase: file:/C:/Users/EIdrisov/.m2/repository/org/liquibase/liquibase-core/3.4.1/liquibase-core-3.4.1.jar
+
+
+Action:
+
+Correct the classpath of your application so that it contains compatible versions of the classes org.springframework.boot.autoconfigure.liquibase.LiquibaseAutoConfiguration$LiquibaseConfiguration and liquibase.integration.spring.SpringLiquibase
+
+17.01.2022 10:28:07.462 [main] INFO   e.m.e.t.TaxiStationApplication - Starting TaxiStationApplication using Java 11.0.6 on NB-100286 with PID 43780 (C:\Users\EIdrisov\IdeaProjects\Project\TaxiStation\target\classes started by EIdrisov in C:\Users\EIdrisov\IdeaProjects\Project\TaxiStation)
+17.01.2022 10:28:07.462 [main] INFO   e.m.e.t.TaxiStationApplication - No active profile set, falling back to default profiles: default
+17.01.2022 10:28:07.989 [main] INFO   o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+17.01.2022 10:28:08.052 [main] INFO   o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 65 ms. Found 6 JPA repository interfaces.
+17.01.2022 10:28:08.358 [main] INFO   o.s.b.w.e.t.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+17.01.2022 10:28:08.374 [main] INFO   o.a.c.h.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+17.01.2022 10:28:08.374 [main] INFO   o.a.c.c.StandardService - Starting service [Tomcat]
+17.01.2022 10:28:08.374 [main] INFO   o.a.c.c.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.56]
+17.01.2022 10:28:08.449 [main] INFO   o.a.c.c.C.[.[.[/] - Initializing Spring embedded WebApplicationContext
+17.01.2022 10:28:08.449 [main] INFO   o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 945 ms
+17.01.2022 10:28:08.553 [main] INFO   o.h.j.i.u.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+17.01.2022 10:28:08.590 [main] INFO   o.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.3.Final
+17.01.2022 10:28:08.690 [main] INFO   o.h.a.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+17.01.2022 10:28:08.769 [main] INFO   c.z.h.HikariDataSource - HikariPool-1 - Starting...
+17.01.2022 10:28:08.938 [main] INFO   c.z.h.HikariDataSource - HikariPool-1 - Start completed.
+17.01.2022 10:28:08.975 [main] INFO   o.h.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+17.01.2022 10:28:09.537 [main] INFO   o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+17.01.2022 10:28:09.537 [main] INFO   o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+17.01.2022 10:28:09.893 [main] WARN   o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+17.01.2022 10:28:10.021 [main] INFO   o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+17.01.2022 10:28:10.094 [main] INFO   o.a.c.h.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+17.01.2022 10:28:10.109 [main] INFO   o.s.b.w.e.t.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+17.01.2022 10:28:10.125 [main] INFO   e.m.e.t.TaxiStationApplication - Started TaxiStationApplication in 2.989 seconds (JVM running for 3.603)
+17.01.2022 10:28:26.000 [http-nio-8080-exec-1] INFO   o.a.c.c.C.[.[.[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+17.01.2022 10:28:26.000 [http-nio-8080-exec-1] INFO   o.s.w.s.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+17.01.2022 10:28:26.000 [http-nio-8080-exec-1] INFO   o.s.w.s.DispatcherServlet - Completed initialization in 0 ms
+17.01.2022 10:28:26.025 [http-nio-8080-exec-1] WARN   o.s.w.s.m.s.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type 'java.lang.String' to required type 'java.lang.Long'; nested exception is java.lang.NumberFormatException: For input string: "call"]
+17.01.2022 10:28:30.580 [http-nio-8080-exec-3] INFO   e.m.e.t.c.ClientController - Get-request received with clientId: 1
+17.01.2022 10:28:30.596 [http-nio-8080-exec-3] INFO   e.m.e.t.s.c.ClientServiceImpl - Taxi call.
+17.01.2022 10:28:30.596 [http-nio-8080-exec-3] INFO   e.m.e.t.s.c.ClientServiceImpl - Taxi call for client with id: 1!
+17.01.2022 10:28:30.596 [http-nio-8080-exec-3] INFO   e.m.e.t.s.c.ClientServiceImpl - Client search by id.
+17.01.2022 10:28:30.636 [http-nio-8080-exec-3] INFO   e.m.e.t.s.c.ClientServiceImpl - Client with id=1 found!
+17.01.2022 10:28:30.705 [http-nio-8080-exec-3] INFO   e.m.e.t.s.d.DispatcherServiceImpl - Dispatcher with id=4: DispatcherDto(id=4, name=Roman, dayoff=13:00, startLunch=14:00, endLunch=14:00, workStatus=true)
+17.01.2022 10:28:30.705 [http-nio-8080-exec-3] INFO   e.m.e.t.s.d.DispatcherServiceImpl - Dispatcher with id=4 working: DispatcherDto(id=4, name=Roman, dayoff=13:00, startLunch=14:00, endLunch=14:00, workStatus=true)
+17.01.2022 10:28:30.736 [http-nio-8080-exec-3] INFO   e.m.e.t.s.d.DriverServiceImpl - Driver with name=Ivan
+17.01.2022 10:28:30.736 [http-nio-8080-exec-3] INFO   e.m.e.t.s.d.DriverServiceImpl - Driver with id=3 working: DriverDto(id=3, name=Ivan, dayoff=Tuesday, car=free, workStatus=true, busy=false)
+17.01.2022 10:28:30.736 [http-nio-8080-exec-3] INFO   e.m.e.t.s.d.DriverServiceImpl - Working driver with name=Ivan not busy
+17.01.2022 10:28:30.751 [http-nio-8080-exec-3] INFO   e.m.e.t.s.d.DispatcherServiceImpl - Found a working driver with name=Ivan
+17.01.2022 10:28:30.751 [http-nio-8080-exec-3] INFO   e.m.e.t.s.c.CarServiceImpl - Car with id: 2
+17.01.2022 10:28:30.751 [http-nio-8080-exec-3] INFO   e.m.e.t.s.c.CarServiceImpl - Car with id=2 not busy
+17.01.2022 10:28:30.767 [http-nio-8080-exec-3] INFO   e.m.e.t.s.c.CarServiceImpl - Working car with id=2 not busy
+17.01.2022 10:28:30.767 [http-nio-8080-exec-3] INFO   e.m.e.t.s.d.DispatcherServiceImpl - Found a working car with number=456789
+17.01.2022 10:28:30.767 [http-nio-8080-exec-3] INFO   e.m.e.t.s.d.DispatcherServiceImpl - Working driver with name=Ivan is busy with client who has an name=Roman
+17.01.2022 10:28:30.767 [http-nio-8080-exec-3] INFO   e.m.e.t.s.d.DispatcherServiceImpl - Working car with number=456789 is busy with client who has an name=Roman
+17.01.2022 10:28:30.767 [http-nio-8080-exec-3] INFO   e.m.e.t.s.d.DispatcherServiceImpl - Assign car=456789 to driver=Ivan
+17.01.2022 10:28:30.767 [http-nio-8080-exec-3] INFO   e.m.e.t.s.d.DispatcherServiceImpl - Метод releaseDriverAndCarAfterOrdering запущен: Mon Jan 17 10:28:30 MSK 2022
+17.01.2022 10:28:30.767 [http-nio-8080-exec-3] INFO   e.m.e.t.s.d.DispatcherServiceImpl - Start timer "Врема заказа" in: 20000 mc
+17.01.2022 10:28:30.767 [http-nio-8080-exec-3] INFO   e.m.e.t.s.d.DispatcherServiceImpl - Начало заказа: Mon Jan 17 10:28:30 MSK 2022
+17.01.2022 10:28:30.783 [http-nio-8080-exec-3] INFO   e.m.e.t.s.c.ClientServiceImpl - Client validation: ClientDto(id=1, name=Roman, orderNumber=8153423).
+17.01.2022 10:28:30.783 [http-nio-8080-exec-3] INFO   e.m.e.t.s.c.ClientServiceImpl - Save the client.
+17.01.2022 10:28:30.783 [http-nio-8080-exec-3] INFO   e.m.e.t.s.c.ClientServiceImpl - Client saved: ClientDto(id=1, name=Roman, orderNumber=8153423)!
+17.01.2022 10:28:30.798 [http-nio-8080-exec-3] INFO   e.m.e.t.s.c.ClientServiceImpl - Order data:
+-- Order id: 30
+-- Order number: 8153423
+-- Client name: Roman
+-- Dispatcher name: Roman
+-- Driver name: Ivan
+-- Car number: 456789
+
+17.01.2022 10:28:30.798 [http-nio-8080-exec-3] INFO   e.m.e.t.c.ClientController - The result is returned: OrderNumberDto(id=30, number=8153423, client=Roman, dispatcher=Roman, driver=Ivan, car=456789)
+17.01.2022 10:28:50.779 [Врема заказа] INFO   e.m.e.t.s.d.DispatcherServiceImpl - Задача "Врема заказа" запущена: Mon Jan 17 10:28:50 MSK 2022
+17.01.2022 10:28:50.792 [Врема заказа] INFO   e.m.e.t.s.c.ClientServiceImpl - Client validation: ClientDto(id=1, name=Roman, orderNumber=No order).
+17.01.2022 10:28:50.798 [Врема заказа] INFO   e.m.e.t.s.c.ClientServiceImpl - Update the client with id: 1.
+17.01.2022 10:28:50.798 [Врема заказа] INFO   e.m.e.t.s.c.ClientServiceImpl - Client updated: ClientDto(id=1, name=Roman, orderNumber=No order)!
+17.01.2022 10:28:50.798 [Врема заказа] INFO   e.m.e.t.s.d.DispatcherServiceImpl - Конец заказа: Mon Jan 17 10:28:50 MSK 2022
+17.01.2022 10:29:37.898 [main] INFO   e.m.e.t.TaxiStationApplication - Starting TaxiStationApplication using Java 11.0.6 on NB-100286 with PID 47944 (C:\Users\EIdrisov\IdeaProjects\Project\TaxiStation\target\classes started by EIdrisov in C:\Users\EIdrisov\IdeaProjects\Project\TaxiStation)
+17.01.2022 10:29:37.901 [main] INFO   e.m.e.t.TaxiStationApplication - No active profile set, falling back to default profiles: default
+17.01.2022 10:29:38.378 [main] INFO   o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+17.01.2022 10:29:38.432 [main] INFO   o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 48 ms. Found 6 JPA repository interfaces.
+17.01.2022 10:29:38.722 [main] INFO   o.s.b.w.e.t.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+17.01.2022 10:29:38.727 [main] INFO   o.a.c.h.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+17.01.2022 10:29:38.728 [main] INFO   o.a.c.c.StandardService - Starting service [Tomcat]
+17.01.2022 10:29:38.728 [main] INFO   o.a.c.c.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.56]
+17.01.2022 10:29:38.793 [main] INFO   o.a.c.c.C.[.[.[/] - Initializing Spring embedded WebApplicationContext
+17.01.2022 10:29:38.793 [main] INFO   o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 853 ms
+17.01.2022 10:29:38.900 [main] INFO   o.h.j.i.u.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+17.01.2022 10:29:38.927 [main] INFO   o.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.3.Final
+17.01.2022 10:29:39.004 [main] INFO   o.h.a.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+17.01.2022 10:29:39.058 [main] INFO   c.z.h.HikariDataSource - HikariPool-1 - Starting...
+17.01.2022 10:29:39.182 [main] INFO   c.z.h.HikariDataSource - HikariPool-1 - Start completed.
+17.01.2022 10:29:39.210 [main] INFO   o.h.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+17.01.2022 10:29:39.618 [main] INFO   o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+17.01.2022 10:29:39.624 [main] INFO   o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+17.01.2022 10:29:39.939 [main] WARN   o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+17.01.2022 10:29:40.050 [main] INFO   o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+17.01.2022 10:29:40.122 [main] INFO   o.a.c.h.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+17.01.2022 10:29:40.134 [main] INFO   o.s.b.w.e.t.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+17.01.2022 10:29:40.141 [main] INFO   e.m.e.t.TaxiStationApplication - Started TaxiStationApplication in 2.541 seconds (JVM running for 3.176)
+17.01.2022 10:29:46.191 [http-nio-8080-exec-1] INFO   o.a.c.c.C.[.[.[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+17.01.2022 10:29:46.192 [http-nio-8080-exec-1] INFO   o.s.w.s.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+17.01.2022 10:29:46.192 [http-nio-8080-exec-1] INFO   o.s.w.s.DispatcherServlet - Completed initialization in 0 ms
+17.01.2022 10:29:46.212 [http-nio-8080-exec-1] INFO   e.m.e.t.c.ClientController - Get-request received with clientId: 1
+17.01.2022 10:29:46.218 [http-nio-8080-exec-1] INFO   e.m.e.t.s.c.ClientServiceImpl - Taxi call.
+17.01.2022 10:29:46.218 [http-nio-8080-exec-1] INFO   e.m.e.t.s.c.ClientServiceImpl - Taxi call for client with id: 1!
+17.01.2022 10:29:46.218 [http-nio-8080-exec-1] INFO   e.m.e.t.s.c.ClientServiceImpl - Client search by id.
+17.01.2022 10:29:46.246 [http-nio-8080-exec-1] INFO   e.m.e.t.s.c.ClientServiceImpl - Client with id=1 found!
+17.01.2022 10:29:46.301 [http-nio-8080-exec-1] INFO   e.m.e.t.s.d.DispatcherServiceImpl - Dispatcher with id=4: DispatcherDto(id=4, name=Roman, dayoff=13:00, startLunch=14:00, endLunch=14:00, workStatus=true)
+17.01.2022 10:29:46.308 [http-nio-8080-exec-1] INFO   e.m.e.t.s.d.DispatcherServiceImpl - Dispatcher with id=4 working: DispatcherDto(id=4, name=Roman, dayoff=13:00, startLunch=14:00, endLunch=14:00, workStatus=true)
+17.01.2022 10:29:46.325 [http-nio-8080-exec-1] INFO   e.m.e.t.s.d.DriverServiceImpl - Driver with name=Ivan
+17.01.2022 10:29:46.325 [http-nio-8080-exec-1] INFO   e.m.e.t.s.d.DriverServiceImpl - Driver with id=3 working: DriverDto(id=3, name=Ivan, dayoff=Tuesday, car=free, workStatus=true, busy=false)
+17.01.2022 10:29:46.333 [http-nio-8080-exec-1] INFO   e.m.e.t.s.d.DriverServiceImpl - Working driver with name=Ivan not busy
+17.01.2022 10:29:46.346 [http-nio-8080-exec-1] INFO   e.m.e.t.s.d.DispatcherServiceImpl - Found a working driver with name=Ivan
+17.01.2022 10:29:46.352 [http-nio-8080-exec-1] INFO   e.m.e.t.s.c.CarServiceImpl - Car with id: 2
+17.01.2022 10:29:46.352 [http-nio-8080-exec-1] INFO   e.m.e.t.s.c.CarServiceImpl - Car with id=2 not busy
+17.01.2022 10:29:46.356 [http-nio-8080-exec-1] INFO   e.m.e.t.s.c.CarServiceImpl - Working car with id=2 not busy
+17.01.2022 10:29:46.356 [http-nio-8080-exec-1] INFO   e.m.e.t.s.d.DispatcherServiceImpl - Found a working car with number=456789
+17.01.2022 10:29:46.356 [http-nio-8080-exec-1] INFO   e.m.e.t.s.d.DispatcherServiceImpl - Working driver with name=Ivan is busy with client who has an name=Roman
+17.01.2022 10:29:46.356 [http-nio-8080-exec-1] INFO   e.m.e.t.s.d.DispatcherServiceImpl - Working car with number=456789 is busy with client who has an name=Roman
+17.01.2022 10:29:46.356 [http-nio-8080-exec-1] INFO   e.m.e.t.s.d.DispatcherServiceImpl - Assign car=456789 to driver=Ivan
+17.01.2022 10:29:46.361 [http-nio-8080-exec-1] INFO   e.m.e.t.s.d.DispatcherServiceImpl - Метод releaseDriverAndCarAfterOrdering запущен: Mon Jan 17 10:29:46 MSK 2022
+17.01.2022 10:29:46.362 [http-nio-8080-exec-1] INFO   e.m.e.t.s.d.DispatcherServiceImpl - Start timer "Врема заказа" in: 20000 mc
+17.01.2022 10:29:46.362 [http-nio-8080-exec-1] INFO   e.m.e.t.s.d.DispatcherServiceImpl - Начало заказа: Mon Jan 17 10:29:46 MSK 2022
+17.01.2022 10:29:46.372 [http-nio-8080-exec-1] INFO   e.m.e.t.s.c.ClientServiceImpl - Client validation: ClientDto(id=1, name=Roman, orderNumber=8402861).
+17.01.2022 10:29:46.376 [http-nio-8080-exec-1] INFO   e.m.e.t.s.c.ClientServiceImpl - Save the client.
+17.01.2022 10:29:46.377 [http-nio-8080-exec-1] INFO   e.m.e.t.s.c.ClientServiceImpl - Client saved: ClientDto(id=1, name=Roman, orderNumber=8402861)!
+17.01.2022 10:29:46.385 [http-nio-8080-exec-1] INFO   e.m.e.t.s.c.ClientServiceImpl - Order data:
+-- Order id: 31
+-- Order number: 8402861
+-- Client name: Roman
+-- Dispatcher name: Roman
+-- Driver name: Ivan
+-- Car number: 456789
+
+17.01.2022 10:29:46.385 [http-nio-8080-exec-1] INFO   e.m.e.t.c.ClientController - The result is returned: OrderNumberDto(id=31, number=8402861, client=Roman, dispatcher=Roman, driver=Ivan, car=456789)
+17.01.2022 10:30:06.372 [Врема заказа] INFO   e.m.e.t.s.d.DispatcherServiceImpl - Задача "Врема заказа" запущена: Mon Jan 17 10:30:06 MSK 2022
+17.01.2022 10:30:06.385 [Врема заказа] INFO   e.m.e.t.s.c.ClientServiceImpl - Client validation: ClientDto(id=1, name=Roman, orderNumber=No order).
+17.01.2022 10:30:06.392 [Врема заказа] INFO   e.m.e.t.s.c.ClientServiceImpl - Update the client with id: 1.
+17.01.2022 10:30:06.392 [Врема заказа] INFO   e.m.e.t.s.c.ClientServiceImpl - Client updated: ClientDto(id=1, name=Roman, orderNumber=No order)!
+17.01.2022 10:30:06.392 [Врема заказа] INFO   e.m.e.t.s.d.DispatcherServiceImpl - Конец заказа: Mon Jan 17 10:30:06 MSK 2022
+17.01.2022 10:30:40.387 [main] INFO   e.m.e.t.TaxiStationApplication - Starting TaxiStationApplication using Java 11.0.6 on NB-100286 with PID 25700 (C:\Users\EIdrisov\IdeaProjects\Project\TaxiStation\target\classes started by EIdrisov in C:\Users\EIdrisov\IdeaProjects\Project\TaxiStation)
+17.01.2022 10:30:40.391 [main] INFO   e.m.e.t.TaxiStationApplication - No active profile set, falling back to default profiles: default
+17.01.2022 10:30:40.959 [main] INFO   o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+17.01.2022 10:30:41.015 [main] INFO   o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 49 ms. Found 6 JPA repository interfaces.
+17.01.2022 10:30:41.316 [main] INFO   o.s.b.w.e.t.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+17.01.2022 10:30:41.321 [main] INFO   o.a.c.h.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+17.01.2022 10:30:41.321 [main] INFO   o.a.c.c.StandardService - Starting service [Tomcat]
+17.01.2022 10:30:41.322 [main] INFO   o.a.c.c.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.56]
+17.01.2022 10:30:41.400 [main] INFO   o.a.c.c.C.[.[.[/] - Initializing Spring embedded WebApplicationContext
+17.01.2022 10:30:41.400 [main] INFO   o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 957 ms
+17.01.2022 10:30:41.499 [main] INFO   o.h.j.i.u.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+17.01.2022 10:30:41.525 [main] INFO   o.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.3.Final
+17.01.2022 10:30:41.604 [main] INFO   o.h.a.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+17.01.2022 10:30:41.661 [main] INFO   c.z.h.HikariDataSource - HikariPool-1 - Starting...
+17.01.2022 10:30:41.777 [main] INFO   c.z.h.HikariDataSource - HikariPool-1 - Start completed.
+17.01.2022 10:30:41.806 [main] INFO   o.h.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+17.01.2022 10:30:42.236 [main] INFO   o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+17.01.2022 10:30:42.241 [main] INFO   o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+17.01.2022 10:30:42.560 [main] WARN   o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+17.01.2022 10:30:42.677 [main] INFO   o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+17.01.2022 10:30:42.776 [main] INFO   o.a.c.h.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+17.01.2022 10:30:42.789 [main] INFO   o.s.b.w.e.t.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+17.01.2022 10:30:42.797 [main] INFO   e.m.e.t.TaxiStationApplication - Started TaxiStationApplication in 2.732 seconds (JVM running for 3.395)
+17.01.2022 10:30:47.663 [http-nio-8080-exec-1] INFO   o.a.c.c.C.[.[.[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+17.01.2022 10:30:47.664 [http-nio-8080-exec-1] INFO   o.s.w.s.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+17.01.2022 10:30:47.665 [http-nio-8080-exec-1] INFO   o.s.w.s.DispatcherServlet - Completed initialization in 1 ms
+17.01.2022 10:30:47.686 [http-nio-8080-exec-1] INFO   e.m.e.t.c.ClientController - Get-request received with clientId: 1
+17.01.2022 10:30:47.693 [http-nio-8080-exec-1] INFO   e.m.e.t.s.c.ClientServiceImpl - Taxi call.
+17.01.2022 10:30:47.693 [http-nio-8080-exec-1] INFO   e.m.e.t.s.c.ClientServiceImpl - Taxi call for client with id: 1!
+17.01.2022 10:30:47.693 [http-nio-8080-exec-1] INFO   e.m.e.t.s.c.ClientServiceImpl - Client search by id.
+17.01.2022 10:30:47.709 [http-nio-8080-exec-1] DEBUG  org.hibernate.SQL - select cliententi0_.id as id1_1_0_, cliententi0_.name as name2_1_0_, cliententi0_.order_number as order_nu3_1_0_ from client cliententi0_ where cliententi0_.id=?
+17.01.2022 10:30:47.711 [http-nio-8080-exec-1] TRACE  o.h.t.d.s.BasicBinder - binding parameter [1] as [BIGINT] - [1]
+17.01.2022 10:30:47.723 [http-nio-8080-exec-1] INFO   e.m.e.t.s.c.ClientServiceImpl - Client with id=1 found!
+17.01.2022 10:30:47.781 [http-nio-8080-exec-1] DEBUG  org.hibernate.SQL - select dispatcher0_.id as id1_2_, dispatcher0_.dayoff as dayoff2_2_, dispatcher0_.end_lunch as end_lunc3_2_, dispatcher0_.name as name4_2_, dispatcher0_.start_lunch as start_lu5_2_, dispatcher0_.workstatus as workstat6_2_ from dispatcher dispatcher0_
+17.01.2022 10:30:47.788 [http-nio-8080-exec-1] INFO   e.m.e.t.s.d.DispatcherServiceImpl - Dispatcher with id=4: DispatcherDto(id=4, name=Roman, dayoff=13:00, startLunch=14:00, endLunch=14:00, workStatus=true)
+17.01.2022 10:30:47.795 [http-nio-8080-exec-1] INFO   e.m.e.t.s.d.DispatcherServiceImpl - Dispatcher with id=4 working: DispatcherDto(id=4, name=Roman, dayoff=13:00, startLunch=14:00, endLunch=14:00, workStatus=true)
+17.01.2022 10:30:47.811 [http-nio-8080-exec-1] DEBUG  org.hibernate.SQL - select driverenti0_.id as id1_3_, driverenti0_.busy as busy2_3_, driverenti0_.car as car3_3_, driverenti0_.dayoff as dayoff4_3_, driverenti0_.name as name5_3_, driverenti0_.workstatus as workstat6_3_ from driver driverenti0_
+17.01.2022 10:30:47.813 [http-nio-8080-exec-1] INFO   e.m.e.t.s.d.DriverServiceImpl - Driver with name=Ivan
+17.01.2022 10:30:47.814 [http-nio-8080-exec-1] INFO   e.m.e.t.s.d.DriverServiceImpl - Driver with id=3 working: DriverDto(id=3, name=Ivan, dayoff=Tuesday, car=free, workStatus=true, busy=false)
+17.01.2022 10:30:47.824 [http-nio-8080-exec-1] INFO   e.m.e.t.s.d.DriverServiceImpl - Working driver with name=Ivan not busy
+17.01.2022 10:30:47.829 [http-nio-8080-exec-1] DEBUG  org.hibernate.SQL - update driver set busy=?, car=?, dayoff=?, name=?, workstatus=? where id=?
+17.01.2022 10:30:47.829 [http-nio-8080-exec-1] TRACE  o.h.t.d.s.BasicBinder - binding parameter [1] as [BOOLEAN] - [false]
+17.01.2022 10:30:47.829 [http-nio-8080-exec-1] TRACE  o.h.t.d.s.BasicBinder - binding parameter [2] as [VARCHAR] - [Назначается машина]
+17.01.2022 10:30:47.829 [http-nio-8080-exec-1] TRACE  o.h.t.d.s.BasicBinder - binding parameter [3] as [VARCHAR] - [Tuesday]
+17.01.2022 10:30:47.829 [http-nio-8080-exec-1] TRACE  o.h.t.d.s.BasicBinder - binding parameter [4] as [VARCHAR] - [Ivan]
+17.01.2022 10:30:47.829 [http-nio-8080-exec-1] TRACE  o.h.t.d.s.BasicBinder - binding parameter [5] as [BOOLEAN] - [true]
+17.01.2022 10:30:47.830 [http-nio-8080-exec-1] TRACE  o.h.t.d.s.BasicBinder - binding parameter [6] as [BIGINT] - [3]
+17.01.2022 10:30:47.832 [http-nio-8080-exec-1] INFO   e.m.e.t.s.d.DispatcherServiceImpl - Found a working driver with name=Ivan
+17.01.2022 10:30:47.837 [http-nio-8080-exec-1] DEBUG  org.hibernate.SQL - select carentity0_.id as id1_0_, carentity0_.busy as busy2_0_, carentity0_.mechanic_id as mechanic5_0_, carentity0_.number_car as number_c3_0_, carentity0_.resource as resource4_0_ from car carentity0_
+17.01.2022 10:30:47.839 [http-nio-8080-exec-1] INFO   e.m.e.t.s.c.CarServiceImpl - Car with id: 2
+17.01.2022 10:30:47.839 [http-nio-8080-exec-1] INFO   e.m.e.t.s.c.CarServiceImpl - Car with id=2 not busy
+17.01.2022 10:30:47.841 [http-nio-8080-exec-1] DEBUG  org.hibernate.SQL - update car set busy=?, mechanic_id=?, number_car=?, resource=? where id=?
+17.01.2022 10:30:47.841 [http-nio-8080-exec-1] TRACE  o.h.t.d.s.BasicBinder - binding parameter [1] as [BOOLEAN] - [false]
+17.01.2022 10:30:47.842 [http-nio-8080-exec-1] TRACE  o.h.t.d.s.BasicBinder - binding parameter [2] as [BIGINT] - [null]
+17.01.2022 10:30:47.842 [http-nio-8080-exec-1] TRACE  o.h.t.d.s.BasicBinder - binding parameter [3] as [VARCHAR] - [456789]
+17.01.2022 10:30:47.842 [http-nio-8080-exec-1] TRACE  o.h.t.d.s.BasicBinder - binding parameter [4] as [INTEGER] - [1]
+17.01.2022 10:30:47.842 [http-nio-8080-exec-1] TRACE  o.h.t.d.s.BasicBinder - binding parameter [5] as [BIGINT] - [2]
+17.01.2022 10:30:47.843 [http-nio-8080-exec-1] INFO   e.m.e.t.s.c.CarServiceImpl - Working car with id=2 not busy
+17.01.2022 10:30:47.843 [http-nio-8080-exec-1] INFO   e.m.e.t.s.d.DispatcherServiceImpl - Found a working car with number=456789
+17.01.2022 10:30:47.843 [http-nio-8080-exec-1] INFO   e.m.e.t.s.d.DispatcherServiceImpl - Working driver with name=Ivan is busy with client who has an name=Roman
+17.01.2022 10:30:47.843 [http-nio-8080-exec-1] INFO   e.m.e.t.s.d.DispatcherServiceImpl - Working car with number=456789 is busy with client who has an name=Roman
+17.01.2022 10:30:47.843 [http-nio-8080-exec-1] INFO   e.m.e.t.s.d.DispatcherServiceImpl - Assign car=456789 to driver=Ivan
+17.01.2022 10:30:47.844 [http-nio-8080-exec-1] DEBUG  org.hibernate.SQL - update driver set busy=?, car=?, dayoff=?, name=?, workstatus=? where id=?
+17.01.2022 10:30:47.844 [http-nio-8080-exec-1] TRACE  o.h.t.d.s.BasicBinder - binding parameter [1] as [BOOLEAN] - [true]
+17.01.2022 10:30:47.844 [http-nio-8080-exec-1] TRACE  o.h.t.d.s.BasicBinder - binding parameter [2] as [VARCHAR] - [456789]
+17.01.2022 10:30:47.845 [http-nio-8080-exec-1] TRACE  o.h.t.d.s.BasicBinder - binding parameter [3] as [VARCHAR] - [Tuesday]
+17.01.2022 10:30:47.845 [http-nio-8080-exec-1] TRACE  o.h.t.d.s.BasicBinder - binding parameter [4] as [VARCHAR] - [Ivan]
+17.01.2022 10:30:47.845 [http-nio-8080-exec-1] TRACE  o.h.t.d.s.BasicBinder - binding parameter [5] as [BOOLEAN] - [true]
+17.01.2022 10:30:47.845 [http-nio-8080-exec-1] TRACE  o.h.t.d.s.BasicBinder - binding parameter [6] as [BIGINT] - [3]
+17.01.2022 10:30:47.846 [http-nio-8080-exec-1] DEBUG  org.hibernate.SQL - update car set busy=?, mechanic_id=?, number_car=?, resource=? where id=?
+17.01.2022 10:30:47.847 [http-nio-8080-exec-1] TRACE  o.h.t.d.s.BasicBinder - binding parameter [1] as [BOOLEAN] - [true]
+17.01.2022 10:30:47.847 [http-nio-8080-exec-1] TRACE  o.h.t.d.s.BasicBinder - binding parameter [2] as [BIGINT] - [null]
+17.01.2022 10:30:47.847 [http-nio-8080-exec-1] TRACE  o.h.t.d.s.BasicBinder - binding parameter [3] as [VARCHAR] - [456789]
+17.01.2022 10:30:47.847 [http-nio-8080-exec-1] TRACE  o.h.t.d.s.BasicBinder - binding parameter [4] as [INTEGER] - [1]
+17.01.2022 10:30:47.847 [http-nio-8080-exec-1] TRACE  o.h.t.d.s.BasicBinder - binding parameter [5] as [BIGINT] - [2]
+17.01.2022 10:30:47.848 [http-nio-8080-exec-1] INFO   e.m.e.t.s.d.DispatcherServiceImpl - Метод releaseDriverAndCarAfterOrdering запущен: Mon Jan 17 10:30:47 MSK 2022
+17.01.2022 10:30:47.849 [http-nio-8080-exec-1] INFO   e.m.e.t.s.d.DispatcherServiceImpl - Start timer "Врема заказа" in: 20000 mc
+17.01.2022 10:30:47.850 [http-nio-8080-exec-1] INFO   e.m.e.t.s.d.DispatcherServiceImpl - Начало заказа: Mon Jan 17 10:30:47 MSK 2022
+17.01.2022 10:30:47.857 [http-nio-8080-exec-1] DEBUG  org.hibernate.SQL - insert into order_number (car, client, dispatcher, driver, number) values (?, ?, ?, ?, ?)
+17.01.2022 10:30:47.857 [http-nio-8080-exec-1] TRACE  o.h.t.d.s.BasicBinder - binding parameter [1] as [VARCHAR] - [456789]
+17.01.2022 10:30:47.857 [http-nio-8080-exec-1] TRACE  o.h.t.d.s.BasicBinder - binding parameter [2] as [VARCHAR] - [Roman]
+17.01.2022 10:30:47.857 [http-nio-8080-exec-1] TRACE  o.h.t.d.s.BasicBinder - binding parameter [3] as [VARCHAR] - [Roman]
+17.01.2022 10:30:47.857 [http-nio-8080-exec-1] TRACE  o.h.t.d.s.BasicBinder - binding parameter [4] as [VARCHAR] - [Ivan]
+17.01.2022 10:30:47.857 [http-nio-8080-exec-1] TRACE  o.h.t.d.s.BasicBinder - binding parameter [5] as [VARCHAR] - [4484191]
+17.01.2022 10:30:47.862 [http-nio-8080-exec-1] INFO   e.m.e.t.s.c.ClientServiceImpl - Client validation: ClientDto(id=1, name=Roman, orderNumber=4484191).
+17.01.2022 10:30:47.867 [http-nio-8080-exec-1] DEBUG  org.hibernate.SQL - update client set name=?, order_number=? where id=?
+17.01.2022 10:30:47.867 [http-nio-8080-exec-1] TRACE  o.h.t.d.s.BasicBinder - binding parameter [1] as [VARCHAR] - [Roman]
+17.01.2022 10:30:47.867 [http-nio-8080-exec-1] TRACE  o.h.t.d.s.BasicBinder - binding parameter [2] as [VARCHAR] - [4484191]
+17.01.2022 10:30:47.867 [http-nio-8080-exec-1] TRACE  o.h.t.d.s.BasicBinder - binding parameter [3] as [BIGINT] - [1]
+17.01.2022 10:30:47.868 [http-nio-8080-exec-1] INFO   e.m.e.t.s.c.ClientServiceImpl - Save the client.
+17.01.2022 10:30:47.868 [http-nio-8080-exec-1] INFO   e.m.e.t.s.c.ClientServiceImpl - Client saved: ClientDto(id=1, name=Roman, orderNumber=4484191)!
+17.01.2022 10:30:47.876 [http-nio-8080-exec-1] INFO   e.m.e.t.s.c.ClientServiceImpl - Order data:
+-- Order id: 32
+-- Order number: 4484191
+-- Client name: Roman
+-- Dispatcher name: Roman
+-- Driver name: Ivan
+-- Car number: 456789
+
+17.01.2022 10:30:47.876 [http-nio-8080-exec-1] INFO   e.m.e.t.c.ClientController - The result is returned: OrderNumberDto(id=32, number=4484191, client=Roman, dispatcher=Roman, driver=Ivan, car=456789)
+17.01.2022 10:31:07.864 [Врема заказа] INFO   e.m.e.t.s.d.DispatcherServiceImpl - Задача "Врема заказа" запущена: Mon Jan 17 10:31:07 MSK 2022
+17.01.2022 10:31:07.867 [Врема заказа] DEBUG  org.hibernate.SQL - select driverenti0_.id as id1_3_0_, driverenti0_.busy as busy2_3_0_, driverenti0_.car as car3_3_0_, driverenti0_.dayoff as dayoff4_3_0_, driverenti0_.name as name5_3_0_, driverenti0_.workstatus as workstat6_3_0_ from driver driverenti0_ where driverenti0_.id=?
+17.01.2022 10:31:07.869 [Врема заказа] TRACE  o.h.t.d.s.BasicBinder - binding parameter [1] as [BIGINT] - [3]
+17.01.2022 10:31:07.873 [Врема заказа] DEBUG  org.hibernate.SQL - update driver set busy=?, car=?, dayoff=?, name=?, workstatus=? where id=?
+17.01.2022 10:31:07.873 [Врема заказа] TRACE  o.h.t.d.s.BasicBinder - binding parameter [1] as [BOOLEAN] - [false]
+17.01.2022 10:31:07.874 [Врема заказа] TRACE  o.h.t.d.s.BasicBinder - binding parameter [2] as [VARCHAR] - [free]
+17.01.2022 10:31:07.874 [Врема заказа] TRACE  o.h.t.d.s.BasicBinder - binding parameter [3] as [VARCHAR] - [Tuesday]
+17.01.2022 10:31:07.875 [Врема заказа] TRACE  o.h.t.d.s.BasicBinder - binding parameter [4] as [VARCHAR] - [Ivan]
+17.01.2022 10:31:07.875 [Врема заказа] TRACE  o.h.t.d.s.BasicBinder - binding parameter [5] as [BOOLEAN] - [true]
+17.01.2022 10:31:07.876 [Врема заказа] TRACE  o.h.t.d.s.BasicBinder - binding parameter [6] as [BIGINT] - [3]
+17.01.2022 10:31:07.879 [Врема заказа] DEBUG  org.hibernate.SQL - select carentity0_.id as id1_0_0_, carentity0_.busy as busy2_0_0_, carentity0_.mechanic_id as mechanic5_0_0_, carentity0_.number_car as number_c3_0_0_, carentity0_.resource as resource4_0_0_, mechanicen1_.id as id1_5_1_, mechanicen1_.busy as busy2_5_1_, mechanicen1_.repair_time as repair_t3_5_1_, mechanicen1_.resource as resource4_5_1_ from car carentity0_ left outer join service mechanicen1_ on carentity0_.mechanic_id=mechanicen1_.id where carentity0_.id=?
+17.01.2022 10:31:07.881 [Врема заказа] TRACE  o.h.t.d.s.BasicBinder - binding parameter [1] as [BIGINT] - [2]
+17.01.2022 10:31:07.885 [Врема заказа] DEBUG  org.hibernate.SQL - update car set busy=?, mechanic_id=?, number_car=?, resource=? where id=?
+17.01.2022 10:31:07.885 [Врема заказа] TRACE  o.h.t.d.s.BasicBinder - binding parameter [1] as [BOOLEAN] - [false]
+17.01.2022 10:31:07.885 [Врема заказа] TRACE  o.h.t.d.s.BasicBinder - binding parameter [2] as [BIGINT] - [null]
+17.01.2022 10:31:07.886 [Врема заказа] TRACE  o.h.t.d.s.BasicBinder - binding parameter [3] as [VARCHAR] - [456789]
+17.01.2022 10:31:07.886 [Врема заказа] TRACE  o.h.t.d.s.BasicBinder - binding parameter [4] as [INTEGER] - [1]
+17.01.2022 10:31:07.886 [Врема заказа] TRACE  o.h.t.d.s.BasicBinder - binding parameter [5] as [BIGINT] - [2]
+17.01.2022 10:31:07.888 [Врема заказа] INFO   e.m.e.t.s.c.ClientServiceImpl - Client validation: ClientDto(id=1, name=Roman, orderNumber=No order).
+17.01.2022 10:31:07.889 [Врема заказа] DEBUG  org.hibernate.SQL - select cliententi0_.id as id1_1_0_, cliententi0_.name as name2_1_0_, cliententi0_.order_number as order_nu3_1_0_ from client cliententi0_ where cliententi0_.id=?
+17.01.2022 10:31:07.889 [Врема заказа] TRACE  o.h.t.d.s.BasicBinder - binding parameter [1] as [BIGINT] - [1]
+17.01.2022 10:31:07.895 [Врема заказа] DEBUG  org.hibernate.SQL - select cliententi0_.id as id1_1_0_, cliententi0_.name as name2_1_0_, cliententi0_.order_number as order_nu3_1_0_ from client cliententi0_ where cliententi0_.id=?
+17.01.2022 10:31:07.895 [Врема заказа] TRACE  o.h.t.d.s.BasicBinder - binding parameter [1] as [BIGINT] - [1]
+17.01.2022 10:31:07.896 [Врема заказа] DEBUG  org.hibernate.SQL - update client set name=?, order_number=? where id=?
+17.01.2022 10:31:07.896 [Врема заказа] TRACE  o.h.t.d.s.BasicBinder - binding parameter [1] as [VARCHAR] - [Roman]
+17.01.2022 10:31:07.896 [Врема заказа] TRACE  o.h.t.d.s.BasicBinder - binding parameter [2] as [VARCHAR] - [No order]
+17.01.2022 10:31:07.896 [Врема заказа] TRACE  o.h.t.d.s.BasicBinder - binding parameter [3] as [BIGINT] - [1]
+17.01.2022 10:31:07.897 [Врема заказа] INFO   e.m.e.t.s.c.ClientServiceImpl - Update the client with id: 1.
+17.01.2022 10:31:07.897 [Врема заказа] INFO   e.m.e.t.s.c.ClientServiceImpl - Client updated: ClientDto(id=1, name=Roman, orderNumber=No order)!
+17.01.2022 10:31:07.898 [Врема заказа] INFO   e.m.e.t.s.d.DispatcherServiceImpl - Конец заказа: Mon Jan 17 10:31:07 MSK 2022
+17.01.2022 10:36:48.796 [http-nio-8080-exec-3] INFO   o.a.c.h.Http11Processor - Error parsing HTTP request header
+ Note: further occurrences of HTTP request parsing errors will be logged at DEBUG level.
+java.lang.IllegalArgumentException: Invalid character found in method name [0x160x030x010x020x000x010x000x010xfc0x030x030x0c0xe80x050x993s0x9cB!0x010xa03G0xc30xb90xd9~:0xd5b0xdb0x0c0x1160x9a0x8d#0xca0xeav0x0f0xe6 ]. HTTP method names must be tokens
+	at org.apache.coyote.http11.Http11InputBuffer.parseRequestLine(Http11InputBuffer.java:419)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:269)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:895)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1732)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+17.01.2022 11:51:30.506 [http-nio-8080-exec-1] INFO   e.m.e.t.c.ClientController - Get-request received with clientId: 2
+17.01.2022 11:51:30.524 [http-nio-8080-exec-1] INFO   e.m.e.t.s.c.ClientServiceImpl - Taxi call.
+17.01.2022 11:51:30.524 [http-nio-8080-exec-1] INFO   e.m.e.t.s.c.ClientServiceImpl - Taxi call for client with id: 2!
+17.01.2022 11:51:30.524 [http-nio-8080-exec-1] INFO   e.m.e.t.s.c.ClientServiceImpl - Client search by id.
+17.01.2022 11:51:30.571 [http-nio-8080-exec-1] DEBUG  org.hibernate.SQL - select cliententi0_.id as id1_1_0_, cliententi0_.name as name2_1_0_, cliententi0_.order_number as order_nu3_1_0_ from client cliententi0_ where cliententi0_.id=?
+17.01.2022 11:51:30.577 [http-nio-8080-exec-1] TRACE  o.h.t.d.s.BasicBinder - binding parameter [1] as [BIGINT] - [2]
+17.01.2022 11:51:30.615 [http-nio-8080-exec-1] INFO   e.m.e.t.s.c.ClientServiceImpl - Client with id=2 found!
+17.01.2022 11:51:30.616 [http-nio-8080-exec-1] INFO   e.m.e.t.s.c.ClientServiceImpl - The client called a taxi before completion. His order: 9440822
+17.01.2022 12:50:09.405 [main] INFO   e.m.e.t.TaxiStationApplication - Starting TaxiStationApplication using Java 11.0.6 on NB-100286 with PID 40384 (C:\Users\EIdrisov\IdeaProjects\Project\TaxiStation\target\classes started by EIdrisov in C:\Users\EIdrisov\IdeaProjects\Project\TaxiStation)
+17.01.2022 12:50:09.407 [main] INFO   e.m.e.t.TaxiStationApplication - No active profile set, falling back to default profiles: default
+17.01.2022 12:50:09.975 [main] INFO   o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+17.01.2022 12:50:10.036 [main] INFO   o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 54 ms. Found 6 JPA repository interfaces.
+17.01.2022 12:50:10.353 [main] INFO   o.s.b.w.e.t.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+17.01.2022 12:50:10.358 [main] INFO   o.a.c.h.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+17.01.2022 12:50:10.358 [main] INFO   o.a.c.c.StandardService - Starting service [Tomcat]
+17.01.2022 12:50:10.359 [main] INFO   o.a.c.c.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.56]
+17.01.2022 12:50:10.425 [main] INFO   o.a.c.c.C.[.[.[/] - Initializing Spring embedded WebApplicationContext
+17.01.2022 12:50:10.426 [main] INFO   o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 980 ms
+17.01.2022 12:50:10.535 [main] INFO   o.h.j.i.u.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+17.01.2022 12:50:10.575 [main] INFO   o.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.3.Final
+17.01.2022 12:50:10.678 [main] INFO   o.h.a.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+17.01.2022 12:50:10.741 [main] INFO   c.z.h.HikariDataSource - HikariPool-1 - Starting...
+17.01.2022 12:50:10.887 [main] INFO   c.z.h.HikariDataSource - HikariPool-1 - Start completed.
+17.01.2022 12:50:10.915 [main] INFO   o.h.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+17.01.2022 12:50:11.352 [main] WARN   o.h.e.j.s.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+17.01.2022 12:50:11.353 [main] WARN   o.h.e.j.s.SqlExceptionHelper - отношение "car" не существует, пропускается
+17.01.2022 12:50:11.354 [main] WARN   o.h.e.j.s.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+17.01.2022 12:50:11.354 [main] WARN   o.h.e.j.s.SqlExceptionHelper - таблица "car" не существует, пропускается
+17.01.2022 12:50:11.355 [main] WARN   o.h.e.j.s.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+17.01.2022 12:50:11.355 [main] WARN   o.h.e.j.s.SqlExceptionHelper - таблица "client" не существует, пропускается
+17.01.2022 12:50:11.355 [main] WARN   o.h.e.j.s.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+17.01.2022 12:50:11.355 [main] WARN   o.h.e.j.s.SqlExceptionHelper - таблица "dispatcher" не существует, пропускается
+17.01.2022 12:50:11.356 [main] WARN   o.h.e.j.s.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+17.01.2022 12:50:11.356 [main] WARN   o.h.e.j.s.SqlExceptionHelper - таблица "driver" не существует, пропускается
+17.01.2022 12:50:11.356 [main] WARN   o.h.e.j.s.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+17.01.2022 12:50:11.356 [main] WARN   o.h.e.j.s.SqlExceptionHelper - таблица "order_number" не существует, пропускается
+17.01.2022 12:50:11.357 [main] WARN   o.h.e.j.s.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+17.01.2022 12:50:11.357 [main] WARN   o.h.e.j.s.SqlExceptionHelper - таблица "service" не существует, пропускается
+17.01.2022 12:50:11.422 [main] INFO   o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+17.01.2022 12:50:11.429 [main] INFO   o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+17.01.2022 12:50:11.729 [main] WARN   o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'controller': Injection of autowired dependencies failed; nested exception is java.lang.IllegalArgumentException: Could not resolve placeholder 'spring.application.name' in value "${spring.application.name}"
+17.01.2022 12:50:11.730 [main] INFO   o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+17.01.2022 12:50:11.732 [main] INFO   c.z.h.HikariDataSource - HikariPool-1 - Shutdown initiated...
+17.01.2022 12:50:11.737 [main] INFO   c.z.h.HikariDataSource - HikariPool-1 - Shutdown completed.
+17.01.2022 12:50:11.738 [main] INFO   o.a.c.c.StandardService - Stopping service [Tomcat]
+17.01.2022 12:50:11.747 [main] INFO   o.s.b.a.l.ConditionEvaluationReportLoggingListener - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+17.01.2022 12:50:11.762 [main] ERROR  o.s.b.SpringApplication - Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'controller': Injection of autowired dependencies failed; nested exception is java.lang.IllegalArgumentException: Could not resolve placeholder 'spring.application.name' in value "${spring.application.name}"
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:405)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1431)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:619)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:953)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:918)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:583)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:145)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:730)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:412)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:302)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1301)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1290)
+	at elp.max.e.taxistation.TaxiStationApplication.main(TaxiStationApplication.java:10)
+Caused by: java.lang.IllegalArgumentException: Could not resolve placeholder 'spring.application.name' in value "${spring.application.name}"
+	at org.springframework.util.PropertyPlaceholderHelper.parseStringValue(PropertyPlaceholderHelper.java:180)
+	at org.springframework.util.PropertyPlaceholderHelper.replacePlaceholders(PropertyPlaceholderHelper.java:126)
+	at org.springframework.core.env.AbstractPropertyResolver.doResolvePlaceholders(AbstractPropertyResolver.java:239)
+	at org.springframework.core.env.AbstractPropertyResolver.resolveRequiredPlaceholders(AbstractPropertyResolver.java:210)
+	at org.springframework.context.support.PropertySourcesPlaceholderConfigurer.lambda$processProperties$0(PropertySourcesPlaceholderConfigurer.java:175)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.resolveEmbeddedValue(AbstractBeanFactory.java:936)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1330)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1309)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:656)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:639)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:119)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:399)
+	... 17 common frames omitted
+17.01.2022 12:54:08.582 [main] INFO   e.m.e.t.TaxiStationApplication - Starting TaxiStationApplication using Java 11.0.6 on NB-100286 with PID 46576 (C:\Users\EIdrisov\IdeaProjects\Project\TaxiStation\target\classes started by EIdrisov in C:\Users\EIdrisov\IdeaProjects\Project\TaxiStation)
+17.01.2022 12:54:08.585 [main] INFO   e.m.e.t.TaxiStationApplication - No active profile set, falling back to default profiles: default
+17.01.2022 12:54:09.191 [main] INFO   o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+17.01.2022 12:54:09.255 [main] INFO   o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 54 ms. Found 6 JPA repository interfaces.
+17.01.2022 12:54:09.548 [main] INFO   o.s.b.w.e.t.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+17.01.2022 12:54:09.553 [main] INFO   o.a.c.h.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+17.01.2022 12:54:09.554 [main] INFO   o.a.c.c.StandardService - Starting service [Tomcat]
+17.01.2022 12:54:09.554 [main] INFO   o.a.c.c.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.56]
+17.01.2022 12:54:09.616 [main] INFO   o.a.c.c.C.[.[.[/] - Initializing Spring embedded WebApplicationContext
+17.01.2022 12:54:09.617 [main] INFO   o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 981 ms
+17.01.2022 12:54:09.716 [main] INFO   o.h.j.i.u.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+17.01.2022 12:54:09.740 [main] INFO   o.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.3.Final
+17.01.2022 12:54:09.812 [main] INFO   o.h.a.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+17.01.2022 12:54:09.864 [main] INFO   c.z.h.HikariDataSource - HikariPool-1 - Starting...
+17.01.2022 12:54:09.985 [main] INFO   c.z.h.HikariDataSource - HikariPool-1 - Start completed.
+17.01.2022 12:54:10.016 [main] INFO   o.h.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+17.01.2022 12:54:10.461 [main] INFO   o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+17.01.2022 12:54:10.466 [main] INFO   o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+17.01.2022 12:54:10.774 [main] WARN   o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+17.01.2022 12:54:10.890 [main] INFO   o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+17.01.2022 12:54:10.970 [main] INFO   o.a.c.h.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+17.01.2022 12:54:10.983 [main] INFO   o.s.b.w.e.t.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+17.01.2022 12:54:10.992 [main] INFO   e.m.e.t.TaxiStationApplication - Started TaxiStationApplication in 2.675 seconds (JVM running for 3.331)
+17.01.2022 13:18:52.792 [main] INFO   e.m.e.t.TaxiStationApplication - Starting TaxiStationApplication using Java 11.0.6 on NB-100286 with PID 5488 (C:\Users\EIdrisov\IdeaProjects\Project\TaxiStation\target\classes started by EIdrisov in C:\Users\EIdrisov\IdeaProjects\Project\TaxiStation)
+17.01.2022 13:18:52.792 [main] INFO   e.m.e.t.TaxiStationApplication - No active profile set, falling back to default profiles: default
+17.01.2022 13:18:53.325 [main] INFO   o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+17.01.2022 13:18:53.417 [main] INFO   o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 71 ms. Found 6 JPA repository interfaces.
+17.01.2022 13:18:53.749 [main] INFO   o.s.b.w.e.t.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+17.01.2022 13:18:53.749 [main] INFO   o.a.c.h.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+17.01.2022 13:18:53.749 [main] INFO   o.a.c.c.StandardService - Starting service [Tomcat]
+17.01.2022 13:18:53.749 [main] INFO   o.a.c.c.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.56]
+17.01.2022 13:18:53.830 [main] INFO   o.a.c.c.C.[.[.[/] - Initializing Spring embedded WebApplicationContext
+17.01.2022 13:18:53.830 [main] INFO   o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1007 ms
+17.01.2022 13:18:53.980 [main] INFO   o.h.j.i.u.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+17.01.2022 13:18:54.019 [main] INFO   o.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.3.Final
+17.01.2022 13:18:54.134 [main] INFO   o.h.a.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+17.01.2022 13:18:54.208 [main] INFO   c.z.h.HikariDataSource - HikariPool-1 - Starting...
+17.01.2022 13:18:54.341 [main] INFO   c.z.h.HikariDataSource - HikariPool-1 - Start completed.
+17.01.2022 13:18:54.365 [main] WARN   o.h.e.j.e.i.JdbcEnvironmentInitiator - HHH000342: Could not obtain connection to query metadata
+org.hibernate.boot.registry.selector.spi.StrategySelectionException: Unable to resolve name [org.hibernate.PostgreSQLDialect] as strategy [org.hibernate.dialect.Dialect]
+	at org.hibernate.boot.registry.selector.internal.StrategySelectorImpl.selectStrategyImplementor(StrategySelectorImpl.java:156)
+	at org.hibernate.boot.registry.selector.internal.StrategySelectorImpl.resolveStrategy(StrategySelectorImpl.java:239)
+	at org.hibernate.boot.registry.selector.internal.StrategySelectorImpl.resolveDefaultableStrategy(StrategySelectorImpl.java:183)
+	at org.hibernate.boot.registry.selector.internal.StrategySelectorImpl.resolveDefaultableStrategy(StrategySelectorImpl.java:170)
+	at org.hibernate.boot.registry.selector.internal.StrategySelectorImpl.resolveStrategy(StrategySelectorImpl.java:164)
+	at org.hibernate.engine.jdbc.dialect.internal.DialectFactoryImpl.constructDialect(DialectFactoryImpl.java:74)
+	at org.hibernate.engine.jdbc.dialect.internal.DialectFactoryImpl.buildDialect(DialectFactoryImpl.java:51)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:97)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:35)
+	at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.initiateService(StandardServiceRegistryImpl.java:101)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:263)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:237)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:214)
+	at org.hibernate.id.factory.internal.DefaultIdentifierGeneratorFactory.injectServices(DefaultIdentifierGeneratorFactory.java:175)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.injectDependencies(AbstractServiceRegistryImpl.java:286)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:243)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:214)
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.<init>(InFlightMetadataCollectorImpl.java:173)
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:127)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.metadata(EntityManagerFactoryBuilderImpl.java:1460)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1494)
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:58)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:341)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1863)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1800)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:620)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1154)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:908)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:583)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:145)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:730)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:412)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:302)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1301)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1290)
+	at elp.max.e.taxistation.TaxiStationApplication.main(TaxiStationApplication.java:10)
+Caused by: org.hibernate.boot.registry.classloading.spi.ClassLoadingException: Unable to load class [org.hibernate.PostgreSQLDialect]
+	at org.hibernate.boot.registry.classloading.internal.ClassLoaderServiceImpl.classForName(ClassLoaderServiceImpl.java:133)
+	at org.hibernate.boot.registry.selector.internal.StrategySelectorImpl.selectStrategyImplementor(StrategySelectorImpl.java:152)
+	... 43 common frames omitted
+Caused by: java.lang.ClassNotFoundException: Could not load requested class : org.hibernate.PostgreSQLDialect
+	at org.hibernate.boot.registry.classloading.internal.AggregatedClassLoader.findClass(AggregatedClassLoader.java:210)
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:588)
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:521)
+	at java.base/java.lang.Class.forName0(Native Method)
+	at java.base/java.lang.Class.forName(Class.java:398)
+	at org.hibernate.boot.registry.classloading.internal.ClassLoaderServiceImpl.classForName(ClassLoaderServiceImpl.java:130)
+	... 44 common frames omitted
+17.01.2022 13:18:54.365 [main] ERROR  o.s.o.j.LocalContainerEntityManagerFactoryBean - Failed to initialize JPA EntityManagerFactory: Unable to create requested service [org.hibernate.engine.jdbc.env.spi.JdbcEnvironment]
+17.01.2022 13:18:54.365 [main] WARN   o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is org.hibernate.service.spi.ServiceException: Unable to create requested service [org.hibernate.engine.jdbc.env.spi.JdbcEnvironment]
+17.01.2022 13:18:54.365 [main] INFO   c.z.h.HikariDataSource - HikariPool-1 - Shutdown initiated...
+17.01.2022 13:18:54.365 [main] INFO   c.z.h.HikariDataSource - HikariPool-1 - Shutdown completed.
+17.01.2022 13:18:54.365 [main] INFO   o.a.c.c.StandardService - Stopping service [Tomcat]
+17.01.2022 13:18:54.372 [main] INFO   o.s.b.a.l.ConditionEvaluationReportLoggingListener - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+17.01.2022 13:18:54.388 [main] ERROR  o.s.b.SpringApplication - Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is org.hibernate.service.spi.ServiceException: Unable to create requested service [org.hibernate.engine.jdbc.env.spi.JdbcEnvironment]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1804)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:620)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1154)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:908)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:583)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:145)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:730)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:412)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:302)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1301)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1290)
+	at elp.max.e.taxistation.TaxiStationApplication.main(TaxiStationApplication.java:10)
+Caused by: org.hibernate.service.spi.ServiceException: Unable to create requested service [org.hibernate.engine.jdbc.env.spi.JdbcEnvironment]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:275)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:237)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:214)
+	at org.hibernate.id.factory.internal.DefaultIdentifierGeneratorFactory.injectServices(DefaultIdentifierGeneratorFactory.java:175)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.injectDependencies(AbstractServiceRegistryImpl.java:286)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:243)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:214)
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.<init>(InFlightMetadataCollectorImpl.java:173)
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:127)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.metadata(EntityManagerFactoryBuilderImpl.java:1460)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1494)
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:58)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:341)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1863)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1800)
+	... 16 common frames omitted
+Caused by: org.hibernate.boot.registry.selector.spi.StrategySelectionException: Unable to resolve name [org.hibernate.PostgreSQLDialect] as strategy [org.hibernate.dialect.Dialect]
+	at org.hibernate.boot.registry.selector.internal.StrategySelectorImpl.selectStrategyImplementor(StrategySelectorImpl.java:156)
+	at org.hibernate.boot.registry.selector.internal.StrategySelectorImpl.resolveStrategy(StrategySelectorImpl.java:239)
+	at org.hibernate.boot.registry.selector.internal.StrategySelectorImpl.resolveDefaultableStrategy(StrategySelectorImpl.java:183)
+	at org.hibernate.boot.registry.selector.internal.StrategySelectorImpl.resolveDefaultableStrategy(StrategySelectorImpl.java:170)
+	at org.hibernate.boot.registry.selector.internal.StrategySelectorImpl.resolveStrategy(StrategySelectorImpl.java:164)
+	at org.hibernate.engine.jdbc.dialect.internal.DialectFactoryImpl.constructDialect(DialectFactoryImpl.java:74)
+	at org.hibernate.engine.jdbc.dialect.internal.DialectFactoryImpl.buildDialect(DialectFactoryImpl.java:51)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:138)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:35)
+	at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.initiateService(StandardServiceRegistryImpl.java:101)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:263)
+	... 33 common frames omitted
+Caused by: org.hibernate.boot.registry.classloading.spi.ClassLoadingException: Unable to load class [org.hibernate.PostgreSQLDialect]
+	at org.hibernate.boot.registry.classloading.internal.ClassLoaderServiceImpl.classForName(ClassLoaderServiceImpl.java:133)
+	at org.hibernate.boot.registry.selector.internal.StrategySelectorImpl.selectStrategyImplementor(StrategySelectorImpl.java:152)
+	... 43 common frames omitted
+Caused by: java.lang.ClassNotFoundException: Could not load requested class : org.hibernate.PostgreSQLDialect
+	at org.hibernate.boot.registry.classloading.internal.AggregatedClassLoader.findClass(AggregatedClassLoader.java:210)
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:588)
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:521)
+	at java.base/java.lang.Class.forName0(Native Method)
+	at java.base/java.lang.Class.forName(Class.java:398)
+	at org.hibernate.boot.registry.classloading.internal.ClassLoaderServiceImpl.classForName(ClassLoaderServiceImpl.java:130)
+	... 44 common frames omitted
+17.01.2022 15:39:51.293 [main] INFO   e.m.e.t.TaxiStationApplication - Starting TaxiStationApplication using Java 11.0.6 on NB-100286 with PID 43720 (C:\Users\EIdrisov\IdeaProjects\Project\TaxiStation\target\classes started by EIdrisov in C:\Users\EIdrisov\IdeaProjects\Project\TaxiStation)
+17.01.2022 15:39:51.309 [main] INFO   e.m.e.t.TaxiStationApplication - No active profile set, falling back to default profiles: default
+17.01.2022 15:39:51.832 [main] INFO   o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+17.01.2022 15:39:51.905 [main] INFO   o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 54 ms. Found 6 JPA repository interfaces.
+17.01.2022 15:39:52.233 [main] INFO   o.s.b.w.e.t.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+17.01.2022 15:39:52.249 [main] INFO   o.a.c.h.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+17.01.2022 15:39:52.249 [main] INFO   o.a.c.c.StandardService - Starting service [Tomcat]
+17.01.2022 15:39:52.249 [main] INFO   o.a.c.c.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.56]
+17.01.2022 15:39:52.333 [main] INFO   o.a.c.c.C.[.[.[/] - Initializing Spring embedded WebApplicationContext
+17.01.2022 15:39:52.333 [main] INFO   o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 987 ms
+17.01.2022 15:39:52.473 [main] INFO   o.h.j.i.u.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+17.01.2022 15:39:52.520 [main] INFO   o.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.3.Final
+17.01.2022 15:39:52.634 [main] INFO   o.h.a.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+17.01.2022 15:39:52.712 [main] INFO   c.z.h.HikariDataSource - HikariPool-1 - Starting...
+17.01.2022 15:39:52.834 [main] INFO   c.z.h.HikariDataSource - HikariPool-1 - Start completed.
+17.01.2022 15:39:52.865 [main] WARN   o.h.e.j.e.i.JdbcEnvironmentInitiator - HHH000342: Could not obtain connection to query metadata
+org.hibernate.boot.registry.selector.spi.StrategySelectionException: Unable to resolve name [org.hibernate.PostgreSQLDialect] as strategy [org.hibernate.dialect.Dialect]
+	at org.hibernate.boot.registry.selector.internal.StrategySelectorImpl.selectStrategyImplementor(StrategySelectorImpl.java:156)
+	at org.hibernate.boot.registry.selector.internal.StrategySelectorImpl.resolveStrategy(StrategySelectorImpl.java:239)
+	at org.hibernate.boot.registry.selector.internal.StrategySelectorImpl.resolveDefaultableStrategy(StrategySelectorImpl.java:183)
+	at org.hibernate.boot.registry.selector.internal.StrategySelectorImpl.resolveDefaultableStrategy(StrategySelectorImpl.java:170)
+	at org.hibernate.boot.registry.selector.internal.StrategySelectorImpl.resolveStrategy(StrategySelectorImpl.java:164)
+	at org.hibernate.engine.jdbc.dialect.internal.DialectFactoryImpl.constructDialect(DialectFactoryImpl.java:74)
+	at org.hibernate.engine.jdbc.dialect.internal.DialectFactoryImpl.buildDialect(DialectFactoryImpl.java:51)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:97)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:35)
+	at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.initiateService(StandardServiceRegistryImpl.java:101)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:263)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:237)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:214)
+	at org.hibernate.id.factory.internal.DefaultIdentifierGeneratorFactory.injectServices(DefaultIdentifierGeneratorFactory.java:175)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.injectDependencies(AbstractServiceRegistryImpl.java:286)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:243)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:214)
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.<init>(InFlightMetadataCollectorImpl.java:173)
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:127)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.metadata(EntityManagerFactoryBuilderImpl.java:1460)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1494)
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:58)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:341)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1863)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1800)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:620)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1154)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:908)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:583)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:145)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:730)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:412)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:302)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1301)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1290)
+	at elp.max.e.taxistation.TaxiStationApplication.main(TaxiStationApplication.java:10)
+Caused by: org.hibernate.boot.registry.classloading.spi.ClassLoadingException: Unable to load class [org.hibernate.PostgreSQLDialect]
+	at org.hibernate.boot.registry.classloading.internal.ClassLoaderServiceImpl.classForName(ClassLoaderServiceImpl.java:133)
+	at org.hibernate.boot.registry.selector.internal.StrategySelectorImpl.selectStrategyImplementor(StrategySelectorImpl.java:152)
+	... 43 common frames omitted
+Caused by: java.lang.ClassNotFoundException: Could not load requested class : org.hibernate.PostgreSQLDialect
+	at org.hibernate.boot.registry.classloading.internal.AggregatedClassLoader.findClass(AggregatedClassLoader.java:210)
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:588)
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:521)
+	at java.base/java.lang.Class.forName0(Native Method)
+	at java.base/java.lang.Class.forName(Class.java:398)
+	at org.hibernate.boot.registry.classloading.internal.ClassLoaderServiceImpl.classForName(ClassLoaderServiceImpl.java:130)
+	... 44 common frames omitted
+17.01.2022 15:39:52.865 [main] ERROR  o.s.o.j.LocalContainerEntityManagerFactoryBean - Failed to initialize JPA EntityManagerFactory: Unable to create requested service [org.hibernate.engine.jdbc.env.spi.JdbcEnvironment]
+17.01.2022 15:39:52.865 [main] WARN   o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is org.hibernate.service.spi.ServiceException: Unable to create requested service [org.hibernate.engine.jdbc.env.spi.JdbcEnvironment]
+17.01.2022 15:39:52.865 [main] INFO   c.z.h.HikariDataSource - HikariPool-1 - Shutdown initiated...
+17.01.2022 15:39:52.865 [main] INFO   c.z.h.HikariDataSource - HikariPool-1 - Shutdown completed.
+17.01.2022 15:39:52.865 [main] INFO   o.a.c.c.StandardService - Stopping service [Tomcat]
+17.01.2022 15:39:52.881 [main] INFO   o.s.b.a.l.ConditionEvaluationReportLoggingListener - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+17.01.2022 15:39:52.881 [main] ERROR  o.s.b.SpringApplication - Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is org.hibernate.service.spi.ServiceException: Unable to create requested service [org.hibernate.engine.jdbc.env.spi.JdbcEnvironment]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1804)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:620)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1154)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:908)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:583)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:145)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:730)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:412)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:302)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1301)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1290)
+	at elp.max.e.taxistation.TaxiStationApplication.main(TaxiStationApplication.java:10)
+Caused by: org.hibernate.service.spi.ServiceException: Unable to create requested service [org.hibernate.engine.jdbc.env.spi.JdbcEnvironment]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:275)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:237)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:214)
+	at org.hibernate.id.factory.internal.DefaultIdentifierGeneratorFactory.injectServices(DefaultIdentifierGeneratorFactory.java:175)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.injectDependencies(AbstractServiceRegistryImpl.java:286)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:243)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:214)
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.<init>(InFlightMetadataCollectorImpl.java:173)
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:127)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.metadata(EntityManagerFactoryBuilderImpl.java:1460)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1494)
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:58)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:341)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1863)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1800)
+	... 16 common frames omitted
+Caused by: org.hibernate.boot.registry.selector.spi.StrategySelectionException: Unable to resolve name [org.hibernate.PostgreSQLDialect] as strategy [org.hibernate.dialect.Dialect]
+	at org.hibernate.boot.registry.selector.internal.StrategySelectorImpl.selectStrategyImplementor(StrategySelectorImpl.java:156)
+	at org.hibernate.boot.registry.selector.internal.StrategySelectorImpl.resolveStrategy(StrategySelectorImpl.java:239)
+	at org.hibernate.boot.registry.selector.internal.StrategySelectorImpl.resolveDefaultableStrategy(StrategySelectorImpl.java:183)
+	at org.hibernate.boot.registry.selector.internal.StrategySelectorImpl.resolveDefaultableStrategy(StrategySelectorImpl.java:170)
+	at org.hibernate.boot.registry.selector.internal.StrategySelectorImpl.resolveStrategy(StrategySelectorImpl.java:164)
+	at org.hibernate.engine.jdbc.dialect.internal.DialectFactoryImpl.constructDialect(DialectFactoryImpl.java:74)
+	at org.hibernate.engine.jdbc.dialect.internal.DialectFactoryImpl.buildDialect(DialectFactoryImpl.java:51)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:138)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:35)
+	at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.initiateService(StandardServiceRegistryImpl.java:101)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:263)
+	... 33 common frames omitted
+Caused by: org.hibernate.boot.registry.classloading.spi.ClassLoadingException: Unable to load class [org.hibernate.PostgreSQLDialect]
+	at org.hibernate.boot.registry.classloading.internal.ClassLoaderServiceImpl.classForName(ClassLoaderServiceImpl.java:133)
+	at org.hibernate.boot.registry.selector.internal.StrategySelectorImpl.selectStrategyImplementor(StrategySelectorImpl.java:152)
+	... 43 common frames omitted
+Caused by: java.lang.ClassNotFoundException: Could not load requested class : org.hibernate.PostgreSQLDialect
+	at org.hibernate.boot.registry.classloading.internal.AggregatedClassLoader.findClass(AggregatedClassLoader.java:210)
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:588)
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:521)
+	at java.base/java.lang.Class.forName0(Native Method)
+	at java.base/java.lang.Class.forName(Class.java:398)
+	at org.hibernate.boot.registry.classloading.internal.ClassLoaderServiceImpl.classForName(ClassLoaderServiceImpl.java:130)
+	... 44 common frames omitted
+17.01.2022 15:40:33.377 [main] INFO   e.m.e.t.TaxiStationApplication - Starting TaxiStationApplication using Java 11.0.6 on NB-100286 with PID 22404 (C:\Users\EIdrisov\IdeaProjects\Project\TaxiStation\target\classes started by EIdrisov in C:\Users\EIdrisov\IdeaProjects\Project\TaxiStation)
+17.01.2022 15:40:33.380 [main] INFO   e.m.e.t.TaxiStationApplication - No active profile set, falling back to default profiles: default
+17.01.2022 15:40:33.894 [main] INFO   o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+17.01.2022 15:40:33.942 [main] INFO   o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 54 ms. Found 6 JPA repository interfaces.
+17.01.2022 15:40:34.261 [main] INFO   o.s.b.w.e.t.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+17.01.2022 15:40:34.268 [main] INFO   o.a.c.h.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+17.01.2022 15:40:34.269 [main] INFO   o.a.c.c.StandardService - Starting service [Tomcat]
+17.01.2022 15:40:34.269 [main] INFO   o.a.c.c.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.56]
+17.01.2022 15:40:34.317 [main] INFO   o.a.c.c.C.[.[.[/] - Initializing Spring embedded WebApplicationContext
+17.01.2022 15:40:34.317 [main] INFO   o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 911 ms
+17.01.2022 15:40:34.438 [main] INFO   o.h.j.i.u.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+17.01.2022 15:40:34.460 [main] INFO   o.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.3.Final
+17.01.2022 15:40:34.545 [main] INFO   o.h.a.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+17.01.2022 15:40:34.611 [main] INFO   c.z.h.HikariDataSource - HikariPool-1 - Starting...
+17.01.2022 15:40:34.718 [main] INFO   c.z.h.HikariDataSource - HikariPool-1 - Start completed.
+17.01.2022 15:40:34.749 [main] INFO   o.h.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+17.01.2022 15:40:35.234 [main] INFO   o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+17.01.2022 15:40:35.250 [main] INFO   o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+17.01.2022 15:40:35.604 [main] WARN   o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+17.01.2022 15:40:35.747 [main] INFO   o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+17.01.2022 15:40:35.854 [main] INFO   o.a.c.h.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+17.01.2022 15:40:35.874 [main] INFO   o.s.b.w.e.t.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+17.01.2022 15:40:35.885 [main] INFO   e.m.e.t.TaxiStationApplication - Started TaxiStationApplication in 2.769 seconds (JVM running for 3.411)
+17.01.2022 15:41:17.172 [main] INFO   e.m.e.t.TaxiStationApplication - Starting TaxiStationApplication using Java 11.0.6 on NB-100286 with PID 46600 (C:\Users\EIdrisov\IdeaProjects\Project\TaxiStation\target\classes started by EIdrisov in C:\Users\EIdrisov\IdeaProjects\Project\TaxiStation)
+17.01.2022 15:41:17.174 [main] INFO   e.m.e.t.TaxiStationApplication - No active profile set, falling back to default profiles: default
+17.01.2022 15:41:17.606 [main] INFO   o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+17.01.2022 15:41:17.667 [main] INFO   o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 48 ms. Found 6 JPA repository interfaces.
+17.01.2022 15:41:17.953 [main] INFO   o.s.b.w.e.t.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+17.01.2022 15:41:17.953 [main] INFO   o.a.c.h.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+17.01.2022 15:41:17.953 [main] INFO   o.a.c.c.StandardService - Starting service [Tomcat]
+17.01.2022 15:41:17.953 [main] INFO   o.a.c.c.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.56]
+17.01.2022 15:41:18.028 [main] INFO   o.a.c.c.C.[.[.[/] - Initializing Spring embedded WebApplicationContext
+17.01.2022 15:41:18.028 [main] INFO   o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 823 ms
+17.01.2022 15:41:18.137 [main] INFO   o.h.j.i.u.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+17.01.2022 15:41:18.169 [main] INFO   o.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.3.Final
+17.01.2022 15:41:18.241 [main] INFO   o.h.a.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+17.01.2022 15:41:18.307 [main] INFO   c.z.h.HikariDataSource - HikariPool-1 - Starting...
+17.01.2022 15:41:18.436 [main] INFO   c.z.h.HikariDataSource - HikariPool-1 - Start completed.
+17.01.2022 15:41:18.467 [main] INFO   o.h.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+17.01.2022 15:41:18.882 [main] INFO   o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+17.01.2022 15:41:18.887 [main] INFO   o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+17.01.2022 15:41:19.207 [main] WARN   o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+17.01.2022 15:41:19.308 [main] INFO   o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+17.01.2022 15:41:19.377 [main] INFO   o.a.c.h.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+17.01.2022 15:41:19.403 [main] INFO   o.s.b.w.e.t.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+17.01.2022 15:41:19.410 [main] INFO   e.m.e.t.TaxiStationApplication - Started TaxiStationApplication in 2.539 seconds (JVM running for 3.143)
+17.01.2022 16:31:21.240 [main] INFO   e.m.e.t.TaxiStationApplication - Starting TaxiStationApplication using Java 11.0.6 on NB-100286 with PID 41204 (C:\Users\EIdrisov\IdeaProjects\Project\TaxiStation\target\classes started by EIdrisov in C:\Users\EIdrisov\IdeaProjects\Project\TaxiStation)
+17.01.2022 16:31:21.240 [main] INFO   e.m.e.t.TaxiStationApplication - No active profile set, falling back to default profiles: default
+17.01.2022 16:31:21.711 [main] INFO   o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+17.01.2022 16:31:21.757 [main] INFO   o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 46 ms. Found 6 JPA repository interfaces.
+17.01.2022 16:31:22.041 [main] INFO   o.s.b.w.e.t.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+17.01.2022 16:31:22.047 [main] INFO   o.a.c.h.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+17.01.2022 16:31:22.047 [main] INFO   o.a.c.c.StandardService - Starting service [Tomcat]
+17.01.2022 16:31:22.047 [main] INFO   o.a.c.c.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.56]
+17.01.2022 16:31:22.105 [main] INFO   o.a.c.c.C.[.[.[/] - Initializing Spring embedded WebApplicationContext
+17.01.2022 16:31:22.105 [main] INFO   o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 834 ms
+17.01.2022 16:31:22.203 [main] INFO   o.h.j.i.u.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+17.01.2022 16:31:22.239 [main] INFO   o.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.3.Final
+17.01.2022 16:31:22.307 [main] INFO   o.h.a.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+17.01.2022 16:31:22.356 [main] INFO   c.z.h.HikariDataSource - HikariPool-1 - Starting...
+17.01.2022 16:31:22.487 [main] INFO   c.z.h.HikariDataSource - HikariPool-1 - Start completed.
+17.01.2022 16:31:22.487 [main] WARN   o.h.e.j.e.i.JdbcEnvironmentInitiator - HHH000342: Could not obtain connection to query metadata
+org.hibernate.boot.registry.selector.spi.StrategySelectionException: Unable to resolve name [org.hibernate.PostgreSQLDialect] as strategy [org.hibernate.dialect.Dialect]
+	at org.hibernate.boot.registry.selector.internal.StrategySelectorImpl.selectStrategyImplementor(StrategySelectorImpl.java:156)
+	at org.hibernate.boot.registry.selector.internal.StrategySelectorImpl.resolveStrategy(StrategySelectorImpl.java:239)
+	at org.hibernate.boot.registry.selector.internal.StrategySelectorImpl.resolveDefaultableStrategy(StrategySelectorImpl.java:183)
+	at org.hibernate.boot.registry.selector.internal.StrategySelectorImpl.resolveDefaultableStrategy(StrategySelectorImpl.java:170)
+	at org.hibernate.boot.registry.selector.internal.StrategySelectorImpl.resolveStrategy(StrategySelectorImpl.java:164)
+	at org.hibernate.engine.jdbc.dialect.internal.DialectFactoryImpl.constructDialect(DialectFactoryImpl.java:74)
+	at org.hibernate.engine.jdbc.dialect.internal.DialectFactoryImpl.buildDialect(DialectFactoryImpl.java:51)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:97)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:35)
+	at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.initiateService(StandardServiceRegistryImpl.java:101)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:263)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:237)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:214)
+	at org.hibernate.id.factory.internal.DefaultIdentifierGeneratorFactory.injectServices(DefaultIdentifierGeneratorFactory.java:175)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.injectDependencies(AbstractServiceRegistryImpl.java:286)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:243)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:214)
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.<init>(InFlightMetadataCollectorImpl.java:173)
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:127)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.metadata(EntityManagerFactoryBuilderImpl.java:1460)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1494)
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:58)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:341)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1863)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1800)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:620)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1154)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:908)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:583)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:145)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:730)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:412)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:302)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1301)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1290)
+	at elp.max.e.taxistation.TaxiStationApplication.main(TaxiStationApplication.java:10)
+Caused by: org.hibernate.boot.registry.classloading.spi.ClassLoadingException: Unable to load class [org.hibernate.PostgreSQLDialect]
+	at org.hibernate.boot.registry.classloading.internal.ClassLoaderServiceImpl.classForName(ClassLoaderServiceImpl.java:133)
+	at org.hibernate.boot.registry.selector.internal.StrategySelectorImpl.selectStrategyImplementor(StrategySelectorImpl.java:152)
+	... 43 common frames omitted
+Caused by: java.lang.ClassNotFoundException: Could not load requested class : org.hibernate.PostgreSQLDialect
+	at org.hibernate.boot.registry.classloading.internal.AggregatedClassLoader.findClass(AggregatedClassLoader.java:210)
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:588)
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:521)
+	at java.base/java.lang.Class.forName0(Native Method)
+	at java.base/java.lang.Class.forName(Class.java:398)
+	at org.hibernate.boot.registry.classloading.internal.ClassLoaderServiceImpl.classForName(ClassLoaderServiceImpl.java:130)
+	... 44 common frames omitted
+17.01.2022 16:31:22.487 [main] ERROR  o.s.o.j.LocalContainerEntityManagerFactoryBean - Failed to initialize JPA EntityManagerFactory: Unable to create requested service [org.hibernate.engine.jdbc.env.spi.JdbcEnvironment]
+17.01.2022 16:31:22.487 [main] WARN   o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is org.hibernate.service.spi.ServiceException: Unable to create requested service [org.hibernate.engine.jdbc.env.spi.JdbcEnvironment]
+17.01.2022 16:31:22.487 [main] INFO   c.z.h.HikariDataSource - HikariPool-1 - Shutdown initiated...
+17.01.2022 16:31:22.503 [main] INFO   c.z.h.HikariDataSource - HikariPool-1 - Shutdown completed.
+17.01.2022 16:31:22.503 [main] INFO   o.a.c.c.StandardService - Stopping service [Tomcat]
+17.01.2022 16:31:22.503 [main] INFO   o.s.b.a.l.ConditionEvaluationReportLoggingListener - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+17.01.2022 16:31:22.526 [main] ERROR  o.s.b.SpringApplication - Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is org.hibernate.service.spi.ServiceException: Unable to create requested service [org.hibernate.engine.jdbc.env.spi.JdbcEnvironment]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1804)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:620)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1154)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:908)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:583)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:145)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:730)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:412)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:302)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1301)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1290)
+	at elp.max.e.taxistation.TaxiStationApplication.main(TaxiStationApplication.java:10)
+Caused by: org.hibernate.service.spi.ServiceException: Unable to create requested service [org.hibernate.engine.jdbc.env.spi.JdbcEnvironment]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:275)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:237)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:214)
+	at org.hibernate.id.factory.internal.DefaultIdentifierGeneratorFactory.injectServices(DefaultIdentifierGeneratorFactory.java:175)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.injectDependencies(AbstractServiceRegistryImpl.java:286)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:243)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:214)
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.<init>(InFlightMetadataCollectorImpl.java:173)
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:127)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.metadata(EntityManagerFactoryBuilderImpl.java:1460)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1494)
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:58)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:341)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1863)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1800)
+	... 16 common frames omitted
+Caused by: org.hibernate.boot.registry.selector.spi.StrategySelectionException: Unable to resolve name [org.hibernate.PostgreSQLDialect] as strategy [org.hibernate.dialect.Dialect]
+	at org.hibernate.boot.registry.selector.internal.StrategySelectorImpl.selectStrategyImplementor(StrategySelectorImpl.java:156)
+	at org.hibernate.boot.registry.selector.internal.StrategySelectorImpl.resolveStrategy(StrategySelectorImpl.java:239)
+	at org.hibernate.boot.registry.selector.internal.StrategySelectorImpl.resolveDefaultableStrategy(StrategySelectorImpl.java:183)
+	at org.hibernate.boot.registry.selector.internal.StrategySelectorImpl.resolveDefaultableStrategy(StrategySelectorImpl.java:170)
+	at org.hibernate.boot.registry.selector.internal.StrategySelectorImpl.resolveStrategy(StrategySelectorImpl.java:164)
+	at org.hibernate.engine.jdbc.dialect.internal.DialectFactoryImpl.constructDialect(DialectFactoryImpl.java:74)
+	at org.hibernate.engine.jdbc.dialect.internal.DialectFactoryImpl.buildDialect(DialectFactoryImpl.java:51)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:138)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:35)
+	at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.initiateService(StandardServiceRegistryImpl.java:101)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:263)
+	... 33 common frames omitted
+Caused by: org.hibernate.boot.registry.classloading.spi.ClassLoadingException: Unable to load class [org.hibernate.PostgreSQLDialect]
+	at org.hibernate.boot.registry.classloading.internal.ClassLoaderServiceImpl.classForName(ClassLoaderServiceImpl.java:133)
+	at org.hibernate.boot.registry.selector.internal.StrategySelectorImpl.selectStrategyImplementor(StrategySelectorImpl.java:152)
+	... 43 common frames omitted
+Caused by: java.lang.ClassNotFoundException: Could not load requested class : org.hibernate.PostgreSQLDialect
+	at org.hibernate.boot.registry.classloading.internal.AggregatedClassLoader.findClass(AggregatedClassLoader.java:210)
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:588)
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:521)
+	at java.base/java.lang.Class.forName0(Native Method)
+	at java.base/java.lang.Class.forName(Class.java:398)
+	at org.hibernate.boot.registry.classloading.internal.ClassLoaderServiceImpl.classForName(ClassLoaderServiceImpl.java:130)
+	... 44 common frames omitted
+17.01.2022 16:32:04.609 [main] INFO   e.m.e.t.TaxiStationApplication - Starting TaxiStationApplication using Java 11.0.6 on NB-100286 with PID 15300 (C:\Users\EIdrisov\IdeaProjects\Project\TaxiStation\target\classes started by EIdrisov in C:\Users\EIdrisov\IdeaProjects\Project\TaxiStation)
+17.01.2022 16:32:04.609 [main] INFO   e.m.e.t.TaxiStationApplication - No active profile set, falling back to default profiles: default
+17.01.2022 16:32:05.087 [main] INFO   o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+17.01.2022 16:32:05.129 [main] INFO   o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 46 ms. Found 6 JPA repository interfaces.
+17.01.2022 16:32:05.410 [main] INFO   o.s.b.w.e.t.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+17.01.2022 16:32:05.410 [main] INFO   o.a.c.h.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+17.01.2022 16:32:05.410 [main] INFO   o.a.c.c.StandardService - Starting service [Tomcat]
+17.01.2022 16:32:05.410 [main] INFO   o.a.c.c.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.56]
+17.01.2022 16:32:05.494 [main] INFO   o.a.c.c.C.[.[.[/] - Initializing Spring embedded WebApplicationContext
+17.01.2022 16:32:05.494 [main] INFO   o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 854 ms
+17.01.2022 16:32:05.595 [main] INFO   o.h.j.i.u.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+17.01.2022 16:32:05.631 [main] INFO   o.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.3.Final
+17.01.2022 16:32:05.695 [main] INFO   o.h.a.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+17.01.2022 16:32:05.751 [main] INFO   c.z.h.HikariDataSource - HikariPool-1 - Starting...
+17.01.2022 16:32:05.885 [main] INFO   c.z.h.HikariDataSource - HikariPool-1 - Start completed.
+17.01.2022 16:32:05.895 [main] INFO   o.h.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+17.01.2022 16:32:06.296 [main] INFO   o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+17.01.2022 16:32:06.312 [main] INFO   o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+17.01.2022 16:32:06.627 [main] WARN   o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+17.01.2022 16:32:06.750 [main] INFO   o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+17.01.2022 16:32:06.827 [main] INFO   o.a.c.h.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+17.01.2022 16:32:06.851 [main] INFO   o.s.b.w.e.t.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+17.01.2022 16:32:06.858 [main] INFO   e.m.e.t.TaxiStationApplication - Started TaxiStationApplication in 2.529 seconds (JVM running for 3.126)
+17.01.2022 22:53:42.734 [main] INFO   e.m.e.t.TaxiStationApplication - Starting TaxiStationApplication using Java 11.0.6 on NB-100286 with PID 27504 (C:\Users\EIdrisov\IdeaProjects\Project\TaxiStation\target\classes started by EIdrisov in C:\Users\EIdrisov\IdeaProjects\Project\TaxiStation)
+17.01.2022 22:53:42.737 [main] INFO   e.m.e.t.TaxiStationApplication - No active profile set, falling back to default profiles: default
+17.01.2022 22:53:43.250 [main] INFO   o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+17.01.2022 22:53:43.304 [main] INFO   o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 49 ms. Found 6 JPA repository interfaces.
+17.01.2022 22:53:43.606 [main] INFO   o.s.b.w.e.t.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+17.01.2022 22:53:43.612 [main] INFO   o.a.c.h.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+17.01.2022 22:53:43.612 [main] INFO   o.a.c.c.StandardService - Starting service [Tomcat]
+17.01.2022 22:53:43.612 [main] INFO   o.a.c.c.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.56]
+17.01.2022 22:53:43.684 [main] INFO   o.a.c.c.C.[.[.[/] - Initializing Spring embedded WebApplicationContext
+17.01.2022 22:53:43.684 [main] INFO   o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 913 ms
+17.01.2022 22:53:43.807 [main] INFO   o.h.j.i.u.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+17.01.2022 22:53:43.846 [main] INFO   o.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.3.Final
+17.01.2022 22:53:43.952 [main] INFO   o.h.a.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+17.01.2022 22:53:44.011 [main] INFO   c.z.h.HikariDataSource - HikariPool-1 - Starting...
+17.01.2022 22:53:44.133 [main] INFO   c.z.h.HikariDataSource - HikariPool-1 - Start completed.
+17.01.2022 22:53:44.149 [main] INFO   o.h.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+17.01.2022 22:53:44.599 [main] INFO   o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+17.01.2022 22:53:44.605 [main] INFO   o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+17.01.2022 22:53:44.906 [main] WARN   o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+17.01.2022 22:53:45.012 [main] INFO   o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+17.01.2022 22:53:45.086 [main] INFO   o.a.c.h.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+17.01.2022 22:53:45.098 [main] INFO   o.s.b.w.e.t.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+17.01.2022 22:53:45.105 [main] INFO   e.m.e.t.TaxiStationApplication - Started TaxiStationApplication in 2.651 seconds (JVM running for 3.342)
