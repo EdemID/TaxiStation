@@ -1,0 +1,2 @@
+databaseChangeLog:
+  - include: db/changelog/changeset/18-01-2022-create-tables.xml

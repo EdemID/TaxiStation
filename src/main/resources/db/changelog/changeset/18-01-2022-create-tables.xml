@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog>
+    <changeSet author="Employee" id="1">
+    <sqlFile dbms="postgresql" path="sql/create-tables.sql" relativeToChangelogFile="true" />
+    </changeSet>
+</databaseChangeLog>
