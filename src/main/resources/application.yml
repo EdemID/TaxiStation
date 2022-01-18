@@ -1,3 +1,8 @@
+#с помощью кода ниже получили sql скрипты создания бд, которые
+#будут использоваться при добавлении liquibase в проект
+#для этого мы создали пустую бд для того, чтобы
+#не проводить процесс ddl-auto=create c бд, где хранятся данные
+
 spring:
   liquibase:
     enabled: true
@@ -9,5 +14,5 @@ spring:
   jpa:
     properties.sql.dialect: org.hibernate.PostgreSQLDialect
     hibernate:
-      ddl-auto: create
+      ddl-auto: validate
   application.name: db_for_create_liqui
