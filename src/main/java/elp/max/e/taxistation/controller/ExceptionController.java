@@ -1,5 +1,9 @@
-package elp.max.e.taxistation.exception;
+package elp.max.e.taxistation.controller;
 
+import elp.max.e.taxistation.exception.CallBeforeCompletionOfOrderException;
+import elp.max.e.taxistation.exception.EntityNotFoundException;
+import elp.max.e.taxistation.exception.ValidationDtoException;
+import elp.max.e.taxistation.exception.WorkingDtoNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
