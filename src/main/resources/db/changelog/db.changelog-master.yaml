@@ -7,3 +7,5 @@ databaseChangeLog: #параметр в котором находятся миг
       file: db/changelog/changeset/19-01-2022-alter-resource-type-of-column-in-car-table.xml
   - include:
       file: db/changelog/changeset/20-01-2022-alter-id-and-repairtime-type-of-columns.xml
+  - include:
+      file: db/changelog/changeset/02-02-2022-alter table car add column date timestamp default null.xml

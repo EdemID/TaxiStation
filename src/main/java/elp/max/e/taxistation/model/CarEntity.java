@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "car")
@@ -20,6 +21,7 @@ public class CarEntity {
     private String numberCar;
     private Integer resource;
     private boolean busy;
+    private LocalDate date;
     @ManyToOne
     @JoinColumn(name = "mechanic_id")
     private MechanicEntity mechanicEntity;
